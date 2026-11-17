@@ -1,0 +1,164 @@
+\section{统一购电与储能调度模型}
+
+\subsection{问题一：确定性日前联合优化}
+
+先省略日期下标。在已知单日输入条件下，令$h_t=0$、$a_t=g_t$，以购电费最小为目标：
+\begin{align}
+ \min\quad &\sum_{t=0}^{143}p_tg_t,\label{eq:q1_objective}\\
+ \text{s.t.}\quad &g_t+d_t-c_t\ge n_t,\label{eq:balance}\\
+ &e_{t+1}=e_t+\eta_cc_t-\frac{d_t}{\eta_d},\label{eq:soc}\\
+ &E_{\min}\le e_{t+1}\le E_{\max},\quad 0\le c_t,d_t\le U,\label{eq:limits}\\
+ &g_t\ge0,\qquad e_0=e_{144}=6000.\label{eq:terminal_q1}
+\end{align}
+式\eqref{eq:balance}中未消纳的非负差值就是弃置电量$w_t$，也可显式写成供需等式。状态方程中的$c_t$为电池外部输入电量，$d_t$为电池外部输出电量，因此分别乘充电效率、除放电效率，而不是把两者都乘0.9。
+
+该模型为线性规划。由于允许免费弃置，同步充放电无需增加二进制变量。若某时段$c_t,d_t>0$，令
+\begin{equation}
+ \varepsilon=\min\{c_t,d_t/(\eta_c\eta_d)\},\qquad
+ c'_t=c_t-\varepsilon,\quad d'_t=d_t-\eta_c\eta_d\varepsilon.
+\end{equation}
+此变换保持储电量变化不变，使充电净需求减少$(1-\eta_c\eta_d)\varepsilon$，因而不破坏供电约束，也不增加购电费，并消去至少一种充放电动作。存在满足互斥的最优解。程序给充放电总量加入$10^{-7}$元/kWh的数值破同解项以优先选取此类解，实际费用统计不计入该项。
+
+忽略容量和功率的机会成本时，若在低价$p_{\ell}$时段购入电量，并在高价$p_h$时段放电替代购电，盈利的必要价差条件为
+\begin{equation}
+ p_h>\frac{p_{\ell}}{\eta_c\eta_d}=\frac{p_{\ell}}{0.81}.
+ \label{eq:arbitrage}
+\end{equation}
+实际调度还受充放电功率、剩余容量、光伏剩余量和日末回补约束影响，不能仅根据相邻电价大小作局部选择。
+
+\subsection{历史整日残差与场景缩减}
+
+在日期$D$、决策时刻$\tau$，历史集合$\mathcal H_D$取此前至多28天。为避免固定先验首日残差长期参与场景估计，历史充足后从1月2日起取样；仅首日无历史时使用单点预测。相同发布时间的历史净负荷误差为
+\begin{equation}
+ \epsilon^{n}_{j,t}
+ =\left[(L_{j,t}-R_{j,t})-(\widehat L_{j,t}^{(\tau)}-\widehat R_{j,t}^{(\tau)})\right]\Delta t,
+ \quad j<D,\quad t\ge\tau.
+ \label{eq:residual}
+\end{equation}
+问题二用历史零时预测误差，滚动问题用相同发布时刻的预测误差。一个历史日构成一条完整剩余日误差轨迹，不逐点独立抽样，也不强制假定正态分布。
+
+以轨迹间欧氏距离作确定性$k$-medoids缩减，最多保留12个历史代表日。先选总距离最小的轨迹，再逐次选距离已有代表最远的轨迹；交替分配与更新中心，最多8轮。代表日仍是实际存在的历史误差轨迹，场景概率为其所属簇样本数占历史样本数的比例：
+\begin{equation}
+ n_{t,s}=\widehat n_t+\epsilon^n_{j_s,t},\qquad
+ \pi_s=\frac{|\mathcal C_s|}{|\mathcal H_D|},\qquad \sum_s\pi_s=1.
+\end{equation}
+历史不足12条时全部保留，赋予相等概率。该方法只对近28日经验分布作压缩，其场景覆盖能力受短窗口限制，不表示已经获得未来随机过程的真实分布。
+
+\subsection{问题二：受限两阶段随机规划}
+
+日前阶段同时选择场景共享的购电$g_t$、参考充放电$c_t,d_t$及参考储电量$e_{t+1}$；第二阶段仅允许各场景的紧急购电$h_{t,s}$不同。对所有场景要求
+\begin{equation}
+ g_t+d_t+h_{t,s}-c_t\ge n_{t,s},\qquad h_{t,s}\ge0.
+ \label{eq:scenario_balance}
+\end{equation}
+因此本模型属于限制策略类的两阶段随机规划：储能参考轨迹作为第一阶段共同决策，不是每个场景拥有一条完全自适应的储能轨迹。这样减少了变量数量，也避免在规划时把整日未来信息提前赋予储能控制，但可能牺牲更一般多阶段策略的经济性。实际执行不选择某个事后最有利场景，而采用下述当前状态反馈规则。
+
+令$Q_s=\sum_{t=\tau}^{143}5p_{t,s}h_{t,s}$为场景在整个剩余时域内的紧急费用，$\bar p_t=\sum_s\pi_sp_{t,s}$。固定电价问题中$p_{t,s}=p_t$。采用期望费用、尾部紧急风险及日末储电偏离的目标：
+\begin{equation}
+ \min\left\{\sum_t\bar p_tg_t+\sum_s\pi_sQ_s
+ +\lambda\operatorname{CVaR}_{0.90}(Q)
+ +\kappa|e_{144}-6000|\right\}.
+ \label{eq:q2_objective}
+\end{equation}
+约束包括式\eqref{eq:soc}、\eqref{eq:limits}和\eqref{eq:scenario_balance}，优化初态为当前实际储电量。CVaR衡量完整轨迹紧急费的尾部，而非将各时段CVaR简单相加，也不是全部购电费用的CVaR。依照文献\cite{rockafellar2000}，引入阈值$z$和超额变量$v_s$，写为
+\begin{equation}
+ \operatorname{CVaR}_{\alpha}(Q)
+ =\min_z\left(z+\frac{1}{1-\alpha}\sum_s\pi_sv_s\right),
+ \quad v_s\ge Q_s-z,\quad v_s\ge0,
+ \quad\alpha=0.90.
+ \label{eq:cvar}
+\end{equation}
+因$Q_s\ge0$，阈值限制为非负不损失本题的最优值。日末绝对值同样通过两个非负变量线性化。取$\kappa=\operatorname{median}_{t}(\bar p_t)$，以接近本时域典型电价的系数约束末端价值损失。该项是优化用软目标，不计入实际电费；问题二至四不强制每日回到6000 kWh，实际次日继续继承末态。
+
+\subsection{预测误差驱动的风险与参考备用}
+
+用近期净负荷误差相对尺度决定风险权重。设$\sigma_t$为历史$\epsilon^n_{j,t}$的标准差，$N_\tau=144-\tau$，定义
+\begin{equation}
+ r=\frac{N_\tau^{-1}\sum_{t=\tau}^{143}\sigma_t}
+ {\max\{N_\tau^{-1}\sum_{t=\tau}^{143}|\widehat n_t|,50\}},
+ \qquad \lambda=0.10\min\{3,r/0.20\}.
+ \label{eq:risk_weight}
+\end{equation}
+分母中的50 kWh防止净负荷接近零时比值失稳，权重上限为0.30。误差越大，目标函数越关注少数高额紧急补购场景；该经验映射的作用强度受给定参数限制。
+
+对时段$t$结束后的未来至多1小时，取6个时段净负荷误差累计值的80\%经验分位数，换算为电池内部应保留的参考电量：
+\begin{equation}
+ \rho_t^{\rm raw}=\min\!\left\{2400,
+ \frac{\max\!\left[0,q_{0.8}\!\left(\sum_{k=t+1}^{\min(t+6,143)}\epsilon^n_{j,k}\right)\right]}{\eta_d}\right\}.
+ \label{eq:reserve}
+\end{equation}
+累计误差沿用同一历史轨迹，保留时段间共同偏差；临近日末时只使用本日尚余时段，空和为零。若当前时刻为$\tau$、实测储电量为$e_\tau$，再按最大充电速度截断为可达备用：
+\begin{equation}
+ \rho_t=\min\{\rho_t^{\rm raw},
+ \max[0,e_\tau-E_{\min}+\eta_cU(t-\tau+1)]\},\quad
+ e_{t+1}\ge E_{\min}+\rho_t.
+ \label{eq:reachable_reserve}
+\end{equation}
+备用上限2400 kWh约为可用容量的四分之一，不把全部电量固定为风险缓冲。CVaR从费用尾部施加偏好，备用从储能参考路径施加约束，两者处理的对象不同。
+
+需要区分参考备用和真实硬约束：式\eqref{eq:reachable_reserve}约束优化参考轨迹，实际运行在当前缺口较大时可以消耗这部分电量，硬性保持的只有1200 kWh物理下限。由于外网紧急补购始终可用，该备用设计不构成概率供电保证；也不能把80\%经验分位解释为具有严格校准的80\%可靠性约束。
+
+\subsection{因果执行器与状态传递}
+
+计划形成后，实际负载与光伏可能偏离参考曲线。执行器在每个10分钟时段只接收当期有效购电$a_t$、当前净负荷$n_t$和当前储电量$e_t$。记$[x]_+=\max(x,0)$。若$a_t\ge n_t$，采用
+\begin{equation}
+ c_t^{\rm act}=\min\{a_t-n_t,U,(E_{\max}-e_t)/\eta_c\},\quad
+ d_t^{\rm act}=h_t=0,\quad w_t=a_t-n_t-c_t^{\rm act}.
+ \label{eq:execute_charge}
+\end{equation}
+若$a_t<n_t$，则
+\begin{equation}
+ d_t^{\rm act}=\min\{n_t-a_t,U,\eta_d(e_t-E_{\min})\},\quad
+ c_t^{\rm act}=w_t=0,\quad h_t=n_t-a_t-d_t^{\rm act}.
+ \label{eq:execute_discharge}
+\end{equation}
+之后由式\eqref{eq:soc}更新实际储电量。该规则把净缺口投影到当前可行充放电区间，再用紧急购电补足剩余缺口；多余电量则充电或弃置。实际充放电由这一反馈规则产生，不能将优化器内部的$c_t,d_t$直接当作全年实际执行量。
+
+由两种情况可逐步验证，充放电互斥、储电量范围、功率上限及含紧急购电的供需平衡均满足。对问题二$a_t=g_t$，购电计划全天不改，但储能可根据当期观测实施反馈。日际满足
+\begin{equation}
+ e_{D+1,0}=e_{D,144},
+ \qquad e_{2025\text{-}01\text{-}01,0}=6000.
+\end{equation}
+因此1月训练期的控制行为会影响2月初状态，不能在填报开始时重新初始化以获得额外免费电量。
+
+\subsection{问题三：结算约束下的定时滚动优化}
+
+在零时用当前发布预报确定原始计划$g_t$；在6:00、12:00、18:00，即$\tau=36,72,108$，根据新预报、历史同发布时间误差以及当前实际储电量，重新优化$t=\tau,\ldots,143$。已执行时段保持不变，每次仅执行直到下一个规定更新时间的购电量。由此形成递减时域的定时MPC；尽管新预报覆盖未来24小时，本实现每次只优化至本日24:00。
+
+采用赛题文字的主结算口径：零时计划全额付费；下调另支付下调量对应的50\%违约费，上调量另按1.5倍电价支付；紧急购电另按5倍支付。令
+\begin{equation}
+ \delta_t^+=[a_t-g_t]_+,\quad\delta_t^-=[g_t-a_t]_+,
+\end{equation}
+则每天实际总费用为
+\begin{equation}
+ C_D=\sum_t p_{D,t}g_{D,t}
+ +\sum_t p_{D,t}(1.5\delta_{D,t}^++0.5\delta_{D,t}^-)
+ +\sum_t5p_{D,t}h_{D,t}.
+ \label{eq:settlement}
+\end{equation}
+该口径未增加题目未给定的取消计划退款。修订始终与零时原始计划比较，避免把多次更新之间的差值重复收费。在每次优化中使用$a_t-g_t=u_t-v_t$、$u_t,v_t\ge0$线性化调整量，并将$1.5\bar p_tu_t+0.5\bar p_tv_t$加入目标；已经承诺的计划费用相对于当前决策为常数，可从当前优化目标中略去。紧急费用、CVaR和日末软目标仍保留。
+
+\paragraph{下调购电的支配性。}
+在正电价、计划不退款、弃余免费的假设下，若某时段$a_t<g_t$，把$a_t$提高为$g_t$，保持原有充放电和紧急购电不变，将新增电量弃置，仍满足全部物理约束，却免去了$0.5p_t(g_t-a_t)$违约费。因此$a_t<g_t$受到支配，至少存在一个满足$a_t\ge g_t$的最优修订解。该性质来自本题结算和弃置假设，不是求解器禁止下调。它也说明，新的预报主要通过发现购电不足和调整储能参考路径发挥作用，光伏上调预报未必能收回原计划费用。
+
+上述结论针对优化可行域和目标函数；实际控制器还根据当前储电量执行反馈，不能因此推断所有更新必然降低实现费用。是否需要额外时刻的预报，须在相同结算方式下比较获得信息后的可执行费用收益与相应成本；现有附件仅支持四个规定发布时刻，不据此编造更高更新频率的实测效果。
+
+\subsection{问题四：价格与净负荷联合不确定性}
+
+波动价格预测使用式\eqref{eq:weekday_forecast}，滚动时再按式\eqref{eq:issue_correction}用已观测价格修正。历史价格残差为$\epsilon^p_{j,t}=p_{j,t}-\widehat p_{j,t}^{(\tau)}$，与相同日期、相同发布时间的净负荷残差拼接成联合轨迹。净负荷残差本身由负载残差减光伏残差形成，因此不把价、荷、光伏随机误差分别打乱组合。
+
+场景缩减前，对净负荷误差块和价格误差块分别除以各块的总体标准差，再计算欧氏距离，防止kWh数值尺度淹没价格误差。选中同一个代表日$j_s$后同时生成
+\begin{equation}
+ n_{t,s}=\widehat n_t+\epsilon^n_{j_s,t},\qquad
+ p_{t,s}=\max\{0.01,\widehat p_t+\epsilon^p_{j_s,t}\}.
+ \label{eq:joint_scenario}
+\end{equation}
+该构造保留样本中的净负荷与价格关联及日内轨迹关系，不声称建立了负载、光伏和电价的完整联合概率分布。0.01元/kWh仅是优化场景的保守支撑下界，用于避免加性残差生成非正电价后出现无限购电激励；它不是原始数据清洗阈值。附件实际最低价0.0076元/kWh予以保留，全部实际费用按未截断价格计算。
+
+问题四对应问题二时，用联合场景在零时优化，全天购电计划不变；对应问题三时，在四个规定时刻更新并执行滚动策略。两者均以场景均价计入第一阶段购电或调整成本，以场景各自价格计算紧急费用和尾部风险，随后按式\eqref{eq:settlement}对实际价格结算。风险权重和参考备用仍由净负荷误差决定，价格风险通过联合场景和紧急费CVaR进入，不额外声称实现了价格驱动的自适应风险权重。
+
+\subsection{求解流程与适用范围}
+
+所有场景系数确定后，上述目标及约束均为线性形式，采用稀疏矩阵构建，由HiGHS求解线性规划。每个决策点依次执行：读取当前可用信息，更新预测，选择历史残差与代表场景，计算风险权重及可达备用，求解剩余日计划，按当前实际净负荷逐时执行，并把真实末态传至后续决策。零时保留原始计划副本供结算和结果填报，后续修订不覆盖这一基准。
+
+该实现求解的是所设限制策略类内的优化问题，不是微网任意因果策略的全局最优控制。整日共享储能参考、至日末的有限优化时域、28日经验窗口以及固定反馈执行器，均可能带来经济性损失。终端软目标减少末端过度放电倾向，但不能替代跨日长期价值函数。本文分别报告优化中的风险目标与实际支付费用，模型预估紧急费不代替实际执行器产生的紧急费。

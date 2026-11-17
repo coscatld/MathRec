@@ -1,0 +1,20 @@
+{
+  "reviewed_at_utc": "2026-09-10T16:00:08.990437+00:00",
+  "review_method": "Viewed rendered PNG previews; verified Chinese labels, values, legends, plot coverage and selected-date zero-adjustment panels.",
+  "status": "passed",
+  "reviewed_images_sha256": {
+    "outputs/final_strategy/workbook_previews/filled/q4_3_充放电量.png": "a8a66abdabd2b48f3e5f3730ee1db2cb09cf11b305301a866b574b43a67e0f04",
+    "outputs/final_strategy/workbook_previews/filled/q4_3_调整购电量.png": "5bbebf2ffc1d5f608703095c7cbf464d9a75c025dad7bec3ce784169b480c9cb",
+    "outputs/final_strategy/workbook_previews/filled/q3_调整购电量.png": "97783a191e4626dc7a4f01f3c294f1fb378425340a7413bcb72d08a3851c3e55",
+    "outputs/final_strategy/workbook_previews/filled/q3_计划购电量.png": "97783a191e4626dc7a4f01f3c294f1fb378425340a7413bcb72d08a3851c3e55",
+    "outputs/final_strategy/workbook_previews/filled/q4_3_计划购电量.png": "5bbebf2ffc1d5f608703095c7cbf464d9a75c025dad7bec3ce784169b480c9cb",
+    "outputs/final_strategy/workbook_previews/filled/q3_充放电量.png": "3e63918800728f9519cec0741fe87ae832c88be3c3dc021fb35330944deed884",
+    "outputs/final_strategy/workbook_previews/filled/q3_紧急购电量.png": "8f09797cc411d83645e48146c89c6a1d931db98131a7a239c8b0e29103165c5a",
+    "outputs/final_strategy/workbook_previews/filled/q4_3_紧急购电量.png": "8f09797cc411d83645e48146c89c6a1d931db98131a7a239c8b0e29103165c5a",
+    "figures/results/v2_control_difference.png": "a2b5930db84f04a73a99895207172f1613c11bc3b266ac9e5394eaaad089eecf",
+    "figures/results/v2_adjustments.png": "41bb3fa56d9e9bc661d06c4ea21e8b8cf84255c59b957772d4948db9894910cd",
+    "figures/results/v2_monthly.png": "5edad4cd58291e951dd27fbb665a6054160cbd8da90f24edbaa10753be479ff6",
+    "figures/results/q4_cost_waterfall.png": "fd66d475e5c3db436b1a94d47eb2fc6baf63350d3c93fe7c09d9a7f9367ad787"
+  },
+  "note": "The two schedule sheets agree during 00:00-06:00 by design; full numeric differences at later slots are checked separately."
+}

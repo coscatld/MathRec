@@ -1,0 +1,6 @@
+# Reference targets only, NOT installed by this package or needed by the CPU core.
+# Choose PyTorch wheels matching your CUDA environment using official instructions.
+# Illustrative compatible family: Python 3.10+, torch 2.5.x with triton 3.1.x.
+# Other versions may work; GPU compatibility has not been validated here.
+torch>=2.5
+triton>=3.1; platform_system == "Linux"

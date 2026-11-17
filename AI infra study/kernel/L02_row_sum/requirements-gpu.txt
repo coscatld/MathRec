@@ -1,0 +1,5 @@
+# Optional historical teaching baseline, NOT installed during this task.
+# Use the PyTorch official cu121 build instructions for torch 2.5.1.
+# Python 3.10-3.12, Linux x86_64 with a compatible NVIDIA driver.
+torch==2.5.1
+triton==3.1.0

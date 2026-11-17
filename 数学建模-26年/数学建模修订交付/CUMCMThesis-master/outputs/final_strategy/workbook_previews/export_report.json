@@ -1,0 +1,46 @@
+[
+  {
+    "key": "q3",
+    "outputPath": "/Users/mingze/Desktop/解题/数学建模修订交付/附件/附件5/result3.xlsx",
+    "inputPath": "/Users/mingze/Desktop/解题/数学建模修订交付/CUMCMThesis-master/outputs/final_strategy/results_export.json",
+    "mappingPath": "/Users/mingze/Desktop/解题/数学建模修订交付/CUMCMThesis-master/data/time_mapping.json",
+    "sheets": [
+      "计划购电量",
+      "调整购电量",
+      "充放电量",
+      "紧急购电量"
+    ],
+    "days": 334,
+    "emergencyRows": 419,
+    "previews": [
+      "/Users/mingze/Desktop/解题/数学建模修订交付/CUMCMThesis-master/outputs/final_strategy/workbook_previews/filled/q3_计划购电量.png",
+      "/Users/mingze/Desktop/解题/数学建模修订交付/CUMCMThesis-master/outputs/final_strategy/workbook_previews/filled/q3_调整购电量.png",
+      "/Users/mingze/Desktop/解题/数学建模修订交付/CUMCMThesis-master/outputs/final_strategy/workbook_previews/filled/q3_充放电量.png",
+      "/Users/mingze/Desktop/解题/数学建模修订交付/CUMCMThesis-master/outputs/final_strategy/workbook_previews/filled/q3_紧急购电量.png"
+    ],
+    "inspection": "{\"kind\":\"table\",\"sheet\":\"计划购电量\",\"address\":\"A1:C4\",\"rows\":4,\"cols\":3,\"values\":[[\"日期\\\\时间\",\"0:10-0:20\",\"0:20-0:30\"],[\"2025-02-01T00:00:00.000Z\",1024.3775756258149,1302.113725],[\"2025-02-02T00:00:00.000Z\",1471.9575548637372,1451.796065080858],[\"2025-02-03T00:00:00.000Z\",1446.033225071044,1441.5259977957435]]}",
+    "errorScan": "{\"kind\":\"notice\",\"message\":\"Cell search matched 0 entries.\"}"
+  },
+  {
+    "key": "q4_3",
+    "outputPath": "/Users/mingze/Desktop/解题/数学建模修订交付/附件/附件5/result4-3.xlsx",
+    "inputPath": "/Users/mingze/Desktop/解题/数学建模修订交付/CUMCMThesis-master/outputs/final_strategy/results_export.json",
+    "mappingPath": "/Users/mingze/Desktop/解题/数学建模修订交付/CUMCMThesis-master/data/time_mapping.json",
+    "sheets": [
+      "计划购电量",
+      "调整购电量",
+      "充放电量",
+      "紧急购电量"
+    ],
+    "days": 334,
+    "emergencyRows": 411,
+    "previews": [
+      "/Users/mingze/Desktop/解题/数学建模修订交付/CUMCMThesis-master/outputs/final_strategy/workbook_previews/filled/q4_3_计划购电量.png",
+      "/Users/mingze/Desktop/解题/数学建模修订交付/CUMCMThesis-master/outputs/final_strategy/workbook_previews/filled/q4_3_调整购电量.png",
+      "/Users/mingze/Desktop/解题/数学建模修订交付/CUMCMThesis-master/outputs/final_strategy/workbook_previews/filled/q4_3_充放电量.png",
+      "/Users/mingze/Desktop/解题/数学建模修订交付/CUMCMThesis-master/outputs/final_strategy/workbook_previews/filled/q4_3_紧急购电量.png"
+    ],
+    "inspection": "{\"kind\":\"table\",\"sheet\":\"计划购电量\",\"address\":\"A1:C4\",\"rows\":4,\"cols\":3,\"values\":[[\"日期\\\\时间\",\"0:10-0:20\",\"0:20-0:30\"],[\"2025-02-01T00:00:00.000Z\",485.0438833333333,468.7803916666666],[\"2025-02-02T00:00:00.000Z\",638.6242215304038,1451.796065080858],[\"2025-02-03T00:00:00.000Z\",612.6998917377108,608.1926644624103]]}",
+    "errorScan": "{\"kind\":\"notice\",\"message\":\"Cell search matched 0 entries.\"}"
+  }
+]

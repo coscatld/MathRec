@@ -1,0 +1,30 @@
+✔ configuration rejects invalid integer bounds (1.339015ms)
+✔ invalid timeout never starts work or allocates timer (0.830981ms)
+✔ pre-aborted signal wins without admission (1.193326ms)
+✔ C running, Q waiting, next rejected before backend (0.900946ms)
+✔ Q=0 allows free slot and rejects overflow (0.300272ms)
+✔ FIFO start order differs from completion order (0.410608ms)
+✔ queued timeout includes wait and immediately frees Q (0.371509ms)
+✔ queued cancellation removes entry and abort listener (0.41193ms)
+✔ running timeout keeps slot until ignored-abort backend finishes (0.311158ms)
+✔ running cancellation likewise retains capacity (0.383527ms)
+✔ late rejection is observed and slot released exactly once (0.306401ms)
+✔ cooperative cancellation settles result before backend rejection (0.173752ms)
+✔ sync throw, async rejection and success all release capacity (0.231048ms)
+✔ normal completion clears timer and caller listener (0.150867ms)
+✔ expired queued work never starts when timer callback is delayed (0.177668ms)
+✔ completion at deadline is timeout even before timer callback (0.098228ms)
+✔ completion before deadline succeeds (0.085899ms)
+✔ first public reason survives later timeout or cancellation (0.133671ms)
+✔ reentrant submit cannot exceed capacity (0.136936ms)
+✔ stress: 1000 submissions enforce C=3, Q=7, bounded admission (3.42271ms)
+✔ sequential reference agrees on successful result ordering (0.430708ms)
+✔ real timer smoke returns timeout, but does not prove exact latency (5.15028ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 134.301773

@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "scope": "AI-assisted automated checks, not human review or authorship evidence",
+  "checks": {
+    "check_scalar_equivalence": {
+      "parameter_combinations": 24,
+      "candidate_scenario_trajectories": 288,
+      "maximum_absolute_error": 7.275957614183426e-12,
+      "coverage": "SOC bounds, charge/discharge power cap, surplus, deficit, spill, exact balance, no storage, both settlement conventions"
+    },
+    "check_paired_price_shortage": {
+      "paired_expected_bill": 250.0,
+      "incorrect_mean_price_bill": 137.5,
+      "same_marginals_reversed_pairing_bill": 25.0
+    },
+    "check_original_reference_and_no_adjust": {
+      "no_adjust_candidate": "no_adjust",
+      "original_plan_bill": 80.0,
+      "existing_adjustment_bill": 24.0,
+      "no_adjust_total_bill": 104.0,
+      "incorrect_rebased_bill": 64.0
+    },
+    "check_actual_terminal_and_common_beta": {
+      "common_beta_yuan_per_kwh": 2.0,
+      "actual_final_energy_by_candidate_scenario": [
+        [
+          6180.0,
+          5777.777777777777
+        ],
+        [
+          6360.0,
+          6000.0
+        ]
+      ],
+      "expected_terminal_penalty": [
+        402.2222222222226,
+        360.0
+      ],
+      "incorrect_penalty_at_mean_soc_first_candidate": 42.222222222222626
+    }
+  }
+}

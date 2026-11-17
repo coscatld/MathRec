@@ -1,0 +1,56 @@
+% 论文入口。沿用原 cumcmthesis.cls / cumcm2026.sty；原 example.tex 未覆盖。
+% 建议用户在本目录用 XeLaTeX 编译两次。本次仅提供源稿，不编译。
+\documentclass[withoutpreface,bwprint]{cumcmthesis}
+\usepackage{cumcm2026}
+\usepackage{url}
+\usepackage{placeins}
+\hypersetup{hidelinks}
+\setlength{\emergencystretch}{2em}
+\renewcommand{\arraystretch}{1.13}
+% 一级标题沿用中文数字；二、三级标题显示为4.1、4.2.1。
+\renewcommand{\thesection}{\chinese{section}、}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+\title{非对称结算机制下的微网采购与储能协同调度}
+\tihao{C}
+\yearinput{2026}
+\monthinput{9}
+\dayinput{10}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+针对微网采购、储能与预测更新的协同问题，建立以实际结算费用为中心的统一调度框架。由五倍紧急补购及1.5倍上调收费，推导无储能单时段的80\%日前采购分位数、70\%条件上调阈值及动态价格下的加权分位数，解释采购偏高的经济动机，再将该机制嵌入含功率、容量和效率限制的场景优化。
+
+问题一建立购电与储能联合线性规划，并利用免费弃余条件证明存在不同时充放电的最优解。计算得到全天计划购电59482.70 kWh、购电费35126.95元，较无储能基准节省26.90\%，首末储电量均为6000 kWh。
+
+问题二以一月实际账单校准有限候选预测器和执行器，冻结后对2月至12月334天顺序回测。主案保留此前28日完整残差轨迹，关闭额外风险与备用。总费用1401.28万元，较相同预测及初态下的点预测方案节省8.36\%，紧急购电85017.69 kWh。固定与自适应风险、备用单独及联合对照显示，附加保守机制并不普遍节费。
+
+问题三将0、6、12、18时的合同修订与每10分钟的储能控制分开，另实现固定合同的内层LP及跨日续接候选。其一月费用未优于规则执行，故主案仍使用经校准的规则，总费用1397.58万元，紧急购电12647.76 kWh。通过同计划场景回放量化规划与执行偏差，并以SOC、新光伏和负荷反馈的递进对照识别更新收益，避免将参考调度等同于真实控制。
+
+问题四以同日价荷残差构造联合场景，按真实价格结算，静态与滚动策略费用分别为1479.41万元和1476.92万元，紧急电量分别为80544.00和11950.68 kWh。本文区分实际账单、规划回放偏差与可选风险偏好，明确退款、终端库存及未来修订机会的近似边界。所有表格与附件5由统一物理时间索引和同一执行结果生成，保留完整源代码及原模板。
+
+\keywords{微网调度\quad 非对称结算\quad 采购分位数\quad 场景优化\quad 因果储能控制}
+\end{abstract}
+
+\input{sections/common_intro}
+\FloatBarrier
+\input{sections/question1}
+\FloatBarrier
+\input{sections/question2}
+\FloatBarrier
+\input{sections/question3}
+\FloatBarrier
+\input{sections/question4}
+\FloatBarrier
+\input{sections/model_evaluation}
+
+\FloatBarrier
+\CumcmAIUsed{建模方案整理、预测与调度程序生成、数据计算、文献检索核验、图表生成及论文初稿撰写}
+\input{sections/references}
+
+\clearpage
+\begin{appendices}
+\input{sections/05_appendix}
+\end{appendices}
+\end{document}

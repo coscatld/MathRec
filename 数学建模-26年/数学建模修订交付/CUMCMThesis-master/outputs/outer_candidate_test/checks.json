@@ -1,0 +1,70 @@
+{
+  "scope": "isolated regression checks for an unvalidated outer candidate selector",
+  "checks": {
+    "scalar_executor_equivalence": {
+      "passed": true,
+      "parameter_combinations": 24,
+      "candidate_scenario_trajectories": 288,
+      "maximum_absolute_error": 7.275957614183426e-12,
+      "coverage": "SOC bounds, charge/discharge power cap, surplus, deficit, spill, exact balance, no storage, both settlement conventions"
+    },
+    "paired_price_shortage": {
+      "passed": true,
+      "paired_expected_bill": 250.0,
+      "incorrect_mean_price_bill": 137.5,
+      "same_marginals_reversed_pairing_bill": 25.0
+    },
+    "original_reference_and_no_adjust": {
+      "passed": true,
+      "no_adjust_candidate": "no_adjust",
+      "original_plan_bill": 80.0,
+      "existing_adjustment_bill": 24.0,
+      "no_adjust_total_bill": 104.0,
+      "incorrect_rebased_bill": 64.0
+    },
+    "actual_terminal_and_common_beta": {
+      "passed": true,
+      "common_beta_yuan_per_kwh": 2.0,
+      "actual_final_energy_by_candidate_scenario": [
+        [
+          6180.0,
+          5777.777777777777
+        ],
+        [
+          6360.0,
+          6000.0
+        ]
+      ],
+      "expected_terminal_penalty": [
+        402.2222222222226,
+        360.0
+      ],
+      "incorrect_penalty_at_mean_soc_first_candidate": 42.222222222222626
+    },
+    "nested_candidate_sets": {
+      "passed": true,
+      "golden_small_minimum": 22.0,
+      "golden_expanded_minimum": 10.0,
+      "solver_base_candidate_count": 2,
+      "solver_expanded_candidate_count": 5,
+      "solver_base_minimum": 1959.4261831275721,
+      "solver_expanded_minimum": 1959.4261831275721,
+      "guarantee_scope": "same fixed empirical score and retained old candidates only"
+    },
+    "future_information_leakage": {
+      "passed": true,
+      "case": "q4_3",
+      "date": "2025-07-20",
+      "decision_slot": 72,
+      "causal_forecasts_rebuilt": true,
+      "candidate_count": 6,
+      "selected_name": "scenario_lp",
+      "outer_input_max_difference": 0.0,
+      "candidate_score_max_difference": 0.0,
+      "selected_grid_max_difference": 0.0,
+      "positive_control_future_issue_price_difference": 0.5427400651528298,
+      "scope": "fixed noon decision; root runner separately checks closed-loop execution"
+    }
+  },
+  "passed": true
+}

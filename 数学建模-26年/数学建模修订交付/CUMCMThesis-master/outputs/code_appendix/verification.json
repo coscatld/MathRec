@@ -1,0 +1,1738 @@
+{
+  "pdf_pages": 194,
+  "source_files": 40,
+  "source_lines": 8360,
+  "body_text_changed_pages": [],
+  "protected_file_count": 64,
+  "protected_files_changed": [],
+  "source_checks": [
+    {
+      "path": "code/requirements.txt",
+      "start_page": 44,
+      "end_page": 44,
+      "source_lines": 5,
+      "nonempty_lines": 5,
+      "missing_lines_in_extracted_pdf": [],
+      "sha_matches": true
+    },
+    {
+      "path": "code/data_forecast.py",
+      "start_page": 44,
+      "end_page": 50,
+      "source_lines": 344,
+      "nonempty_lines": 310,
+      "missing_lines_in_extracted_pdf": [],
+      "sha_matches": true
+    },
+    {
+      "path": "code/time_index.py",
+      "start_page": 50,
+      "end_page": 53,
+      "source_lines": 196,
+      "nonempty_lines": 166,
+      "missing_lines_in_extracted_pdf": [],
+      "sha_matches": true
+    },
+    {
+      "path": "code/optimize_dispatch.py",
+      "start_page": 53,
+      "end_page": 59,
+      "source_lines": 387,
+      "nonempty_lines": 354,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 245,
+          "text": "    for k in (\"plan_cost\",\"adjustment_cost\",\"emergency_cost\",\"total_cost\",\"risk\",\"solve_seconds\"):"
+        },
+        {
+          "line": 290,
+          "text": "                  f\"E={energy:.2f}; seconds/day={arrays['solve_seconds'][:day+1].mean():.3f}\",flush=True)"
+        },
+        {
+          "line": 343,
+          "text": "    s = solve_lp(net[None,:],data[\"fixed_price\"][None,:],np.ones(1),6000,cfg,q1=True)"
+        },
+        {
+          "line": 363,
+          "text": "    parser.add_argument(\"--case\",default=\"all\",choices=[\"all\",\"q1\",\"q2\",\"q3\",\"q4_2\",\"q4_3\"])"
+        },
+        {
+          "line": 370,
+          "text": "    (out/\"q1.json\").write_text(json.dumps(jsonable(q1),ensure_ascii=False,indent=2),encoding=\"utf-8\")"
+        },
+        {
+          "line": 377,
+          "text": "            (out/f\"{case}_summary.json\").write_text(json.dumps(summary(r),indent=2),encoding=\"utf-8\")"
+        },
+        {
+          "line": 383,
+          "text": "        (out/\"results_export.json\").write_text(json.dumps(export,ensure_ascii=False,separators=(\",\",\":\")),encoding=\"utf-8\")"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/dispatch_v2.py",
+      "start_page": 59,
+      "end_page": 64,
+      "source_lines": 309,
+      "nonempty_lines": 272,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 89,
+          "text": "        d[\"pv_issue_forecast\"]=np.repeat(data[\"pv_issue_forecast\"][:,0:1,:],4,axis=1)"
+        },
+        {
+          "line": 103,
+          "text": "    base=old.Settings(scenarios=cfg.scenarios,history=cfg.history,risk_scale=cfg.risk_scale,"
+        },
+        {
+          "line": 125,
+          "text": "        rr.extend([t]*3);cc.extend([int(en[t]),int(ch[t]),int(dis[t])]);vv.extend([1,-ETA,1/ETA])"
+        },
+        {
+          "line": 159,
+          "text": "                A_eq=Aeq,b_eq=rhs,bounds=np.column_stack([lower,upper]),method=\"highs\","
+        },
+        {
+          "line": 178,
+          "text": "    lh=historical_forecast(data[\"load\"],day+1,str(data[\"chosen_load_model\"]),data[\"q1_load\"],known_before=day)[:m]"
+        },
+        {
+          "line": 183,
+          "text": "        ph=historical_forecast(data[\"price\"],day+1,str(data[\"chosen_price_model\"]),data[\"fixed_price\"],known_before=day)[:m]"
+        },
+        {
+          "line": 194,
+          "text": "def simulate(data,case,cfg,start_day=31,end_day=365,initial_energy=None,progress=False):"
+        },
+        {
+          "line": 199,
+          "text": "    arrays[\"energy\"]=np.zeros((nd,145));arrays[\"reference_energy\"]=np.zeros((nd,145))"
+        },
+        {
+          "line": 200,
+          "text": "    for k in (\"plan_cost\",\"adjustment_cost\",\"emergency_cost\",\"total_cost\",\"risk\",\"solve_seconds\",\"inner_seconds\"):"
+        },
+        {
+          "line": 225,
+          "text": "                if cfg.cross_day and rolling:nextnet,nextprice=next_day_forecast(data,day,issue,case)"
+        },
+        {
+          "line": 230,
+          "text": "                c,d,energy,h,waste=old.execute_step(effective[t],actual_net,energy,cfg.no_storage)"
+        },
+        {
+          "line": 240,
+          "text": "                    action=inner_lp(effective[t:],future_net,future_price,energy,cfg.terminal_scale,"
+        },
+        {
+          "line": 264,
+          "text": "    n=len(r[\"dates\"]);net=(data[\"load\"][start_day:start_day+n]-data[\"pv\"][start_day:start_day+n])*DT"
+        },
+        {
+          "line": 267,
+          "text": "    assert np.max(np.abs(np.diff(r[\"energy\"],axis=1)-ETA*r[\"charge\"]+r[\"discharge\"]/ETA))<1e-5"
+        },
+        {
+          "line": 281,
+          "text": "        reference_soc_rmse=float(np.sqrt(np.mean((r[\"reference_energy\"]-r[\"energy\"])**2))),"
+        },
+        {
+          "line": 301,
+          "text": "    (DATA/f\"{case}_v2_summary.json\").write_text(json.dumps(summary_v2(r),indent=2),encoding=\"utf-8\")"
+        },
+        {
+          "line": 306,
+          "text": "    p=argparse.ArgumentParser();p.add_argument(\"--benchmark\",action=\"store_true\");args=p.parse_args()"
+        },
+        {
+          "line": 307,
+          "text": "    raw=dict(np.load(DATA/\"prepared.npz\",allow_pickle=False));data=make_forecast_data(raw)"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/calibrate_v2.py",
+      "start_page": 64,
+      "end_page": 66,
+      "source_lines": 78,
+      "nonempty_lines": 71,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 18,
+          "text": "        err=actual-pred;return {\"mae\":float(np.mean(np.abs(err))),\"rmse\":float(np.sqrt(np.mean(err**2)))}"
+        },
+        {
+          "line": 19,
+          "text": "    for var,key in [(\"load\",\"forecast_load\"),(\"pv\",\"forecast_pv_history\"),(\"price\",\"forecast_price\")]:"
+        },
+        {
+          "line": 22,
+          "text": "        out[\"published_pv_midnight\"]=metric(data[\"pv\"][31:],data[\"pv_issue_forecast\"][31:,0])"
+        },
+        {
+          "line": 36,
+          "text": "        forecasts={\"load_model\":\"weekday_4\",\"pv_model\":\"mean_7\",\"price_model\":\"weekday_4\"}"
+        },
+        {
+          "line": 62,
+          "text": "        if case in (\"q3\",\"q4_3\"):alternatives.append(Config(controller=\"lp\",cross_day=True))"
+        },
+        {
+          "line": 71,
+          "text": "             \"forecast_metrics_evaluation_descriptive_only\":forecast_metrics(data,case)}"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/run_main_v2.py",
+      "start_page": 66,
+      "end_page": 67,
+      "source_lines": 44,
+      "nonempty_lines": 38,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 23,
+          "text": "    export={\"version\":\"v2_settlement_control\",\"q1\":json.loads((DATA/\"q1.json\").read_text(encoding=\"utf-8\")),"
+        },
+        {
+          "line": 29,
+          "text": "    (DATA/\"results_export.json\").write_text(json.dumps(export,ensure_ascii=False,separators=(\",\",\":\")),encoding=\"utf-8\")"
+        },
+        {
+          "line": 35,
+          "text": "    p.add_argument(\"--only\",choices=[\"q2\",\"q3\",\"q4_2\",\"q4_3\"]);p.add_argument(\"--export-only\",action=\"store_true\")"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/outer_candidate_selector.py",
+      "start_page": 67,
+      "end_page": 70,
+      "source_lines": 246,
+      "nonempty_lines": 223,
+      "missing_lines_in_extracted_pdf": [],
+      "sha_matches": true
+    },
+    {
+      "path": "code/run_outer_candidate_experiment.py",
+      "start_page": 71,
+      "end_page": 75,
+      "source_lines": 286,
+      "nonempty_lines": 264,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 182,
+          "text": "                                       -primary[\"total_cost\"][stored_start:stored_start+nd].sum()),"
+        },
+        {
+          "line": 208,
+          "text": "                        \"baseline_emergency_kwh\":float(baseline[\"emergency\"][mask].sum()),"
+        },
+        {
+          "line": 209,
+          "text": "                        \"selected_emergency_kwh\":float(selected[\"emergency\"][mask].sum())})"
+        },
+        {
+          "line": 215,
+          "text": "               \"source_sha256\":source_hashes,\"baseline_reproduction\":baseline_validation,"
+        },
+        {
+          "line": 216,
+          "text": "               \"comparison\":comparison,\"monthly\":monthly,\"candidate_selection_counts\":counts,"
+        },
+        {
+          "line": 219,
+          "text": "               \"mean_estimated_score_reduction_yuan_per_decision\":float(reductions.mean()),"
+        },
+        {
+          "line": 220,
+          "text": "               \"max_estimated_score_reduction_yuan_per_decision\":float(reductions.max()),"
+        },
+        {
+          "line": 221,
+          "text": "               \"actual_bill_improved_days\":int(np.sum(selected[\"total_cost\"]<baseline[\"total_cost\"]-1e-6)),"
+        },
+        {
+          "line": 222,
+          "text": "               \"actual_bill_worsened_days\":int(np.sum(selected[\"total_cost\"]>baseline[\"total_cost\"]+1e-6)),"
+        },
+        {
+          "line": 242,
+          "text": "    parser.add_argument(\"--output\",type=Path,default=ROOT/\"outputs/outer_candidate_test\")"
+        },
+        {
+          "line": 266,
+          "text": "        \"python\":platform.python_version(),\"numpy\":np.__version__,\"scipy\":scipy.__version__,"
+        },
+        {
+          "line": 275,
+          "text": "            pending = {pool.submit(run_case,case,args.start_date,args.end_date,str(output)):case"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/outer_timing_policy.py",
+      "start_page": 76,
+      "end_page": 78,
+      "source_lines": 175,
+      "nonempty_lines": 157,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 123,
+          "text": "                        estimated_score_reduction_yuan=float(choice[\"score_improvement\"]),"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/run_outer_timing_ablation.py",
+      "start_page": 78,
+      "end_page": 83,
+      "source_lines": 261,
+      "nonempty_lines": 236,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 92,
+          "text": "                       \"actual_bill_yuan\":float(result[\"total_cost\"][months==month].sum()),"
+        },
+        {
+          "line": 109,
+          "text": "    old_summary = json.loads((EARLIER/f\"{case}_summary.json\").read_text(encoding=\"utf-8\"))"
+        },
+        {
+          "line": 136,
+          "text": "                   \"outer_decision_count\":len(decisions),\"screened_decision_count\":len(active),"
+        },
+        {
+          "line": 139,
+          "text": "                   \"frozen_config\":asdict(cfg),\"elapsed_seconds\":time.perf_counter()-begin,"
+        },
+        {
+          "line": 140,
+          "text": "                   \"bill_minus_main_yuan\":totals[\"actual_bill_yuan\"]-float(primary[\"total_cost\"].sum()),"
+        },
+        {
+          "line": 141,
+          "text": "                   \"bill_minus_all_screening_yuan\":totals[\"actual_bill_yuan\"]-float(incumbent[\"total_cost\"].sum()),"
+        },
+        {
+          "line": 142,
+          "text": "                   \"actual_improved_days_vs_all\":int(np.sum(result[\"total_cost\"]<incumbent[\"total_cost\"]-1e-6)),"
+        },
+        {
+          "line": 143,
+          "text": "                   \"actual_worsened_days_vs_all\":int(np.sum(result[\"total_cost\"]>incumbent[\"total_cost\"]+1e-6)),"
+        },
+        {
+          "line": 144,
+          "text": "                   \"validation\":{\"physical_constraints\":True,\"legal_updates_preserved\":True,"
+        },
+        {
+          "line": 165,
+          "text": "        choices = {\"main\": {**summarize(main,beta,6000.),\"array_path\":str(main_path.relative_to(ROOT))}}"
+        },
+        {
+          "line": 167,
+          "text": "            table[case] = {\"selected_strategy\":\"main\",\"reason\":\"user_fixed_day_ahead_main\","
+        },
+        {
+          "line": 172,
+          "text": "        choices[\"all\"] = {**summarize(enhanced,beta,6000.),\"array_path\":str(all_path.relative_to(ROOT))}"
+        },
+        {
+          "line": 187,
+          "text": "        table[case] = {\"selected_strategy\":winner,\"reason\":reason,\"selected\":choices[winner],"
+        },
+        {
+          "line": 191,
+          "text": "                       -choices[\"intraday_only\"][\"actual_bill_yuan\"]+choices[\"main\"][\"actual_bill_yuan\"],"
+        },
+        {
+          "line": 193,
+          "text": "    return {\"schema_version\":\"1.0\",\"generated_by\":Path(__file__).name,\"generated_at\":now(),"
+        },
+        {
+          "line": 204,
+          "text": "    parser.add_argument(\"--output\",type=Path,default=ROOT/\"outputs/outer_timing_ablation\")"
+        },
+        {
+          "line": 215,
+          "text": "    report = {\"schema_version\":\"1.0\",\"generated_by\":Path(__file__).name,\"generated_at\":began,"
+        },
+        {
+          "line": 227,
+          "text": "              \"python\":platform.python_version(),\"numpy\":np.__version__,\"scipy\":scipy.__version__,"
+        },
+        {
+          "line": 248,
+          "text": "    manifest = {\"schema_version\":\"1.0\",\"generated_by\":Path(__file__).name,\"generated_at\":now(),"
+        },
+        {
+          "line": 252,
+          "text": "                \"platform\":platform.platform(),\"started_at\":began,\"completed_at\":now(),"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/run_experiments.py",
+      "start_page": 83,
+      "end_page": 86,
+      "source_lines": 160,
+      "nonempty_lines": 141,
+      "missing_lines_in_extracted_pdf": [],
+      "sha_matches": true
+    },
+    {
+      "path": "code/experiments_v2.py",
+      "start_page": 86,
+      "end_page": 93,
+      "source_lines": 373,
+      "nonempty_lines": 342,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 154,
+          "text": "        \"mean_realized_risk_weight\":float(np.mean(result.get(\"risk_trace\",result.get(\"risk\")))) if \"risk\" in result or \"risk_trace\" in result else None,"
+        },
+        {
+          "line": 188,
+          "text": "            return net[None,update:],price[None,update:],np.ones(1),np.zeros(144-update),0.,base"
+        },
+        {
+          "line": 211,
+          "text": "            \"cost_percent_vs_reference\":100*(current[\"total_cost\"]/base[\"total_cost\"]-1),"
+        },
+        {
+          "line": 212,
+          "text": "            \"emergency_kwh_minus_reference\":current[\"emergency_energy\"]-base[\"emergency_energy\"],"
+        },
+        {
+          "line": 214,
+          "text": "            \"final_energy_minus_reference_kwh\":current[\"evaluation_final_energy\"]-base[\"evaluation_final_energy\"]}"
+        },
+        {
+          "line": 239,
+          "text": "            \"cost_percent_difference\":100*(variant[\"total_cost\"]/base[\"total_cost\"]-1),"
+        },
+        {
+          "line": 240,
+          "text": "            \"emergency_difference_kwh\":variant[\"emergency_energy\"]-base[\"emergency_energy\"],"
+        },
+        {
+          "line": 242,
+          "text": "            \"final_energy_difference_kwh\":variant[\"evaluation_final_energy\"]-base[\"evaluation_final_energy\"],"
+        },
+        {
+          "line": 245,
+          "text": "            \"reference_mean_reference_reserve_kwh\":base[\"mean_realized_reference_reserve_kwh\"],"
+        },
+        {
+          "line": 246,
+          "text": "            \"variant_mean_reference_reserve_kwh\":variant[\"mean_realized_reference_reserve_kwh\"]}"
+        },
+        {
+          "line": 249,
+          "text": "        names = [\"q2_expectation_only\",f\"q2_risk_{kind}_only\",f\"q2_reserve_{kind}_only\",f\"q2_risk_reserve_{kind}\"]"
+        },
+        {
+          "line": 254,
+          "text": "                \"cost_difference_in_differences_yuan\":j[\"total_cost\"]-r[\"total_cost\"]-s[\"total_cost\"]+e[\"total_cost\"]}"
+        },
+        {
+          "line": 259,
+          "text": "    OUT_JSON.write_text(json.dumps(native(report),ensure_ascii=False,indent=2),encoding=\"utf-8\")"
+        },
+        {
+          "line": 340,
+          "text": "        entry.update(status=\"complete\",summary=summary,run_seconds=elapsed,reused_primary=False)"
+        },
+        {
+          "line": 357,
+          "text": "        entry.update(status=\"complete\",summary=source[\"summary\"],reused_identical_config=reference,"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/diagnose_execution_gap.py",
+      "start_page": 93,
+      "end_page": 97,
+      "source_lines": 199,
+      "nonempty_lines": 182,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 131,
+          "text": "                       \"planning_expected_emergency_cost_yuan\":float(weights@planned_em_cost),"
+        },
+        {
+          "line": 132,
+          "text": "                       \"replay_expected_emergency_cost_yuan\":float(weights@replay_em_cost),"
+        },
+        {
+          "line": 134,
+          "text": "                       \"soc_expected_terminal_difference_kwh\":float(weights@errors[:,-1]),"
+        },
+        {
+          "line": 149,
+          "text": "                                \"reference_charge\":sol[\"charge\"].copy(), \"reference_discharge\":sol[\"discharge\"].copy(),"
+        },
+        {
+          "line": 152,
+          "text": "                                \"planning_scenario_billed_cost\":planned_cost.copy(), \"replay_scenario_billed_cost\":replay_cost.copy()}"
+        },
+        {
+          "line": 190,
+          "text": "        \"max_recreated_committed_grid_deviation_kwh\":max(r[\"recreated_committed_grid_max_abs_kwh\"] for r in rows),"
+        },
+        {
+          "line": 194,
+          "text": "    (out / \"execution_gap_v1.json\").write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding=\"utf-8\")"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/diagnose_inner_v2.py",
+      "start_page": 97,
+      "end_page": 101,
+      "source_lines": 226,
+      "nonempty_lines": 212,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 151,
+          "text": "            f\"{controller}_signed_mean_gap_yuan\":expectation(f\"{controller}_minus_plan_yuan\"),"
+        },
+        {
+          "line": 152,
+          "text": "            f\"{controller}_mean_absolute_scenario_gap_yuan\":expectation(f\"{controller}_absolute_gap_yuan\"),"
+        },
+        {
+          "line": 153,
+          "text": "            f\"{controller}_absolute_expected_gap_yuan\":abs(expectation(f\"{controller}_minus_plan_yuan\")),"
+        },
+        {
+          "line": 156,
+          "text": "            f\"{controller}_expected_terminal_energy_kwh\":expectation(f\"{controller}_terminal_energy_kwh\"),"
+        },
+        {
+          "line": 197,
+          "text": "            json_path.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding=\"utf-8\")"
+        },
+        {
+          "line": 206,
+          "text": "    aggregate = {\"decision_count\":len(decisions),\"scenario_replays_per_controller\":len(rows)}"
+        },
+        {
+          "line": 221,
+          "text": "    json_path.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding=\"utf-8\")"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/scenario_convergence.py",
+      "start_page": 101,
+      "end_page": 103,
+      "source_lines": 86,
+      "nonempty_lines": 78,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 21,
+          "text": "    dist=np.sqrt(np.maximum(0,np.sum(x*x,axis=1)[:,None]+np.sum(x*x,axis=1)[None,:]-2*x@x.T))"
+        },
+        {
+          "line": 24,
+          "text": "        dd=dist[:,centers].min(axis=1);dd[centers]=-1;centers.append(int(dd.argmax()))"
+        },
+        {
+          "line": 42,
+          "text": "    return {'objectives':objectives,'relative_objectives':(np.asarray(objectives)/objectives[0]).tolist(),"
+        },
+        {
+          "line": 43,
+          "text": "            'iterations':iteration,'stable':stable,'medoids':expected.tolist(),'weights':w.tolist()}"
+        },
+        {
+          "line": 47,
+          "text": "    source=DATA/'prepared_v2_q2.npz';data=dict(np.load(source,allow_pickle=False));records=[]"
+        },
+        {
+          "line": 51,
+          "text": "                (data['forecast_load'][history]-data['forecast_pv_history'][history]))/6"
+        },
+        {
+          "line": 52,
+          "text": "        rec=trace_reduction(errors);rec['date']=str(data['dates'][day]);records.append(rec)"
+        },
+        {
+          "line": 54,
+          "text": "    curves=np.stack([np.pad(r['relative_objectives'],(0,maxstep+1-len(r['relative_objectives'])),mode='edge') for r in records])"
+        },
+        {
+          "line": 66,
+          "text": "       'quantiles':{'p10':q[0].tolist(),'median':q[1].tolist(),'p90':q[2].tolist()},'records':records}"
+        },
+        {
+          "line": 67,
+          "text": "    (DATA/'scenario_convergence.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')"
+        },
+        {
+          "line": 68,
+          "text": "    np.savez_compressed(DATA/'scenario_convergence.npz',relative_objectives=curves,dates=data['dates'][31:],quantiles=q)"
+        },
+        {
+          "line": 69,
+          "text": "    fig,axs=plt.subplots(1,2,figsize=(8.2,3.5),gridspec_kw={'width_ratios':[1.8,1]},layout='constrained')"
+        },
+        {
+          "line": 78,
+          "text": "    for k in steps[1:]:axs[1].text(k,counts[k]+2,str(counts[k]),ha='center',fontsize=8)"
+        },
+        {
+          "line": 79,
+          "text": "    axs[1].set_xticks(steps[1:]);axs[1].set_xlabel('代表点稳定时的迭代次数');axs[1].set_ylabel('历史窗口个数')"
+        },
+        {
+          "line": 80,
+          "text": "    axs[1].set_ylim(0,counts.max()*1.16);axs[1].grid(axis='y',alpha=.18);axs[1].set_title('(b) 334个窗口的停止分布',loc='left',fontsize=10)"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/make_paper_assets.py",
+      "start_page": 103,
+      "end_page": 107,
+      "source_lines": 231,
+      "nonempty_lines": 214,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 21,
+          "text": "plt.rcParams.update({\"font.size\":9,\"axes.spines.top\":False,\"axes.spines.right\":False,"
+        },
+        {
+          "line": 52,
+          "text": "            cells.extend([f\"{clock(t)}--{clock(end)}\",fmt(ch[t:end].sum()),fmt(dis[t:end].sum())])"
+        },
+        {
+          "line": 54,
+          "text": "    s.extend([r\"\\midrule\",r\"0:00储电量 & \\multicolumn{2}{r}{\"+fmt(e[0])+r\"} & 24:00储电量 & \\multicolumn{2}{r}{\"+fmt(e[-1])+r\"}\\\\\",r\"\\bottomrule\",r\"\\end{tabularx}\"])"
+        },
+        {
+          "line": 90,
+          "text": "    write(f\"{case}_selected.tex\",\"\\n\\n\".join([\"\\n\".join(p),\"\\n\".join(b),\"\\n\".join(e)]))"
+        },
+        {
+          "line": 98,
+          "text": "                              fmt(r[\"plan_cost\"][i]),fmt(r[\"adjustment_cost\"][i]),fmt(r[\"emergency_cost\"][i])])+r\"\\\\\")"
+        },
+        {
+          "line": 108,
+          "text": "    axs[0].step(h,np.asarray(q1[\"plan\"])*6,where=\"post\",label=\"外网购电\",color=COLORS[2])"
+        },
+        {
+          "line": 111,
+          "text": "    axs[1].bar(h,-np.asarray(q1[\"discharge\"])*6,width=1/6,label=\"放电\",color=COLORS[1])"
+        },
+        {
+          "line": 114,
+          "text": "    axs[2].axhline(1200,color=\"#9CA3AF\",ls=\":\");axs[2].axhline(10800,color=\"#9CA3AF\",ls=\":\")"
+        },
+        {
+          "line": 116,
+          "text": "    ax=axs[2].twinx();ax.plot(h,data[\"fixed_price\"],color=COLORS[3],alpha=.8,label=\"电价\")"
+        },
+        {
+          "line": 120,
+          "text": "    fig.savefig(FIG/\"q1_dispatch.pdf\");fig.savefig(FIG/\"q1_dispatch.png\");plt.close(fig)"
+        },
+        {
+          "line": 123,
+          "text": "        im=ax.imshow(data[key],aspect=\"auto\",origin=\"lower\",extent=(0,24,1,365),cmap=\"cividis\")"
+        },
+        {
+          "line": 127,
+          "text": "    fig.savefig(FIG/\"annual_inputs.pdf\");fig.savefig(FIG/\"annual_inputs.png\");plt.close(fig)"
+        },
+        {
+          "line": 134,
+          "text": "        ax.fill_between(h,0,r[\"emergency\"][i]*6,color=\"#B45454\",alpha=.6,label=\"紧急购电\")"
+        },
+        {
+          "line": 137,
+          "text": "        ax.set_xticks(np.arange(0,25,6));ax.set_xlim(0,24);ax.grid(axis=\"y\",alpha=.18)"
+        },
+        {
+          "line": 140,
+          "text": "    fig.savefig(FIG/\"q3_seasons.pdf\");fig.savefig(FIG/\"q3_seasons.png\");plt.close(fig)"
+        },
+        {
+          "line": 151,
+          "text": "    fig.savefig(FIG/\"monthly_results.pdf\");fig.savefig(FIG/\"monthly_results.png\");plt.close(fig)"
+        },
+        {
+          "line": 176,
+          "text": "          r\"\\label{tab:\"+filename[:-4]+r\"}\",r\"\\begin{tabularx}{\\linewidth}{LRRRR}\\toprule\","
+        },
+        {
+          "line": 180,
+          "text": "            lines.append(\" & \".join([label,fmt(v[\"total_cost\"]/1e4),fmt(v[\"emergency_energy\"]),"
+        },
+        {
+          "line": 181,
+          "text": "                                     fmt(v[\"daily_cost_cvar95\"]),fmt(v[\"final_energy\"])])+r\"\\\\\")"
+        },
+        {
+          "line": 196,
+          "text": "    fig.savefig(FIG/\"update_value.pdf\");fig.savefig(FIG/\"update_value.png\");plt.close(fig)"
+        },
+        {
+          "line": 203,
+          "text": "    q1table=r\"\\begin{table}[htbp]\\centering\\small\\caption{问题1指定时段与全天购电结果（电量单位：kWh）}\\label{tab:q1-purchase}\"+\"\\n\"+purchase_block(q1[\"plan\"],sum(q1[\"plan\"]),q1[\"cost\"])+r\"\\end{table}\"+\"\\n\""
+        },
+        {
+          "line": 204,
+          "text": "    q1table+=r\"\\begin{table}[htbp]\\centering\\small\\caption{问题1储能充放电及首末电量（单位：kWh）}\\label{tab:q1-battery}\"+\"\\n\"+battery_block(np.array(q1[\"charge\"]),np.array(q1[\"discharge\"]),q1[\"energy\"])+r\"\\end{table}\""
+        },
+        {
+          "line": 208,
+          "text": "    s=[r\"\\begin{table}[htbp]\\centering\\small\\caption{2025年2月1日至12月31日费用与风险结果}\\label{tab:annual}\","
+        },
+        {
+          "line": 213,
+          "text": "             (\"紧急电量/万kWh\",\"emergency_energy\",1e4),(\"发生紧急购电天数\",\"emergency_days\",1),"
+        },
+        {
+          "line": 214,
+          "text": "             (\"日费用CVaR95/万元\",\"daily_cost_cvar95\",1e4),(\"最高日费用/万元\",\"daily_cost_max\",1e4),"
+        },
+        {
+          "line": 215,
+          "text": "             (\"2月1日期初电量/kWh\",\"initial_energy\",1),(\"12月31日期末电量/kWh\",\"final_energy\",1)]"
+        },
+        {
+          "line": 221,
+          "text": "        fields=[\"case\",\"date\",\"plan_kwh\",\"adjusted_kwh\",\"emergency_kwh\",\"plan_cost_yuan\",\"adjustment_cost_yuan\",\"emergency_cost_yuan\",\"total_cost_yuan\",\"energy_start_kwh\",\"energy_end_kwh\"]"
+        },
+        {
+          "line": 225,
+          "text": "                w.writerow([case,r[\"dates\"][i],r[\"plan\"][i].sum(),r[\"adjusted\"][i].sum(),r[\"emergency\"][i].sum(),r[\"plan_cost\"][i],r[\"adjustment_cost\"][i],r[\"emergency_cost\"][i],r[\"total_cost\"][i],r[\"energy\"][i,0],r[\"energy\"][i,-1]])"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/make_paper_assets_v2.py",
+      "start_page": 107,
+      "end_page": 111,
+      "source_lines": 213,
+      "nonempty_lines": 198,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 18,
+          "text": "         r'\\label{tab:'+name+r'}',r'\\begin{tabularx}{\\linewidth}{'+spec+r'}\\toprule',"
+        },
+        {
+          "line": 38,
+          "text": "        for controller,cross,label in [('greedy',False,'规则执行'),('lp',False,'储能LP'),('lp',True,'储能LP+跨日')]:"
+        },
+        {
+          "line": 42,
+          "text": "                s=matches[0]['summary'];control.append([CASES[case],label,f(s['total_cost']),f(s['emergency_energy']),f(s['final_energy'])])"
+        },
+        {
+          "line": 46,
+          "text": "        if case.startswith('q4'):variables.append(('电价/(元/kWh)','price','forecast_price'))"
+        },
+        {
+          "line": 68,
+          "text": "    old.write('q1_results.tex',r'\\begin{table}[htbp]\\centering\\small\\caption{问题1指定时段与全天购电结果（电量单位：kWh）}\\label{tab:q1-purchase}'+"
+        },
+        {
+          "line": 69,
+          "text": "       old.purchase_block(q1['plan'],sum(q1['plan']),q1['cost'])+r'\\end{table}'+'\\n'+"
+        },
+        {
+          "line": 71,
+          "text": "       old.battery_block(np.array(q1['charge']),np.array(q1['discharge']),q1['energy'])+r'\\end{table}')"
+        },
+        {
+          "line": 78,
+          "text": "       ('日总费用CVaR95/元','daily_cost_cvar95',1),('最高日费用/元','daily_cost_max',1),"
+        },
+        {
+          "line": 79,
+          "text": "       ('2月1日期初库存/kWh','initial_energy',1),('12月31日期末库存/kWh','final_energy',1),"
+        },
+        {
+          "line": 82,
+          "text": "    table('annual_summary','冻结经济主案的2月至12月334天结果',['指标',*CASES.values()],rows,"
+        },
+        {
+          "line": 85,
+          "text": "        w=csv.writer(out);w.writerow(['case','date','plan_kwh','adjusted_kwh','emergency_kwh','plan_cost_yuan','adjustment_cost_yuan','emergency_cost_yuan','total_cost_yuan','energy_start_kwh','energy_end_kwh'])"
+        },
+        {
+          "line": 89,
+          "text": "                            *[r[k][i] for k in ['plan_cost','adjustment_cost','emergency_cost','total_cost']],r['energy'][i,0],r['energy'][i,-1]])"
+        },
+        {
+          "line": 97,
+          "text": "        s=report['summary'][c]['reporting_feb_to_dec']['all_updates'];g=s['delta_exec_yuan']"
+        },
+        {
+          "line": 98,
+          "text": "        rows.append([CASES[c],str(g['count']),f(g['mean']),f(100*g['negative_fraction'])+r'\\%',"
+        },
+        {
+          "line": 127,
+          "text": "          ('q2_reserve_adaptive_only','动态备用'),('q2_risk_reserve_fixed','固定风险+备用'),"
+        },
+        {
+          "line": 128,
+          "text": "          ('q2_risk_reserve_adaptive','自适应风险+备用'),('q2_risk_reserve_adaptive_12','自适应联合，12场景')]),"
+        },
+        {
+          "line": 130,
+          "text": "          ('q3_midnight_only','仅零时外层计划'),('q3_feedback_soc_only','仅更新SOC并重优化'),('q3_feedback_pv_only','再加入新光伏预报'),('q3_feedback_full','再加入负荷偏差反馈')]),"
+        },
+        {
+          "line": 132,
+          "text": "          ('q3_controller_greedy','规则执行（母模型）'),('q3_cross_day_false','剩余日储能LP'),('q3_cross_day_true','储能LP+跨日价值')]),"
+        },
+        {
+          "line": 136,
+          "text": "          ('q2_no_storage','无储能场景采购'),('q2_point_forecast','点预测采购'),('q2_expectation_only','场景期望费用（主案）')])}"
+        },
+        {
+          "line": 142,
+          "text": "            rows.append([label,f(s['total_cost']/1e4),f(s['emergency_energy']),f(s['daily_cost_cvar95']),f(s['final_energy'])])"
+        },
+        {
+          "line": 143,
+          "text": "        if rows:table(name,title,['策略','总费/万元','紧急量/kWh','日费CVaR95/元','末库存/kWh'],rows,"
+        },
+        {
+          "line": 147,
+          "text": "                     ('q2_reserve_fixed_only','固定备用'),('q2_reserve_adaptive_only','动态备用'),"
+        },
+        {
+          "line": 148,
+          "text": "                     ('q2_risk_reserve_fixed','固定联合'),('q2_risk_reserve_adaptive','自适应联合')]:"
+        },
+        {
+          "line": 150,
+          "text": "            s=ex[key]['summary'];rows.append([label,f'{s[\"mean_realized_risk_weight\"]:.5f}',f(s['mean_realized_reference_reserve_kwh'])])"
+        },
+        {
+          "line": 159,
+          "text": "                s=ex[key]['summary'];rows.append([CASES[c],str(n),f'{s[\"mean_seconds_per_day\"]:.4f}'])"
+        },
+        {
+          "line": 160,
+          "text": "    if rows:table('v2_solve_times','场景规模与每日平均运行时间',['问题','场景数','秒/日'],rows,"
+        },
+        {
+          "line": 170,
+          "text": "    axs[0].bar(h,r['adjusted'][i]-r['plan'][i],width=1/6,color=old.COLORS[1]);axs[0].set_ylabel('常规上调量 / kWh')"
+        },
+        {
+          "line": 171,
+          "text": "    axs[1].plot(np.arange(145)/6,r['reference_energy'][i],label='各次外层参考轨迹拼接',color=old.COLORS[0],ls='--')"
+        },
+        {
+          "line": 172,
+          "text": "    axs[1].plot(np.arange(145)/6,r['energy'][i],label='实际储电量',color=old.COLORS[2]);axs[1].set_ylabel('储电量 / kWh');axs[1].legend()"
+        },
+        {
+          "line": 173,
+          "text": "    axs[2].bar(h,r['emergency'][i],width=1/6,color='#B45454');axs[2].set_ylabel('紧急购电量 / kWh');axs[2].set_xlabel('物理时刻 / h')"
+        },
+        {
+          "line": 183,
+          "text": "        j=list(r['dates']).index(date);ax.bar(h,r['adjusted'][j]-r['plan'][j],width=1/6,color=old.COLORS[1])"
+        },
+        {
+          "line": 198,
+          "text": "    grid=z[pre+'grid'];w=z[pre+'weights'];ref=z[pre+'reference_soc'];soc=z[pre+'replay_soc']"
+        },
+        {
+          "line": 202,
+          "text": "    axs[0].plot(x,w@soc,label='场景回放平均SOC',color=old.COLORS[1]);axs[0].fill_between(x,soc.min(axis=0),soc.max(axis=0),alpha=.15,color=old.COLORS[1]);axs[0].legend();axs[0].set_ylabel('储电量 / kWh')"
+        },
+        {
+          "line": 204,
+          "text": "    axs[1].bar(x[:-1],np.sum(w[:,None]*5*p*a,axis=0),width=1/6,color=old.COLORS[3]);axs[1].axhline(0,color='#555555',lw=.6);axs[1].set_ylabel('期望紧急费差 / 元');axs[1].set_xlabel('物理时刻 / h')"
+        },
+        {
+          "line": 212,
+          "text": "    selection_tables();results,summaries=primary_tables();gap_table();experiment_tables();focused_figures(results)"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/make_question_tables.py",
+      "start_page": 111,
+      "end_page": 114,
+      "source_lines": 175,
+      "nonempty_lines": 158,
+      "missing_lines_in_extracted_pdf": [],
+      "sha_matches": true
+    },
+    {
+      "path": "code/make_visual_atlas.py",
+      "start_page": 114,
+      "end_page": 123,
+      "source_lines": 464,
+      "nonempty_lines": 427,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 148,
+          "text": "                 MplPath.LINETO,MplPath.CURVE4,MplPath.CURVE4,MplPath.CURVE4,MplPath.CLOSEPOLY]"
+        },
+        {
+          "line": 149,
+          "text": "        ax.add_patch(PathPatch(MplPath(vertices,codes),facecolor=color,edgecolor=color,lw=.25,alpha=alpha,zorder=1))"
+        },
+        {
+          "line": 151,
+          "text": "        ax.add_patch(Rectangle((x,y),width,amount*scale,facecolor=color,edgecolor='white',lw=.7,zorder=3))"
+        },
+        {
+          "line": 167,
+          "text": "               MplPath.LINETO,MplPath.CURVE4,MplPath.CURVE4,MplPath.CURVE4,MplPath.CLOSEPOLY]"
+        },
+        {
+          "line": 168,
+          "text": "        ax.add_patch(PathPatch(MplPath(vertices,codes),facecolor=color,edgecolor=color,lw=.25,alpha=.58,zorder=1))"
+        },
+        {
+          "line": 186,
+          "text": "    turned_ribbon((busx+width,busy+c*scale/2),(chx,chy+width),c,(1,0),(0,-1),ORANGE)"
+        },
+        {
+          "line": 187,
+          "text": "    ax.add_patch(Rectangle((charge_left,chy),c*scale,width,facecolor=ORANGE,edgecolor='white',lw=.7,zorder=3))"
+        },
+        {
+          "line": 188,
+          "text": "    turned_ribbon((charge_left+stored*scale/2,chy),(stx+width,sty+initial*scale+stored*scale/2),"
+        },
+        {
+          "line": 192,
+          "text": "    turned_ribbon((stx,sty+final*scale+withdrawn*scale/2),(dsx,dsy),withdrawn,(-1,0),(0,1),GREEN,reach=.11)"
+        },
+        {
+          "line": 195,
+          "text": "    ax.add_patch(Rectangle((discharge_left,dsy),withdrawn*scale,width,facecolor=GREEN,edgecolor='white',lw=.7,zorder=3))"
+        },
+        {
+          "line": 196,
+          "text": "    turned_ribbon((discharge_left+dloss*scale+d*scale/2,dsy+width),(busx,busy+d*scale/2),"
+        },
+        {
+          "line": 199,
+          "text": "    turned_ribbon((charge_left+stored*scale+closs*scale/2,chy),(.985,.168+closs*scale/2),"
+        },
+        {
+          "line": 201,
+          "text": "    turned_ribbon((discharge_left+dloss*scale/2,dsy+width),(-.004,.305+dloss*scale/2),"
+        },
+        {
+          "line": 205,
+          "text": "    label(-.035,busy+(d+g)*scale+.017+pv*scale/2,f'光伏产能\\n{pv:,.1f}',ha='right',color=GREEN)"
+        },
+        {
+          "line": 238,
+          "text": "    im=axs[0].imshow(masked,aspect='auto',interpolation='nearest',origin='upper',extent=[0,24,334,0],"
+        },
+        {
+          "line": 241,
+          "text": "    cb=fig.colorbar(im,ax=axs[0],location='bottom',shrink=.92,pad=.065);cb.set_label('紧急电量 / kWh（幂次色标 γ=0.4）')"
+        },
+        {
+          "line": 242,
+          "text": "    im2=axs[1].imshow(state,aspect='auto',interpolation='nearest',origin='upper',extent=[0,24,334,0],"
+        },
+        {
+          "line": 245,
+          "text": "    cb2=fig.colorbar(im2,ax=axs[1],location='bottom',shrink=.92,pad=.065);cb2.set_label('时段末储电量 / kWh')"
+        },
+        {
+          "line": 255,
+          "text": "         dimensions=[334,144],date_range=[dates[0],dates[-1]],positive_emergency_cells=int(positive.sum()),"
+        },
+        {
+          "line": 256,
+          "text": "         emergency_kwh=float(emergency.sum()),max_emergency_kwh=float(emergency.max()),"
+        },
+        {
+          "line": 258,
+          "text": "         emergency_color_normalization={'type':'PowerNorm','gamma':.4,'vmin':0,'vmax':float(emergency.max())})"
+        },
+        {
+          "line": 262,
+          "text": "    keys=['q2_expectation_only','q2_risk_fixed_only','q2_risk_adaptive_only','q2_reserve_fixed_only',"
+        },
+        {
+          "line": 263,
+          "text": "          'q2_reserve_adaptive_only','q2_risk_reserve_fixed','q2_risk_reserve_adaptive']"
+        },
+        {
+          "line": 264,
+          "text": "    labels=['期望费用\\n主案','固定\\n风险','自适应\\n风险','固定\\n备用','动态\\n备用','固定\\n风险+备用','自适应\\n风险+备用']"
+        },
+        {
+          "line": 265,
+          "text": "    metrics=['total_cost','emergency_energy','daily_cost_cvar95','mean_realized_reference_reserve_kwh','final_energy']"
+        },
+        {
+          "line": 273,
+          "text": "    cmap=colors.LinearSegmentedColormap.from_list('delta_atlas',[BLUE,'#FAFBFC',RED])"
+        },
+        {
+          "line": 293,
+          "text": "         policy_keys=keys,metric_keys=metrics,raw_metric_values=raw.tolist(),display_deltas=delta.tolist(),"
+        },
+        {
+          "line": 295,
+          "text": "         color_row_denominators=denominators.tolist(),color_formula='row_delta/max(abs(row_delta))',"
+        },
+        {
+          "line": 303,
+          "text": "    low=float(levels.min()-max(4,np.ptp(levels)*.23));high=float(levels.max()+max(8,np.ptp(levels)*.32))"
+        },
+        {
+          "line": 314,
+          "text": "            ax.plot([level,level],[j+.30,j+1-.30],color='#7D8C94',lw=.8,ls='--',zorder=2)"
+        },
+        {
+          "line": 327,
+          "text": "        right.text(value+(high-low)*.017,row,f'{value:,.2f}',ha='left',va='center',color=BLUE,fontweight='bold')"
+        },
+        {
+          "line": 335,
+          "text": "    save(fig,name,sources,caption,first_total_yuan=first*1e4,component_changes_yuan=(changes*1e4).tolist(),"
+        },
+        {
+          "line": 342,
+          "text": "    keys=['q3_midnight_only','q3_feedback_soc_only','q3_feedback_pv_only','q3_feedback_full']"
+        },
+        {
+          "line": 345,
+          "text": "              ['仅零时计划：总费','仅更新SOC并重优化','再加入新光伏预报','再加入负荷偏差反馈','完整反馈：总费'],"
+        },
+        {
+          "line": 366,
+          "text": "    states=arrays[prefix+'replay_soc'];reference=arrays[prefix+'reference_soc'];weights=arrays[prefix+'weights']"
+        },
+        {
+          "line": 368,
+          "text": "    lo=weighted_quantile(states,weights,.1);hi=weighted_quantile(states,weights,.9);mean=weights@states"
+        },
+        {
+          "line": 382,
+          "text": "    save(fig,'q3_execution_band',['execution_gap_v1.npz','execution_gap_v1.json','inner_gap_v2.json'],"
+        },
+        {
+          "line": 384,
+          "text": "         diagnostic_version='v1_before_settlement_revision',example=example,date=meta['date'],"
+        },
+        {
+          "line": 385,
+          "text": "         update_hour=meta['update_hour'],scenario_count=len(weights),weights=weights.tolist(),"
+        },
+        {
+          "line": 387,
+          "text": "         quantiles=[.1,.9],lower_soc_kwh=lo.tolist(),upper_soc_kwh=hi.tolist(),mean_soc_kwh=mean.tolist(),"
+        },
+        {
+          "line": 396,
+          "text": "    predicted_load=issued('forecast_load_issue');predicted_pv=issued('pv_issue_forecast')"
+        },
+        {
+          "line": 402,
+          "text": "                       actual_load-actual_pv-predicted_load+predicted_pv,actual_price-predicted_price]])"
+        },
+        {
+          "line": 406,
+          "text": "    names=['负荷','光伏','净负荷','电价'];cmap=colors.LinearSegmentedColormap.from_list('corr_atlas',[BLUE,'#FAFBFC',RED])"
+        },
+        {
+          "line": 414,
+          "text": "        ax.set_xticks(np.arange(-.5,4,1),minor=True);ax.set_yticks(np.arange(-.5,4,1),minor=True)"
+        },
+        {
+          "line": 415,
+          "text": "        ax.grid(which='minor',color='white',lw=1.5);ax.tick_params(which='both',length=0)"
+        },
+        {
+          "line": 420,
+          "text": "    fig.suptitle('问题4：价荷实际值与预测误差的相关结构',x=.05,y=.98,ha='left',fontsize=12,fontweight='bold')"
+        },
+        {
+          "line": 422,
+          "text": "    save(fig,'q4_correlation_heatmap',['q4_3_v2.npz','prepared_v2_q4_3.npz','selection_v2.json'],"
+        },
+        {
+          "line": 424,
+          "text": "         n_observations=48096,variable_order=names,actual_correlation=correlation[0].tolist(),"
+        },
+        {
+          "line": 425,
+          "text": "         residual_correlation=correlation[1].tolist(),residual_units=['kW','kW','kW','CNY/kWh'],"
+        },
+        {
+          "line": 439,
+          "text": "              component_keys=keys,conservation_residual_yuan=first+float(delta.sum())-last,"
+        },
+        {
+          "line": 441,
+          "text": "              final_storage_kwh=[float(a['energy'][-1,-1]),float(b['energy'][-1,-1])])"
+        },
+        {
+          "line": 448,
+          "text": "            'execution_gap_v1.json','execution_gap_v1.npz','inner_gap_v2.json','time_mapping.json']"
+        },
+        {
+          "line": 450,
+          "text": "    q1=read_json('q1.json');prepared=read_npz('prepared.npz');q2=read_npz('q2_v2.npz')"
+        },
+        {
+          "line": 455,
+          "text": "    q2_risk(experiments['experiments']);q3_feedback(experiments['experiments']);q3_band()"
+        },
+        {
+          "line": 458,
+          "text": "    REPORT['checks']={'source_files_unchanged':True,'figure_count':len(REPORT['figures']),"
+        },
+        {
+          "line": 459,
+          "text": "                      'q1_all_node_flow_balance_max_abs_kwh':max(abs(x) for x in REPORT['figures']['q1_energy_sankey']['node_balance_residual_kwh'].values())}"
+        },
+        {
+          "line": 460,
+          "text": "    (DATA/'visual_atlas.json').write_text(json.dumps(REPORT,ensure_ascii=False,indent=2),encoding='utf-8')"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/publish_final_strategy.py",
+      "start_page": 123,
+      "end_page": 128,
+      "source_lines": 248,
+      "nonempty_lines": 219,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 87,
+          "text": "        max_emergency_date=str(r['dates'][int(r['emergency'].sum(axis=1).argmax())]),"
+        },
+        {
+          "line": 152,
+          "text": "                [('plan_cost',1e4),('adjustment_cost',1e4),('emergency_cost',1e4),('emergency_energy',1)]]])"
+        },
+        {
+          "line": 173,
+          "text": "    axs[0].bar(h,r['adjusted'][i]-r['plan'][i],width=1/6,color=layout.COLORS[1]);axs[0].set_ylabel('常规上调量 / kWh')"
+        },
+        {
+          "line": 174,
+          "text": "    axs[1].plot(np.arange(145)/6,base['energy'][i],label='母模型实际库存',color=layout.COLORS[0],ls='--')"
+        },
+        {
+          "line": 175,
+          "text": "    axs[1].plot(np.arange(145)/6,r['energy'][i],label='最终方案实际库存',color=layout.COLORS[2]);axs[1].set_ylabel('储电量 / kWh');axs[1].legend()"
+        },
+        {
+          "line": 176,
+          "text": "    axs[2].bar(h,r['emergency'][i],width=1/6,color='#B45454');axs[2].set_ylabel('紧急购电量 / kWh');axs[2].set_xlabel('物理时刻 / h')"
+        },
+        {
+          "line": 189,
+          "text": "            ax.text(.5,.5,'全天无常规上调',ha='center',va='center',transform=ax.transAxes,color=atlas.MUTED)"
+        },
+        {
+          "line": 202,
+          "text": "    a,b=results['q4_2'],results['q4_3'];keys=('plan_cost','adjustment_cost','emergency_cost')"
+        },
+        {
+          "line": 215,
+          "text": "        ROOT/'data/time_mapping.json',ROOT/'outputs/outer_timing_ablation/final_strategy.json',"
+        },
+        {
+          "line": 216,
+          "text": "        ROOT/'code/make_paper_assets.py',ROOT/'code/make_visual_atlas.py',ROOT/'code/time_index.py']"
+        },
+        {
+          "line": 226,
+          "text": "    path.write_text(json.dumps(native(output),ensure_ascii=False,separators=(',',':')),encoding='utf-8')"
+        },
+        {
+          "line": 228,
+          "text": "    write_json(OUT/'summary.json',summaries);record(OUT/'summary.json',list(SOURCES.values()))"
+        },
+        {
+          "line": 230,
+          "text": "        writer=csv.writer(stream);writer.writerow(['case','date','plan_kwh','adjusted_kwh','emergency_kwh',"
+        },
+        {
+          "line": 231,
+          "text": "            'plan_cost_yuan','adjustment_cost_yuan','emergency_cost_yuan','total_cost_yuan','energy_start_kwh','energy_end_kwh'])"
+        },
+        {
+          "line": 235,
+          "text": "                    *[r[k][i] for k in ('plan_cost','adjustment_cost','emergency_cost','total_cost')],r['energy'][i,0],r['energy'][i,-1]])"
+        },
+        {
+          "line": 239,
+          "text": "    write_json(OUT/'asset_manifest.json',{'generated_at_utc':dt.datetime.now(dt.timezone.utc).isoformat(),"
+        },
+        {
+          "line": 243,
+          "text": "        'unchanged_diagnostic_figures':['q3_feedback_waterfall','q3_execution_band','q4_correlation_heatmap'],"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/make_compact_paper_tables.py",
+      "start_page": 128,
+      "end_page": 130,
+      "source_lines": 107,
+      "nonempty_lines": 97,
+      "missing_lines_in_extracted_pdf": [],
+      "sha_matches": true
+    },
+    {
+      "path": "code/export_workbooks.mjs",
+      "start_page": 130,
+      "end_page": 134,
+      "source_lines": 261,
+      "nonempty_lines": 250,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 45,
+          "text": "  return `${timeMapping.physical_boundaries[a]}-${timeMapping.physical_boundaries[b]}`;"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/export_final_workbooks.mjs",
+      "start_page": 135,
+      "end_page": 139,
+      "source_lines": 261,
+      "nonempty_lines": 250,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 45,
+          "text": "  return `${timeMapping.physical_boundaries[a]}-${timeMapping.physical_boundaries[b]}`;"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/verify_workbooks.py",
+      "start_page": 139,
+      "end_page": 143,
+      "source_lines": 187,
+      "nonempty_lines": 171,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 124,
+          "text": "        for sheet_name, quantity_key, cost_key in [('计划购电量','plan','plan_cost'),('调整购电量','adjusted','total_cost')]:"
+        },
+        {
+          "line": 132,
+          "text": "            close([s.cell(i+2,146).value for i in range(334)],np.sum(data[quantity_key],axis=1),f'{key}.{quantity_key}.sum')"
+        },
+        {
+          "line": 162,
+          "text": "        close(list(actual.values()),np.sum(data['emergency'],axis=1),f'{key}.emergency totals')"
+        },
+        {
+          "line": 163,
+          "text": "        info = {'key':key,'days':334,'storage_rows':2004,'emergency_rows':emergency.max_row-1,"
+        },
+        {
+          "line": 164,
+          "text": "                'plan_cost':sum(data['plan_cost']),'total_cost':sum(data['total_cost']),"
+        },
+        {
+          "line": 166,
+          "text": "    info.update(filename=filename,sha256=hashlib.sha256(p.read_bytes()).hexdigest(),"
+        },
+        {
+          "line": 167,
+          "text": "                original_sha256=hashlib.sha256((SOURCE/filename).read_bytes()).hexdigest(),"
+        },
+        {
+          "line": 172,
+          "text": "                first_template_label=MAPPING['slots'][0]['template_labels'][key]['计划购电量'],"
+        },
+        {
+          "line": 173,
+          "text": "                last_template_label=MAPPING['slots'][-1]['template_labels'][key]['计划购电量'],"
+        },
+        {
+          "line": 179,
+          "text": "report_file.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')"
+        },
+        {
+          "line": 182,
+          "text": "    fields = ['key','filename','absolute_path','size_bytes','sha256','plan_numeric_count','days',"
+        },
+        {
+          "line": 183,
+          "text": "              'first_template_label','last_template_label','results_source_sha256','time_mapping_sha256','status']"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/verify_final_workbooks.py",
+      "start_page": 143,
+      "end_page": 146,
+      "source_lines": 187,
+      "nonempty_lines": 171,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 124,
+          "text": "        for sheet_name, quantity_key, cost_key in [('计划购电量','plan','plan_cost'),('调整购电量','adjusted','total_cost')]:"
+        },
+        {
+          "line": 132,
+          "text": "            close([s.cell(i+2,146).value for i in range(334)],np.sum(data[quantity_key],axis=1),f'{key}.{quantity_key}.sum')"
+        },
+        {
+          "line": 162,
+          "text": "        close(list(actual.values()),np.sum(data['emergency'],axis=1),f'{key}.emergency totals')"
+        },
+        {
+          "line": 163,
+          "text": "        info = {'key':key,'days':334,'storage_rows':2004,'emergency_rows':emergency.max_row-1,"
+        },
+        {
+          "line": 164,
+          "text": "                'plan_cost':sum(data['plan_cost']),'total_cost':sum(data['total_cost']),"
+        },
+        {
+          "line": 166,
+          "text": "    info.update(filename=filename,sha256=hashlib.sha256(p.read_bytes()).hexdigest(),"
+        },
+        {
+          "line": 167,
+          "text": "                original_sha256=hashlib.sha256((SOURCE/filename).read_bytes()).hexdigest(),"
+        },
+        {
+          "line": 172,
+          "text": "                first_template_label=MAPPING['slots'][0]['template_labels'][key]['计划购电量'],"
+        },
+        {
+          "line": 173,
+          "text": "                last_template_label=MAPPING['slots'][-1]['template_labels'][key]['计划购电量'],"
+        },
+        {
+          "line": 178,
+          "text": "report_file = PROJECT/'outputs'/'final_strategy'/'workbook_previews'/'workbook_verification.json'"
+        },
+        {
+          "line": 179,
+          "text": "report_file.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')"
+        },
+        {
+          "line": 182,
+          "text": "    fields = ['key','filename','absolute_path','size_bytes','sha256','plan_numeric_count','days',"
+        },
+        {
+          "line": 183,
+          "text": "              'first_template_label','last_template_label','results_source_sha256','time_mapping_sha256','status']"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/check_dispatch_v2.py",
+      "start_page": 146,
+      "end_page": 147,
+      "source_lines": 57,
+      "nonempty_lines": 53,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 15,
+          "text": "       'lp_emergency_bill':z['monetary_forecast'],'lp_first_emergency':z['emergency'],"
+        },
+        {
+          "line": 22,
+          "text": "    altered['load'][day,cut:]*=1.3;altered['pv'][day,cut:]*=.3;altered['price'][day,cut:]*=1.7"
+        },
+        {
+          "line": 32,
+          "text": "        differences['energy']=float(np.max(np.abs(a['energy'][0,:cut+1]-b['energy'][0,:cut+1])))"
+        },
+        {
+          "line": 34,
+          "text": "        report['checks']['future_truth_perturbation_'+control]={'day_index':day,'first_altered_slot':cut,"
+        },
+        {
+          "line": 45,
+          "text": "                'cost_component_max_abs_yuan':float(np.max(np.abs(r['total_cost']-r['plan_cost']-r['adjustment_cost']-r['emergency_cost']))),"
+        },
+        {
+          "line": 46,
+          "text": "                'simultaneous_charge_discharge_count':int(np.sum((r['charge']>1e-7)&(r['discharge']>1e-7))),"
+        },
+        {
+          "line": 47,
+          "text": "                'min_energy':float(r['energy'].min()),'max_energy':float(r['energy'].max())}"
+        },
+        {
+          "line": 53,
+          "text": "    (DATA/'numerical_checks_v2.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/check_outer_candidate_selector.py",
+      "start_page": 148,
+      "end_page": 153,
+      "source_lines": 312,
+      "nonempty_lines": 285,
+      "missing_lines_in_extracted_pdf": [],
+      "sha_matches": true
+    },
+    {
+      "path": "code/check_outer_timing_policy.py",
+      "start_page": 153,
+      "end_page": 157,
+      "source_lines": 261,
+      "nonempty_lines": 237,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 165,
+          "text": "                                   float(np.max(np.abs(np.asarray(left)-np.asarray(right)))))"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/check_outer_timing_ablation.py",
+      "start_page": 157,
+      "end_page": 164,
+      "source_lines": 359,
+      "nonempty_lines": 335,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 224,
+          "text": "                        entry[\"expected_purchase_cost\"]+entry[\"expected_adjustment_cost\"]+entry[\"expected_emergency_cost\"], \"candidate bill components\"))"
+        },
+        {
+          "line": 256,
+          "text": "    return prefix, {\"passed\":True,\"days\":nd,\"actual_bill_yuan\":float(daily[\"total_cost\"].sum()),"
+        },
+        {
+          "line": 258,
+          "text": "        \"emergency_kwh\":float(arrays[\"emergency\"].sum()),\"max_daily_billing_error_yuan\":cost_errors,"
+        },
+        {
+          "line": 260,
+          "text": "        \"max_day_continuity_error_kwh\":continuity,\"max_scalar_executor_error\":executor_error,"
+        },
+        {
+          "line": 262,
+          "text": "        \"ordinary_lp_resolved_count\":ordinary_count,\"max_installed_execution_error_kwh\":installed_error,"
+        },
+        {
+          "line": 263,
+          "text": "        \"max_ordinary_lp_grid_error_kwh\":lp_error,\"max_selected_replay_field_error\":replay_error,"
+        },
+        {
+          "line": 264,
+          "text": "        \"max_no_adjust_replay_field_error\":no_adjust_error,\"max_candidate_component_error_yuan\":components_error,"
+        },
+        {
+          "line": 265,
+          "text": "        \"candidate_argmin_and_tie_order\":True,\"paired_scenario_prices_in_independent_replay\":True,"
+        },
+        {
+          "line": 266,
+          "text": "        \"endpoint_adjustment_recomputed\":True,\"summary_and_monthly_metrics_recomputed\":True,"
+        },
+        {
+          "line": 303,
+          "text": "            close(entry[\"interaction_yuan\"], choices[\"all\"][\"actual_bill_yuan\"]-choices[\"midnight_only\"][\"actual_bill_yuan\"]"
+        },
+        {
+          "line": 304,
+          "text": "                  -choices[\"intraday_only\"][\"actual_bill_yuan\"]+choices[\"main\"][\"actual_bill_yuan\"], \"interaction\")"
+        },
+        {
+          "line": 319,
+          "text": "             \"created_utc\":datetime.now(timezone.utc).isoformat(),\"python\":platform.python_version(),"
+        },
+        {
+          "line": 320,
+          "text": "             \"auditor_script_sha256\":digest(__file__),\"audit_command\":[sys.executable, *sys.argv],"
+        },
+        {
+          "line": 343,
+          "text": "        verify_records(manifest[\"inputs\"]+manifest[\"source_code\"]+manifest[\"output_artifacts\"])"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/check_final_strategy_delivery.py",
+      "start_page": 164,
+      "end_page": 172,
+      "source_lines": 449,
+      "nonempty_lines": 409,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 176,
+          "text": "                        close(entry[\"score\"], entry[\"expected_bill\"]+entry[\"expected_terminal_penalty\"], case+\" replay score\"))"
+        },
+        {
+          "line": 214,
+          "text": "        selected = arrays(f\"outputs/outer_candidate_test/{case}_selected.npz\")[\"total_cost\"].sum()"
+        },
+        {
+          "line": 243,
+          "text": "                    \"daily_cost_cvar95\",\"daily_cost_max\",\"initial_energy\",\"final_energy\"}"
+        },
+        {
+          "line": 346,
+          "text": "              (\"日总费用CVaR95/元\",\"daily_cost_cvar95\",1),(\"最高日费用/元\",\"daily_cost_max\",1),"
+        },
+        {
+          "line": 347,
+          "text": "              (\"2月1日期初库存/kWh\",\"initial_energy\",1),(\"12月31日期末库存/kWh\",\"final_energy\",1)]"
+        },
+        {
+          "line": 371,
+          "text": "            require(decomp, \" & \".join([date,f\"{a['plan'][i].sum():.2f}\",f\"{a['adjusted'][i].sum():.2f}\"]+"
+        },
+        {
+          "line": 372,
+          "text": "                    [f\"{a[k][i]:.2f}\" for k in (\"plan_cost\",\"adjustment_cost\",\"emergency_cost\")]),case+date+\" decomposition\")"
+        },
+        {
+          "line": 434,
+          "text": "            report[\"checks\"][name] = {\"passed\":False,\"error\":str(exc),\"traceback\":traceback.format_exc()}"
+        },
+        {
+          "line": 438,
+          "text": "        [OUT/\"results_export.json\",OUT/\"summary.json\",OUT/\"daily_summary.csv\",OUT/\"asset_manifest.json\",ROOT/\"main.tex\","
+        },
+        {
+          "line": 443,
+          "text": "    REPORT.write_text(json.dumps(report,ensure_ascii=False,indent=2)+\"\\n\",encoding=\"utf-8\")"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/check_manuscript_sources.py",
+      "start_page": 172,
+      "end_page": 173,
+      "source_lines": 61,
+      "nonempty_lines": 55,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 40,
+          "text": "    baseline=json.loads((ROOT/'data/layout_revision_baseline.json').read_text(encoding='utf-8'))"
+        },
+        {
+          "line": 49,
+          "text": "    report={'tex_input_count':len(seen),'figure_count':len(figures),'unique_figure_count':len(set(figures)),"
+        },
+        {
+          "line": 54,
+          "text": "        'changed_numeric_or_workbook_files':changed,'latex_compiled':False,'paper_review_performed':False}"
+        },
+        {
+          "line": 55,
+          "text": "    for key in ['missing_files','unresolved_labels','duplicate_labels','missing_bibkeys','changed_numeric_or_workbook_files']:"
+        },
+        {
+          "line": 57,
+          "text": "    (ROOT/'data/source_bundle_checks.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "code/run_all.ps1",
+      "start_page": 173,
+      "end_page": 174,
+      "source_lines": 46,
+      "nonempty_lines": 46,
+      "missing_lines_in_extracted_pdf": [],
+      "sha_matches": true
+    },
+    {
+      "path": "code/run_revision.ps1",
+      "start_page": 174,
+      "end_page": 177,
+      "source_lines": 153,
+      "nonempty_lines": 145,
+      "missing_lines_in_extracted_pdf": [],
+      "sha_matches": true
+    },
+    {
+      "path": "code/package_revision.py",
+      "start_page": 177,
+      "end_page": 178,
+      "source_lines": 65,
+      "nonempty_lines": 58,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 28,
+          "text": "            if path.is_symlink() or name.endswith(('.pyc','.zip','.inspect.ndjson','.log','.aux','.toc','.out','.synctex.gz')):continue"
+        },
+        {
+          "line": 32,
+          "text": "    filled=[BASE/'附件/附件5'/name for name in ['result1.xlsx','result2.xlsx','result3.xlsx','result4-2.xlsx','result4-3.xlsx']]"
+        },
+        {
+          "line": 37,
+          "text": "    records=[{'path':p.relative_to(BASE).as_posix(),'bytes':p.stat().st_size,'sha256':sha(p)} for p in sorted(files)]"
+        },
+        {
+          "line": 40,
+          "text": "          'latex_compiled':False,'paper_review_performed':False,'files':records},ensure_ascii=False,indent=2),encoding='utf-8')"
+        },
+        {
+          "line": 43,
+          "text": "    with zipfile.ZipFile(TARGET,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as out:"
+        },
+        {
+          "line": 59,
+          "text": "    report={'path':str(TARGET),'bytes':TARGET.stat().st_size,'sha256':sha(TARGET),'files':len(files)+1,"
+        },
+        {
+          "line": 60,
+          "text": "            'filled_workbooks':5,'zip_integrity_check':'passed','latex_compiled':False}"
+        },
+        {
+          "line": 61,
+          "text": "    (ROOT/'data/delivery_package.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "versions/v1_before_settlement_revision/code/optimize_dispatch.py",
+      "start_page": 178,
+      "end_page": 184,
+      "source_lines": 387,
+      "nonempty_lines": 354,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 245,
+          "text": "    for k in (\"plan_cost\",\"adjustment_cost\",\"emergency_cost\",\"total_cost\",\"risk\",\"solve_seconds\"):"
+        },
+        {
+          "line": 290,
+          "text": "                  f\"E={energy:.2f}; seconds/day={arrays['solve_seconds'][:day+1].mean():.3f}\",flush=True)"
+        },
+        {
+          "line": 343,
+          "text": "    s = solve_lp(net[None,:],data[\"fixed_price\"][None,:],np.ones(1),6000,cfg,q1=True)"
+        },
+        {
+          "line": 363,
+          "text": "    parser.add_argument(\"--case\",default=\"all\",choices=[\"all\",\"q1\",\"q2\",\"q3\",\"q4_2\",\"q4_3\"])"
+        },
+        {
+          "line": 370,
+          "text": "    (out/\"q1.json\").write_text(json.dumps(jsonable(q1),ensure_ascii=False,indent=2),encoding=\"utf-8\")"
+        },
+        {
+          "line": 377,
+          "text": "            (out/f\"{case}_summary.json\").write_text(json.dumps(summary(r),indent=2),encoding=\"utf-8\")"
+        },
+        {
+          "line": 383,
+          "text": "        (out/\"results_export.json\").write_text(json.dumps(export,ensure_ascii=False,separators=(\",\",\":\")),encoding=\"utf-8\")"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "compile.sh",
+      "start_page": 184,
+      "end_page": 185,
+      "source_lines": 36,
+      "nonempty_lines": 32,
+      "missing_lines_in_extracted_pdf": [],
+      "sha_matches": true
+    },
+    {
+      "path": "outputs/final_strategy/runtime/export_final_workbooks.mjs",
+      "start_page": 185,
+      "end_page": 190,
+      "source_lines": 261,
+      "nonempty_lines": 250,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 45,
+          "text": "  return `${timeMapping.physical_boundaries[a]}-${timeMapping.physical_boundaries[b]}`;"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "outputs/logic_formula_review/verify_revision.py",
+      "start_page": 190,
+      "end_page": 191,
+      "source_lines": 88,
+      "nonempty_lines": 84,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 81,
+          "text": "    'related_reports': ['numerical_recheck.json','protected_recheck.json','q1_q2_review.md','rolling_logic_review.md','relocation_review.md','figure_review.md'],"
+        },
+        {
+          "line": 88,
+          "text": "print(json.dumps({k:result[k] for k in ['targeted_revision_status','current_source_files','labels','cases_before','cases_after','pdf','compile_issues']},ensure_ascii=False,indent=2))"
+        }
+      ],
+      "sha_matches": true
+    },
+    {
+      "path": "outputs/code_appendix/build_code_appendix.py",
+      "start_page": 191,
+      "end_page": 194,
+      "source_lines": 116,
+      "nonempty_lines": 109,
+      "missing_lines_in_extracted_pdf": [
+        {
+          "line": 94,
+          "text": "            r'\\begingroup', r'\\newfontfamily\\appendixcodefont{Menlo}[NFSSFamily=appendixcode]',"
+        },
+        {
+          "line": 96,
+          "text": "            r'\\fvset{fontfamily=appendixcode,fontsize=\\fontsize{8.5}{10.5}\\selectfont,baselinestretch=1,formatcom=\\CJKfamily{appendixcjk},numbers=left,numbersep=6pt,xleftmargin=2.8em,frame=lines,framesep=5pt,rulecolor=\\color{black!25},breaklines=true,breakanywhere=true,breakautoindent=true,breakindent=1em,breaksymbolleft=\\tiny\\ensuremath{\\hookrightarrow},tabsize=4,showspaces=false,showtabs=false}',"
+        },
+        {
+          "line": 97,
+          "text": "            r'\\renewcommand{\\theFancyVerbLine}{\\scriptsize\\color{black!50}\\arabic{FancyVerbLine}}']"
+        }
+      ],
+      "sha_matches": true
+    }
+  ],
+  "missing_pdf_line_count": 334,
+  "pdf_sha256": "0ad2ef06119c16a5ffeac8cd89519b8e124b235017029286405a71363eaa6619",
+  "pdf_bytes": 1804036
+}

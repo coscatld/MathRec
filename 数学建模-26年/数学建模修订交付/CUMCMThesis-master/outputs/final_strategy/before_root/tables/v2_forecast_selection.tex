@@ -1,0 +1,12 @@
+\begin{table}[htbp]\centering\small
+\caption{一月验证冻结的预测配置与执行结果}
+\label{tab:v2_forecast_selection}
+\begin{tabularx}{\linewidth}{LLLLRR}\toprule
+问题 & 负荷 & 光伏 & 电价 & 验证费/元 & 末库存/kWh\\\midrule
+问题2 & 同星期2日 & 最近3日 & 已知电价 & 917318.59 & 7155.31\\
+问题3 & 同星期2日 & 附件3发布值 & 已知电价 & 919340.82 & 7143.30\\
+问题4-2 & 同星期2日 & 最近3日 & 同星期4日 & 1042234.20 & 7298.41\\
+问题4-3 & 同星期2日 & 附件3发布值 & 同星期2日 & 1043044.13 & 7308.72\\
+\bottomrule\end{tabularx}
+\par\smallskip\parbox{\linewidth}{\footnotesize 验证期为1月15日至31日；所有主案选择规则执行、28个历史场景，额外CVaR与备用均关闭。预测器先以统一储能LP进行逐坐标费用比较，再比较执行器，属于有限候选搜索。}
+\end{table}

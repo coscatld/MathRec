@@ -1,0 +1,206 @@
+{
+  "schema_version": "1.0",
+  "generated_by": "check_outer_timing_policy.py",
+  "generated_at": "2026-09-10T15:37:13.588889+00:00",
+  "scope": "Preservation and information-isolation regression checks for the timing ablation only.",
+  "passed": true,
+  "checks": {
+    "q3/compatibility_and_gating": {
+      "passed": true,
+      "case": "q3",
+      "period": [
+        "2025-02-01",
+        "2025-02-02"
+      ],
+      "initial_energy_kwh": 8814.599676936767,
+      "modes": {
+        "none": {
+          "passed": true,
+          "screened_count": 0,
+          "unscreened_lp_independently_resolved_count": 8,
+          "bill_yuan": 86600.88722522208,
+          "retained_or_main_exact_array_equality": true,
+          "physical_and_bill_validation": true
+        },
+        "all": {
+          "passed": true,
+          "screened_count": 8,
+          "unscreened_lp_independently_resolved_count": 0,
+          "bill_yuan": 84880.52963194833,
+          "retained_or_main_exact_array_equality": true,
+          "physical_and_bill_validation": true
+        },
+        "midnight_only": {
+          "passed": true,
+          "screened_count": 2,
+          "unscreened_lp_independently_resolved_count": 6,
+          "bill_yuan": 84880.52963194833,
+          "retained_or_main_exact_array_equality": null,
+          "physical_and_bill_validation": true
+        },
+        "intraday_only": {
+          "passed": true,
+          "screened_count": 6,
+          "unscreened_lp_independently_resolved_count": 2,
+          "bill_yuan": 86600.88722522208,
+          "retained_or_main_exact_array_equality": null,
+          "physical_and_bill_validation": true
+        }
+      }
+    },
+    "q3/prefix_information_isolation": {
+      "passed": true,
+      "case": "q3",
+      "date": "2025-07-20",
+      "cutoff_slot": 72,
+      "initial_energy_kwh": 8409.836005308644,
+      "causal_forecasts_rebuilt": true,
+      "lawful_outer_input_max_difference": 0.0,
+      "positive_control_future_price_issue_max_difference": 0.4741456777590751,
+      "positive_control_unpublished_pv_issue_max_difference": 730.174999999999,
+      "scope": "Closed-loop current-day execution prefix plus decisions through noon; perturbations start before revealing noon actual values.",
+      "modes": {
+        "midnight_only": {
+          "passed": true,
+          "execution_prefix_slots": 72,
+          "decision_prefix_slots": [
+            0,
+            36,
+            72
+          ],
+          "screened_decisions_in_prefix": 1,
+          "execution_prefix_exact_equality": true,
+          "full_midnight_plan_exact_equality": true,
+          "full_decision_and_candidate_metrics_exact_equality_ignoring_timings": true,
+          "positive_control_changed_execution_suffix_max_kwh": 1989.73381
+        },
+        "intraday_only": {
+          "passed": true,
+          "execution_prefix_slots": 72,
+          "decision_prefix_slots": [
+            0,
+            36,
+            72
+          ],
+          "screened_decisions_in_prefix": 2,
+          "execution_prefix_exact_equality": true,
+          "full_midnight_plan_exact_equality": true,
+          "full_decision_and_candidate_metrics_exact_equality_ignoring_timings": true,
+          "positive_control_changed_execution_suffix_max_kwh": 1989.73381
+        }
+      }
+    },
+    "q4_3/compatibility_and_gating": {
+      "passed": true,
+      "case": "q4_3",
+      "period": [
+        "2025-02-01",
+        "2025-02-02"
+      ],
+      "initial_energy_kwh": 9030.403582948851,
+      "modes": {
+        "none": {
+          "passed": true,
+          "screened_count": 0,
+          "unscreened_lp_independently_resolved_count": 8,
+          "bill_yuan": 89247.32440694049,
+          "retained_or_main_exact_array_equality": true,
+          "physical_and_bill_validation": true
+        },
+        "all": {
+          "passed": true,
+          "screened_count": 8,
+          "unscreened_lp_independently_resolved_count": 0,
+          "bill_yuan": 86854.76490618076,
+          "retained_or_main_exact_array_equality": true,
+          "physical_and_bill_validation": true
+        },
+        "midnight_only": {
+          "passed": true,
+          "screened_count": 2,
+          "unscreened_lp_independently_resolved_count": 6,
+          "bill_yuan": 86854.76490618076,
+          "retained_or_main_exact_array_equality": null,
+          "physical_and_bill_validation": true
+        },
+        "intraday_only": {
+          "passed": true,
+          "screened_count": 6,
+          "unscreened_lp_independently_resolved_count": 2,
+          "bill_yuan": 89247.32440694049,
+          "retained_or_main_exact_array_equality": null,
+          "physical_and_bill_validation": true
+        }
+      }
+    },
+    "q4_3/prefix_information_isolation": {
+      "passed": true,
+      "case": "q4_3",
+      "date": "2025-07-20",
+      "cutoff_slot": 72,
+      "initial_energy_kwh": 8553.598655956794,
+      "causal_forecasts_rebuilt": true,
+      "lawful_outer_input_max_difference": 0.0,
+      "positive_control_future_price_issue_max_difference": 0.5427400651528298,
+      "positive_control_unpublished_pv_issue_max_difference": 730.174999999999,
+      "scope": "Closed-loop current-day execution prefix plus decisions through noon; perturbations start before revealing noon actual values.",
+      "modes": {
+        "midnight_only": {
+          "passed": true,
+          "execution_prefix_slots": 72,
+          "decision_prefix_slots": [
+            0,
+            36,
+            72
+          ],
+          "screened_decisions_in_prefix": 1,
+          "execution_prefix_exact_equality": true,
+          "full_midnight_plan_exact_equality": true,
+          "full_decision_and_candidate_metrics_exact_equality_ignoring_timings": true,
+          "positive_control_changed_execution_suffix_max_kwh": 1989.73381
+        },
+        "intraday_only": {
+          "passed": true,
+          "execution_prefix_slots": 72,
+          "decision_prefix_slots": [
+            0,
+            36,
+            72
+          ],
+          "screened_decisions_in_prefix": 2,
+          "execution_prefix_exact_equality": true,
+          "full_midnight_plan_exact_equality": true,
+          "full_decision_and_candidate_metrics_exact_equality_ignoring_timings": true,
+          "positive_control_changed_execution_suffix_max_kwh": 1989.73381
+        }
+      }
+    }
+  },
+  "execution_provenance": {
+    "run_command": [
+      "/Users/mingze/miniconda3/envs/deeptutor/bin/python",
+      "code/check_outer_timing_policy.py"
+    ],
+    "working_directory": "/Users/mingze/Desktop/解题/数学建模修订交付/CUMCMThesis-master",
+    "python_version": "3.11.15",
+    "numpy_version": "2.4.6",
+    "scipy_version": "1.17.1",
+    "source_sha256": {
+      "code/check_outer_timing_policy.py": "617883b5bb451e9c2453e6cf19bd246ff0690c9755c3ddb12eba3c40fa834715",
+      "code/outer_timing_policy.py": "9903c94153e685039f393ba6820da568b2730d9d114d628d000ff45d6356ff7e",
+      "code/run_outer_candidate_experiment.py": "ceeda250e36b7ff582f72f48adc8c6e4a6ca0fdf1104657ed3781fbec9cc934d",
+      "code/dispatch_v2.py": "3dd2d60d587acc2853ce496c61afd566c8270ec4f2d466eb947c325869d9bf44",
+      "code/optimize_dispatch.py": "22179f1a3f259b7083c159d9c3cb1288ab0715abc1545f6c51bb360d76c03b8e",
+      "code/outer_candidate_selector.py": "c9f20c5cd38386674e142f23feb47472f35ac05019a3a491e5c1e3cb528c23cf",
+      "data/selection_v2.json": "f290084567f8b335dfbe7c042da7bf6863af20d3db001376f8bb5003dedd9aa7",
+      "data/prepared.npz": "ceec2fb14c53411feb9ce329d6256bcc17656b21a01841c360345142b0cd383c",
+      "data/prepared_v2_q3.npz": "cc1d4d5075dd5e9b4956d5394610aa01e3c46fe11621b11ffa5ff3b1c15e9348",
+      "data/q3_v2.npz": "aa117028deb01d98c67a1b44fc07a98a2cb766f93df17fa1cea79253887aaf93",
+      "data/prepared_v2_q4_3.npz": "3244204697d7bd3aa996a090e54bb3d5a6e3ca30e582c6b0880265829f4b5126",
+      "data/q4_3_v2.npz": "7b68322aa8154236db1a6b2f7a2c90f20e35e962df4ffd94fd83cf051d905fb6"
+    },
+    "run_exit_code": 0
+  },
+  "source_inputs_unchanged": true,
+  "elapsed_seconds": 3.8821918750181794
+}

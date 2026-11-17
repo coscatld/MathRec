@@ -1,0 +1,150 @@
+[
+  {
+    "date": "2025-02-01",
+    "slot": 0,
+    "hour": 0,
+    "initial_energy_kwh": 9251.544592637878,
+    "selected_name": "margin_0.25sigma",
+    "baseline_score": 29285.64975346886,
+    "estimated_score_reduction_yuan": 124.94801276599901,
+    "terminal_beta": 0.7531974702380954,
+    "generation_seconds": 0.047001375001855195,
+    "replay_seconds": 0.0023692079994361848,
+    "candidates": [
+      {
+        "name": "scenario_lp",
+        "plan_objective": 26992.224955073485,
+        "expected_purchase_cost": 21284.119249645028,
+        "expected_adjustment_cost": 0.0,
+        "expected_emergency_cost": 7159.89196635965,
+        "expected_bill": 28444.011216004674,
+        "expected_terminal_penalty": 841.6385374641904,
+        "expected_emergency_kwh": 1122.3267116982986,
+        "expected_final_energy": 7051.999534563054,
+        "score": 29285.64975346886
+      },
+      {
+        "name": "point_lp",
+        "plan_objective": 17411.04525651444,
+        "expected_purchase_cost": 17332.865876818352,
+        "expected_adjustment_cost": 0.0,
+        "expected_emergency_cost": 13030.790566572789,
+        "expected_bill": 30363.656443391134,
+        "expected_terminal_penalty": 244.37946115242727,
+        "expected_emergency_kwh": 2134.539015382878,
+        "expected_final_energy": 6112.012793352957,
+        "score": 30608.035904543565
+      },
+      {
+        "name": "margin_0.25sigma",
+        "plan_objective": 18799.159459803104,
+        "expected_purchase_cost": 18687.537209825732,
+        "expected_adjustment_cost": 0.0,
+        "expected_emergency_cost": 10015.280451904626,
+        "expected_bill": 28702.817661730358,
+        "expected_terminal_penalty": 457.8840789725052,
+        "expected_emergency_kwh": 1612.7028702638622,
+        "expected_final_energy": 6483.7556026806515,
+        "score": 29160.70174070286
+      },
+      {
+        "name": "margin_0.5sigma",
+        "plan_objective": 20266.63008579355,
+        "expected_purchase_cost": 20130.649315834118,
+        "expected_adjustment_cost": 0.0,
+        "expected_emergency_cost": 8615.624792288208,
+        "expected_bill": 28746.274108122325,
+        "expected_terminal_penalty": 721.5490870995894,
+        "expected_emergency_kwh": 1359.579067413251,
+        "expected_final_energy": 6859.300248777685,
+        "score": 29467.82319522192
+      },
+      {
+        "name": "margin_1sigma",
+        "plan_objective": 23406.48326714521,
+        "expected_purchase_cost": 23229.630266905093,
+        "expected_adjustment_cost": 0.0,
+        "expected_emergency_cost": 5582.342361667314,
+        "expected_bill": 28811.972628572403,
+        "expected_terminal_penalty": 1214.416023515652,
+        "expected_emergency_kwh": 868.8896283080146,
+        "expected_final_energy": 7563.413149261225,
+        "score": 30026.388652088048
+      }
+    ]
+  },
+  {
+    "date": "2025-02-02",
+    "slot": 0,
+    "hour": 0,
+    "initial_energy_kwh": 7030.960526367629,
+    "selected_name": "margin_0.25sigma",
+    "baseline_score": 81730.37210938094,
+    "estimated_score_reduction_yuan": 528.8613937326008,
+    "terminal_beta": 0.9834334226190479,
+    "generation_seconds": 0.0448427080118563,
+    "replay_seconds": 0.0011848750000353903,
+    "candidates": [
+      {
+        "name": "scenario_lp",
+        "plan_objective": 79769.8735254101,
+        "expected_purchase_cost": 70865.29152388572,
+        "expected_adjustment_cost": 0.0,
+        "expected_emergency_cost": 10013.949651480169,
+        "expected_bill": 80879.24117536588,
+        "expected_terminal_penalty": 851.1309340150542,
+        "expected_emergency_kwh": 1323.3642550782563,
+        "expected_final_energy": 6795.81165193673,
+        "score": 81730.37210938094
+      },
+      {
+        "name": "point_lp",
+        "plan_objective": 65457.93488363003,
+        "expected_purchase_cost": 65336.75756441265,
+        "expected_adjustment_cost": 0.0,
+        "expected_emergency_cost": 18108.82347858716,
+        "expected_bill": 83445.5810429998,
+        "expected_terminal_penalty": 179.28937897991085,
+        "expected_emergency_kwh": 2425.994821902557,
+        "expected_final_energy": 5976.583252747134,
+        "score": 83624.87042197972
+      },
+      {
+        "name": "margin_0.25sigma",
+        "plan_objective": 67446.36770039146,
+        "expected_purchase_cost": 67314.97296073957,
+        "expected_adjustment_cost": 0.0,
+        "expected_emergency_cost": 13550.95792417492,
+        "expected_bill": 80865.9308849145,
+        "expected_terminal_penalty": 335.57983073383804,
+        "expected_emergency_kwh": 1803.97653611452,
+        "expected_final_energy": 6203.818152511514,
+        "score": 81201.51071564834
+      },
+      {
+        "name": "margin_0.5sigma",
+        "plan_objective": 69442.80056363004,
+        "expected_purchase_cost": 69301.09605488094,
+        "expected_adjustment_cost": 0.0,
+        "expected_emergency_cost": 11328.9069957068,
+        "expected_bill": 80630.00305058772,
+        "expected_terminal_penalty": 577.930176691117,
+        "expected_emergency_kwh": 1503.442715269542,
+        "expected_final_energy": 6480.946395213328,
+        "score": 81207.93322727886
+      },
+      {
+        "name": "margin_1sigma",
+        "plan_objective": 73458.16909461755,
+        "expected_purchase_cost": 73299.70351898181,
+        "expected_adjustment_cost": 0.0,
+        "expected_emergency_cost": 8236.241212871508,
+        "expected_bill": 81535.94473185332,
+        "expected_terminal_penalty": 1036.1544471250431,
+        "expected_emergency_kwh": 1085.4466060591312,
+        "expected_final_energy": 6991.314041136375,
+        "score": 82572.09917897836
+      }
+    ]
+  }
+]

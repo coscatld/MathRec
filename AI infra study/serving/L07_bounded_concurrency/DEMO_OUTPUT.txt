@@ -1,0 +1,25 @@
+C admission: { ok: false, code: 'OVERLOADED' }
+Before timeout: {
+  active: 1,
+  queued: 1,
+  started: 1,
+  completed: 0,
+  overloaded: 1,
+  peakActive: 1,
+  peakQueued: 1
+}
+A public result: { ok: false, code: 'TIMEOUT' }
+A abort requested: true
+Backend actually active: 1
+Started IDs: [ 'A' ]
+After A actually finished, started IDs: [ 'A', 'B' ]
+B public result: { ok: true, value: 'reply:B' }
+Final state: {
+  active: 0,
+  queued: 0,
+  started: 2,
+  completed: 2,
+  overloaded: 1,
+  peakActive: 1,
+  peakQueued: 1
+} pending timers: 0

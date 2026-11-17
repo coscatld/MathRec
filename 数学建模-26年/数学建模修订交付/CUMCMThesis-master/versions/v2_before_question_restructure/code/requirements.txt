@@ -1,0 +1,5 @@
+# Python 3.12; numerical solver and figure environment used for this delivery.
+numpy==2.4.2
+scipy==1.17.0
+matplotlib==3.10.8
+openpyxl==3.1.5

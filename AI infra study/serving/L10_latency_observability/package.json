@@ -1,0 +1,1 @@
+{"name":"lesson10-latency-observability","private":true,"type":"module","engines":{"node":">=24.0.0 <25"},"scripts":{"test":"node --test metrics.test.js","demo":"node demo.js","bench":"node benchmark.js"}}

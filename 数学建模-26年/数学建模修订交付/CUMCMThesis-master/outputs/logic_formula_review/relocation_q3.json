@@ -1,0 +1,15 @@
+{
+  "moved_from": "sections/question3.tex",
+  "moved_to": "sections/appendix_controller_checks.tex",
+  "blocks": [
+    {
+      "kind": "models",
+      "sha256": "526b2e23f38d02ca83ed80f41527a766948db22cfb6efe6cd4281e4ba007ab2d"
+    },
+    {
+      "kind": "results",
+      "sha256": "b1f9d415223f5fe19c76ccfb1dbdd6a64fe5e145670b5d4313c741467ba91ff8"
+    }
+  ],
+  "subheading_level_change": "subsubsection to subsection only; mathematical content unchanged during relocation"
+}

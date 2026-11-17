@@ -1,0 +1,156 @@
+\section{统一购电与储能调度模型}
+
+\subsection{问题一：确定性日前联合优化}
+
+省略日期下标，问题一以购电费最小为目标：
+\begin{align}
+ \min\quad &\sum_{t=0}^{143}p_tg_t,\label{eq:q1_objective}\\
+ \text{s.t.}\quad &g_t+d_t-c_t\ge n_t,\label{eq:balance}\\
+ &e_{t+1}=e_t+\eta_cc_t-d_t/\eta_d,\label{eq:soc}\\
+ &E_{\min}\le e_{t+1}\le E_{\max},\quad0\le c_t,d_t\le U,\label{eq:limits}\\
+ &g_t\ge0,\qquad e_0=e_{144}=6000.\label{eq:terminal_q1}
+\end{align}
+供需不等式中的非负差值为免费弃置电量。充电量是电池外部输入，放电量是外部输出，因此状态转移分别乘充电效率、除放电效率。
+
+免费弃余使充放电互斥可在LP中实现。若$c_t,d_t>0$，令$\varepsilon=\min\{c_t,d_t/(\eta_c\eta_d)\}$，以$c'_t=c_t-\varepsilon$、$d'_t=d_t-\eta_c\eta_d\varepsilon$替换。该变换保持储电变化不变，使净用电减少$(1-\eta_c\eta_d)\varepsilon$，不破坏供需和功率约束，也不增加费用，并消去至少一种动作。故存在不同时充放电的最优解。程序加入$10^{-7}$元/kWh的充放电量破同解项，仅作数值选择，不计入账单。
+
+忽略容量及功率的机会成本时，低价购电经电池转移到高价时段的必要盈利条件为
+\begin{equation}
+ p_h>p_\ell/(\eta_c\eta_d)=p_\ell/0.81.
+ \label{eq:arbitrage}
+\end{equation}
+实际调度还需共同考虑光伏富余、可用容量及日末回补。
+
+\subsection{问题二：非对称结算下的场景采购}
+
+日期$D$、发布时间$\tau$的历史集合$\mathcal H_D$取此前至多28个完整日。一个历史日构成一条剩余时域残差轨迹：
+\begin{equation}
+ \epsilon^n_{j,t}=\big[(L_{j,t}-R_{j,t})-(\widehat L^{(\tau)}_{j,t}-\widehat R^{(\tau)}_{j,t})\big]\Delta t,
+ \quad j<D,\ t\ge\tau.
+ \label{eq:residual}
+\end{equation}
+问题二使用历史零时预测，滚动问题使用相同发布时间预测。主方案保留全部历史轨迹、等权赋值，历史充足后不再纳入采用固定先验的1月1日；无历史才用单点先验。场景为$n_{t,s}=\widehat n_t+\epsilon^n_{j_s,t}$。不逐点独立抽样，也不假设正态分布。12场景压缩只用于对照：以整条轨迹距离进行确定性$k$-medoids缩减，概率取代表簇频率，与28场景比较实际费用、补购和求解耗时。
+
+外层选择场景共享的购电$g_t$及参考储能轨迹$c_t,d_t,e_{t+1}$，仅紧急补购$h_{t,s}$带场景下标：
+\begin{equation}
+ g_t+d_t+h_{t,s}-c_t\ge n_{t,s},\qquad h_{t,s}\ge0.
+ \label{eq:scenario_balance}
+\end{equation}
+记$Q_s=\sum_{t=\tau}^{143}5p_{t,s}h_{t,s}$、$\bar p_t=\sum_s\pi_sp_{t,s}$，经济主方案为
+\begin{equation}
+ \min\left\{\sum_t\bar p_tg_t+\sum_s\pi_sQ_s+\beta_T|e_{144}-6000|\right\},
+ \quad\beta_T=b_T\operatorname{median}_{t\ge\tau}\bar p_t,\quad b_T=1.
+ \label{eq:q2_objective}
+\end{equation}
+约束为式\eqref{eq:soc}、\eqref{eq:limits}和\eqref{eq:scenario_balance}，初态取当前实际储电量。终端绝对值用非负偏差变量线性化，是有限时域的价值近似，不计入实际费用，也不强制日末回到6000 kWh。主方案明确取风险权重$\lambda=0$和参考备用$\rho_t=0$。
+
+该模型属于受限两阶段结构。共享参考储能避免让每个场景独立使用全天未来信息，但也限制了补救策略类；它尚未按照实际因果储能控制器计算每条场景的成本。因此上层最优目标与真实执行费用必须分别报告。
+
+\subsection{因果主执行器与内层LP候选}
+
+一月费用校准在四案中均选择贪心执行器。对当期有效常规购电$a_t$、实际净负荷$n_t$及储电量$e_t$，若$a_t\ge n_t$，取
+\begin{equation}
+ c_t^{\rm act}=\min\{a_t-n_t,U,(E_{\max}-e_t)/\eta_c\},\quad
+ d_t^{\rm act}=h_t=0,\quad w_t=a_t-n_t-c_t^{\rm act}.
+ \label{eq:execute_charge}
+\end{equation}
+若$a_t<n_t$，取
+\begin{equation}
+ d_t^{\rm act}=\min\{n_t-a_t,U,\eta_d(e_t-E_{\min})\},\quad
+ c_t^{\rm act}=w_t=0,\quad h_t=n_t-a_t-d_t^{\rm act}.
+ \label{eq:execute_discharge}
+\end{equation}
+两者按状态方程推进储电量，且满足供需平衡、互斥及物理上下界。该规则不直接读取后续价格和参考SOC，因此优化参考与实际控制的偏差仍可能存在。
+
+为检验经济控制能否改善这一问题，另实现每10分钟求解的内层LP。当前$t$固定外层已承诺的当天剩余合同$a_{k|t}$；令$\widetilde n_{t|t}=n_t$、$\widetilde p_{t|t}=p_t$，未来$k>t$仍使用最新合法预测，定义
+\begin{equation}
+ s_{k|t}=[a_{k|t}-\widetilde n_{k|t}]_+,\qquad
+ b_{k|t}=[\widetilde n_{k|t}-a_{k|t}]_+.
+ \label{eq:v2_surplus_deficit}
+\end{equation}
+内层求解
+\begin{align}
+ \min\quad&\sum_{k=t}^{143}5\widetilde p_{k|t}(b_{k|t}-d_{k|t})
+             +\beta_T|e_{144|t}-6000|,\label{eq:v2_inner_objective}\\
+ &0\le c_{k|t}\le\min\{U,s_{k|t}\},\quad
+ 0\le d_{k|t}\le\min\{U,b_{k|t}\},\label{eq:v2_inner_bounds}\\
+ &h_{k|t}=b_{k|t}-d_{k|t},\quad w_{k|t}=s_{k|t}-c_{k|t},\label{eq:v2_inner_balance}
+\end{align}
+同时满足状态方程和储电上下界，初态为实测值，$\beta_T=b_T\operatorname{median}_{k\ge t}\widetilde p_{k|t}$。当天常规购电及调整费为常数，从内层目标省略。只执行第一步$c_{t|t},d_{t|t},h_{t|t}$，下一时段观测后重算。
+
+式\eqref{eq:v2_inner_bounds}只允许用常规供电富余充电，紧急购电仅补负载缺口，不用于主动充电；富余时不能放电，缺口时不能充电，因而互斥自动成立。内层LP可因后续补购预测更贵而当前少放电、适量紧急购电，将存量留到后续时段。其潜在优势来自未来价格和合同缺口的共同作用，但表\ref{tab:v2_controller_validation}中一月账单未优于贪心规则，故未被选为主控制器。两类控制器均按$e_{D+1,0}=e_{D,144}$传递状态，且无权在规定发布时点以外修改常规购电合同。
+
+\input{tables/v2_controller_validation}
+
+\subsection{问题三：交易时点与跨日续接候选}
+
+外层在$\tau\in\{0,36,72,108\}$更新剩余日计划，分别对应0、6、12、18时。零时保存原计划$g_t$，后续优化有效量$a_t$，执行至下一发布时刻。按主结算口径，实际账单为
+\begin{equation}
+ C_D=\sum_tp_{D,t}\big(g_{D,t}+1.5[a_{D,t}-g_{D,t}]_+
+ +0.5[g_{D,t}-a_{D,t}]_++5h_{D,t}\big).
+ \label{eq:settlement}
+\end{equation}
+修订目标将式\eqref{eq:q2_objective}的购电项替换为$\sum_t\bar p_t(1.5u_t+0.5v_t)$，其中$a_t-g_t=u_t-v_t$，$u_t,v_t\ge0$。原计划费用为常数，略去不影响当前决策。所有修订与零时计划比较，下调支配性及退款口径见第\ref{sec:settlement_mechanism}节。
+
+跨日候选仅扩展内层价值评估：在6、12、18时，用当次已公布24小时预报中跨过午夜的6、12、18小时光伏，构造次日前$m=36,72,108$段预测。次日负载及价格依据当天之前已完成的历史日外推，不读取当天尚未结束的数据作为完整历史。零时尚无跨日部分，取$m=0$。
+
+当$m>0$时，将内层终端项替换为续接LP
+\begin{equation}
+ \widehat V_D(e_{144})=\min_{z,c',d',e'}
+ \left\{\sum_{j=0}^{m-1}\widehat p'_jz_j+\beta_T|e'_m-6000|\right\},
+ \label{eq:v2_continuation}
+\end{equation}
+其中$z_j\ge0$是次日临时购电变量，$z_j+d'_j-c'_j\ge\widehat n'_j$，$e'_0=e_{144}$，储能状态转移及容量、功率界同问题一。系数$\beta_T$仍由当天剩余预测价格确定。次日变量只估计当前库存后续价值，不提前执行、填报或计入当天结算；次日零时重新制定正式计划。该近似利用已有跨日信息，但未建立次日随机结算全过程。它在一月未被选中，主结果仍保留截至当天末端的外层预测和终端近似。
+
+外层零时模型尚未显式计入未来1.5倍修订机会。事后重新优化不等于已计入未来重优化价值。内层LP候选也没有把外层共享参考轨迹改造成带非预见性约束的场景树，因此本文只检验不同时间尺度控制的经济效果，不声称已获得严格策略一致性或全局最优因果控制。
+
+\subsection{问题四：价荷联合场景}
+
+价格残差$\epsilon^p_{j,t}=p_{j,t}-\widehat p^{(\tau)}_{j,t}$与同日净负荷残差配对，构造
+\begin{equation}
+ n_{t,s}=\widehat n_t+\epsilon^n_{j_s,t},\qquad
+ p_{t,s}=\max\{0.01,\widehat p_t+\epsilon^p_{j_s,t}\}.
+ \label{eq:joint_scenario}
+\end{equation}
+联合场景保留价荷关联及日内持续偏差。12场景对照在计算距离前对价格和净负荷残差块分别标准化，主方案28轨迹全部保留。0.01元/kWh仅为外层加性场景正价下界；原始最低价0.0076元/kWh保留，实际费用全部按原价结算。内层LP候选的当前价使用已观测实际价，未来价使用合法点预测。
+
+动态静态案沿问题二只在零时采购；动态滚动案沿问题三在四个时点修订。外层采购按场景均价、场景紧急费按对应价格计算。由第\ref{sec:settlement_mechanism}节的价格加权分位数可知，保持同日价荷联系具有经济意义，但有限历史窗口不等于真实联合分布。
+
+\subsection{风险与备用：可选扩展及匹配对照}
+
+风险扩展在外层目标加入$\lambda\operatorname{CVaR}_{0.90}(Q)$，其中$Q_s$只含整条场景紧急费用。按文献\cite{rockafellar2000}线性化为
+\begin{equation}
+ \operatorname{CVaR}_{\alpha}(Q)=\min_z\left\{z+\frac{1}{1-\alpha}\sum_s\pi_sv_s\right\},
+ \quad v_s\ge Q_s-z,\ v_s\ge0,\quad\alpha=0.90.
+ \label{eq:cvar}
+\end{equation}
+固定风险取一月匹配值，自适应风险用历史残差总体标准差（方差分母取历史日数）：
+\begin{equation}
+ \lambda_\tau=0.10\min\{3,r_\tau/0.20\},\qquad
+ r_\tau=\frac{\operatorname{mean}_{t\ge\tau}\operatorname{sd}_j(\epsilon^n_{j,t})}
+ {\max\{\operatorname{mean}_{t\ge\tau}|\widehat n_t|,50\}}.
+ \label{eq:risk_weight}
+\end{equation}
+动态备用先求未来至多一小时累计误差分位数，经2400 kWh上限截断后再乘无量纲$k_\rho$：
+\begin{align}
+ \rho^{\rm raw}_t&=k_\rho\min\left\{2400,
+ \frac{\left[q_{0.8}\left(\sum_{k=t+1}^{\min(t+6,143)}\epsilon^n_{j,k}\right)\right]_+}{\eta_d}\right\},\label{eq:reserve}\\
+ \rho_t&=\min\{\rho^{\rm raw}_t,[e_\tau-E_{\min}+\eta_cU(t-\tau+1)]_+\},\quad
+ e_{t+1}\ge E_{\min}+\rho_t.\label{eq:reachable_reserve}
+\end{align}
+故原始备用最终上限为$2400k_\rho$，不是缩放后重新截为2400；空和取0。备用经验分位数采用排序样本间线性插值，与机制推导中的下分位数记法区分。固定备用除日末为0外取同一常数，再作相同可达截断。这些都是外层参考约束，执行器只遵守物理下限，不把参考备用当作硬性保护区间，也不据此宣称概率供电保证。
+
+固定参数由1月15--31日自适应值匹配：每个外层更新只按其实际覆盖的执行时段累计，取风险权重及可达截断前参考备用的平均值。固定与自适应在回测期的实际平均值可能不同，需同时报告。对照补齐期望费用、仅CVaR、仅备用及二者并用，分别设置固定和自适应版本；紧急费用CVaR与实际总费用CVaR作为不同指标报告。
+
+\subsection{规划与执行偏差及求解流程}
+
+对问题三四个指定日各自四个外层决策点，重建主策略在当时实际初态下的购电计划。固定该计划与28条历史场景，分别回放贪心和内层LP；只在当前步揭示该步场景实现，未来仍使用该决策时刻的合法点预测，后续合同和预报都不再更新。记
+\begin{equation}
+ \Delta_{\rm exec}=\sum_s\pi_s\left(C_s^{\rm replay}-C_s^{\rm plan}\right).
+ \label{eq:v2_execution_gap}
+\end{equation}
+两项仅包括相同口径的真实收费项目，剔除CVaR、终端罚项及数值破同解项。该值衡量规划与回放费用偏差，可能为正或负，不是相对全局最优的差距；同时比较参考与回放SOC，以定位过早放电等时序差异。
+
+预报价值另用相同更新时点分解：只更新SOC并保留零时预测，继而加入新光伏预报，最后加入负载偏差修正。这三组均关闭跨日续接，以免“只更新SOC”组从跨日预测间接获得新信息。控制器、跨日续接与场景数量的比较分别改变相应因素，初态和其余设置一致；闭环运行后的SOC与后续合同可随策略变化，不将总收益归因于单次预测精度。
+
+所有优化问题采用稀疏LP，由HiGHS求解。流程为：读取合法信息，在允许时点更新常规合同；每10分钟根据实际状态执行所选控制器；累加计划、调整和紧急账单，并将末态传递到下一日。结果输出统一来自实际执行数组，外层参考SOC单独保存。数值验证检查供需平衡、状态递推、互斥、功率和容量界、日际连续性及合同更新时间，论文表格与附件5共享同一结果源。

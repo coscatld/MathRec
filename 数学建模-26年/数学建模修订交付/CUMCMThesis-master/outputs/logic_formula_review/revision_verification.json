@@ -1,0 +1,222 @@
+{
+  "scope": "Targeted manuscript logic, formula layout and PDF review; not a full submission-compliance certificate.",
+  "current_source_files": 37,
+  "missing_current_inputs": [],
+  "snapshot_missing_inputs": [
+    "/Users/mingze/Desktop/解题/数学建模修订交付/CUMCMThesis-master/outputs/logic_formula_review/before/figures/modeling_framework.tex"
+  ],
+  "labels": 106,
+  "references": 68,
+  "duplicate_labels": [],
+  "unresolved_references": [],
+  "unresolved_citations": [],
+  "uncited_bibliography_entries": [
+    "jani2022",
+    "li2016",
+    "li2020",
+    "palma2013",
+    "silvente2015"
+  ],
+  "missing_graphics": [],
+  "equation_labels_before": 50,
+  "equation_labels_after": 50,
+  "lost_equation_labels": [],
+  "cases_before": 1,
+  "cases_after": 26,
+  "table_checks": {
+    "tables/ablation.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/annual_summary.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/outer_screening_tradeoff.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/outer_timing_ablation.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/q1_results.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/q2_decomposition.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/q2_selected.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/q3_decomposition.tex": {
+      "byte_identical": false,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/q3_selected.tex": {
+      "byte_identical": false,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/q4_2_decomposition.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/q4_2_selected.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/q4_3_decomposition.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/q4_3_selected.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/question2_forecast_validation.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/question2_prediction_errors.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/question2_scenario_comparison.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/sensitivity.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/updates.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/v2_baselines.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/v2_conservatism.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/v2_controller_validation.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/v2_controllers.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/v2_execution_gap.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/v2_feedback.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/v2_forecast_metrics.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/v2_forecast_selection.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/v2_inner_gap.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/v2_risk_modules.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/v2_scenarios.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/v2_settlement.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    },
+    "tables/v2_solve_times.tex": {
+      "byte_identical": true,
+      "content_identical_ignoring_float_placement": true
+    }
+  },
+  "figures_total": 13,
+  "figures_in_appendices": 4,
+  "pdf": {
+    "pages": 41,
+    "abstract_pages": 1,
+    "appendix_first_page": 32,
+    "body_including_references_pages": 30,
+    "bytes": 1041107,
+    "sha256": "738deececab1972b9c7e66898240c857e348baa46a5ff4fcf80aec30fd28ac8a"
+  },
+  "compile_issues": {
+    "overfull_box": false,
+    "missing_character": false,
+    "undefined_reference": false,
+    "multiply_defined_label": false
+  },
+  "visual_review": "All pages rendered; contact sheets and formula/transition detail pages visually inspected.",
+  "source_sha256": {
+    "main.tex": "e9bb1c21ef0b495bd7291a77ea9a665f5ba6f28d14080f864ef8f1e223ea97bf",
+    "sections/common_intro.tex": "a8282575b6f84c7ac281658c3b2eec157571093000ea7f8e8493a35e7b5befa7",
+    "figures/modeling_framework.tex": "1eb501816c0c7bdb57543c857e26a0ebdc6121f72ead7840cda25ad4516730d7",
+    "sections/question1.tex": "995c1f542434ad918c22b052150dd48127418e7b1347ada9ff53918ef89dca4e",
+    "tables/q1_results.tex": "52365c2f407bcd9d82e3777f4c4adeba236f6b134cb4eb69547afacac1dcd0f5",
+    "sections/question2.tex": "0a5f2c963d18b549188456b9792695d61bdc4754e2a9e91417699834211a4b71",
+    "tables/question2_forecast_validation.tex": "fdf06b400d6772f7ef379c6772165a546f89267937397fe5aba762d4fa68c81e",
+    "tables/question2_prediction_errors.tex": "166e4605f70357be4b40238b5c658ad0007fb224d8bf2a6101c57d683ea4f01a",
+    "tables/v2_baselines.tex": "0540a377ad4b5e15b01e9fab7d19445765367f60ce2fd1723aa8ef0f03e0a37a",
+    "tables/q2_selected.tex": "294957708a3623e830c9399348488fd9183a9f7a6880409629a33deec5ce26f0",
+    "tables/q2_decomposition.tex": "f8bd6d1f4b752291e6dc4515c3668958ec9a02b54142b3a64c189288dc4faa12",
+    "sections/question3.tex": "a7733fd5ea6999dc9fde29b726fb87ff4b03dee2d74fe2aea86ab601e4d402ea",
+    "tables/v2_controller_validation.tex": "25cd3d1bf26da2bf654c7fe98d34a92eac51c3dab7c9745d662ab134f0051ec8",
+    "tables/outer_timing_ablation.tex": "6db39aebae7d12521f45d8687266a629e35d2f36f497d409c4e3e1d565e71883",
+    "tables/outer_screening_tradeoff.tex": "b4255594dd025fb6d4b487fc04bdd5488449402583616c07246ec080a1158d0b",
+    "tables/v2_feedback.tex": "81c1a07f7b759e8dcd53f387b73fa7113bf4f0bc9271bfd7e71ac1cb7ad14c86",
+    "tables/q3_selected.tex": "a95b99a5308510dd9271d23f7dc34dd9680bf55d11dcfac13629320b00e3c202",
+    "tables/q3_decomposition.tex": "dfbef3afaebadc5b314e8331ce2ca05a8139a6c8b3f93387d0f0363dc1171c1b",
+    "sections/question4.tex": "6653e806f6284578321f0bb88d5c71fb3005251a89a2bfd739cb66c18a5a91e9",
+    "tables/q4_2_selected.tex": "500e68da7ae589a8f13a87f3f8bfae09001054e29ad4bdfac0e926fe520f5820",
+    "tables/q4_2_decomposition.tex": "bc7debb6a5327519f747e353688006ccc631ab0e4c67961d6f41faf9fb8df251",
+    "tables/q4_3_selected.tex": "7e2eabdfd9ffbd774067ac643915d2040c4f820b7b08cb7de4e7eeba0f3d5ab3",
+    "tables/q4_3_decomposition.tex": "b55c2ad8f4a6c9d01cc16850cf26fd7c40b6f2c6e1ae166587be3af02dca8d50",
+    "sections/model_evaluation.tex": "bbd6049e9a56fa02f7a250f002707ac0ec3cc3663fb81f4a5c2a2e131de80b42",
+    "tables/annual_summary.tex": "fc931d755b4805307acd109385af579562872268cbb48df120e2e6b79bcdbfda",
+    "sections/references.tex": "d1a579c1a61074069eaa70044a66a74b5d2fa168a88703fc509119751e5b2141",
+    "sections/05_appendix.tex": "3a6e863be55e49db25da9774da4006ed59098d04a00e052ac6b2672e67b21a8d",
+    "sections/appendix_optional_models.tex": "8116b64c43dc09d776ba94b7b4ed2d35453060501bf0f6a44c49f5901273b849",
+    "tables/v2_risk_modules.tex": "0f5ce97c239cd1b2f80ad6fdb1980e3427c06aecbff385d630660cc20a18af0a",
+    "tables/v2_conservatism.tex": "65aee5b6d331f5c87bb6ca26b3c6e060deb344cae03c750590471eb777cfc1ba",
+    "tables/question2_scenario_comparison.tex": "7792225a515cb70cd9f112ef57b9f19400dd04c75c7acb4159ec38e73fdb3897",
+    "sections/appendix_controller_checks.tex": "c75f660ec87c1f6ec8941be0f929ed13a06b17cd4b27bc5de4e05508545df0fe",
+    "tables/v2_execution_gap.tex": "2ffa794b4074c9239e979a2c672d3028a0c642c7c151fb2b08a30ca67205e548",
+    "tables/v2_inner_gap.tex": "2e5e2a9a01288f17fe3320c2fbbb081bea300e62bd353eb9c101fc9e5c65dc10",
+    "tables/v2_controllers.tex": "62934671bfd1d4d2b4b481d9b5f3116e4558f826e0ab029b01c38c22d5832401",
+    "tables/v2_settlement.tex": "cdcf78c440a1c870a30f35393529808bf111d7da030151d88d6da0bf41865030",
+    "sections/appendix_final_adjustments.tex": "03f05e23f09cb9dbdabe0057671cf6671c10549e477fdbb4ae657d383bd4ec6a"
+  },
+  "related_reports": [
+    "numerical_recheck.json",
+    "protected_recheck.json",
+    "q1_q2_review.md",
+    "rolling_logic_review.md",
+    "relocation_review.md",
+    "figure_review.md"
+  ],
+  "known_submission_preparation_items": [
+    "Full runnable source text is not yet included in the PDF appendix.",
+    "Five bibliography entries lack in-text citations.",
+    "Compact specified-date tables should be checked against the literal requested table layout."
+  ],
+  "targeted_revision_status": "PASS"
+}

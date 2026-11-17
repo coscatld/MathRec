@@ -1,0 +1,23 @@
+test_empty_batch (test_stdlib.ScalarTests.test_empty_batch) ... ok
+test_empty_row (test_stdlib.ScalarTests.test_empty_row) ... ok
+test_known (test_stdlib.ScalarTests.test_known) ... ok
+test_large (test_stdlib.ScalarTests.test_large) ... ok
+test_negative (test_stdlib.ScalarTests.test_negative) ... ok
+test_nonfinite (test_stdlib.ScalarTests.test_nonfinite) ... ok
+test_padding (test_stdlib.ScalarTests.test_padding) ... ok
+test_probability_invariants (test_stdlib.ScalarTests.test_probability_invariants) ... ok
+test_ragged (test_stdlib.ScalarTests.test_ragged) ... ok
+test_single (test_stdlib.ScalarTests.test_single) ... ok
+test_uniform (test_stdlib.ScalarTests.test_uniform) ... ok
+test_wrong_zero_padding_is_detectable (test_stdlib.ScalarTests.test_wrong_zero_padding_is_detectable) ... ok
+test_large_uniform (test_torch.GpuTests.test_large_uniform) ... skipped 'NVIDIA CUDA/PyTorch/Triton unavailable'
+test_reject_nonfinite (test_torch.GpuTests.test_reject_nonfinite) ... skipped 'NVIDIA CUDA/PyTorch/Triton unavailable'
+test_shapes_dtypes (test_torch.GpuTests.test_shapes_dtypes) ... skipped 'NVIDIA CUDA/PyTorch/Triton unavailable'
+test_contracts (test_torch.TorchTests.test_contracts) ... skipped 'PyTorch not installed'
+test_cpu_reference (test_torch.TorchTests.test_cpu_reference) ... skipped 'PyTorch not installed'
+test_empty (test_torch.TorchTests.test_empty) ... skipped 'PyTorch not installed'
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.029s
+
+OK (skipped=6)

@@ -1,0 +1,73 @@
+\section{支撑材料与结果生成链}
+
+
+\begin{table}[htbp]\centering\small
+\caption{核心计算与结果生成入口}\label{tab:files}
+\begin{tabularx}{\linewidth}{p{0.43\linewidth}X}\toprule
+文件 & 用途\\\midrule
+\path{code/data_forecast.py} & 原始附件读取及因果预测基础\\
+\path{code/dispatch_v2.py} & 采购模型、控制器、跨日续接与逐段结算\\
+\path{code/calibrate_v2.py} & 一月费用选型、匹配参数与冻结配置\\
+\path{code/run_main_v2.py} & 四组未筛选母模型结果\\
+\path{code/outer_candidate_selector.py} & 候选生成与固定执行规则回放评分\\
+\path{code/run_outer_candidate_experiment.py} & 母模型与全时点筛选对照\\
+\path{code/run_outer_timing_ablation.py} & 四次筛选时点消融与配置冻结\\
+\path{code/publish_final_strategy.py} & 最终配置汇总、主结果图表及附件数据\\
+\path{code/make_compact_paper_tables.py} & 指定日期表的紧凑编排与原值核对\\
+\path{code/experiments_v2.py} & 场景、风险、备用、反馈及控制对照\\
+\path{code/time_index.py} & 物理时间、模板列序及分组映射\\
+\path{code/check_dispatch_v2.py} & 数值守恒、未来扰动及价格机制检查\\
+\path{code/export_final_workbooks.mjs} & 从最终导出数据重填两本滚动工作簿\\
+\path{code/verify_final_workbooks.py} & 五本最终附件的逐值、标签及汇总检查\\
+\path{code/check_final_strategy_delivery.py} & 最终执行、图表、正文与附件独立核对\\
+\bottomrule\end{tabularx}
+\end{table}
+
+原版LP、规划与执行诊断、场景缩减及母模型图表脚本作为独立代码支撑材料提供；\path{run_revision.ps1}提供复用冻结配置的复算入口。
+
+\texttt{selection\_v2.json}保存每个一月候选、费用、末库存、母模型配置及固定参数匹配值。\texttt{prepared\_v2\_*.npz}为已选预测输入，\texttt{*\_v2.npz}为334天母模型执行结果；旧\texttt{*\_full.npz}是原版365天记录，提供冻结的一月运行前缀。最终主结果中，问题二及第四问日前版仍读取母模型数组，问题三及第四问滚动版分别读取\path{outputs/outer_candidate_test/}中的\texttt{q3\_selected.npz}及\texttt{q4\_3\_selected.npz}。
+
+筛选消融、逐决策评分及检查保存在\path{outputs/outer_timing_ablation/}，其中\texttt{final\_strategy.json}给出所选配置和数组路径。各次实验保留当时输入指纹，最终数值发布清单位于\path{outputs/final_strategy/}；本次框架与排版修订记录位于\path{outputs/framework_revision/}。
+
+\texttt{plan}、\texttt{adjusted}分别保存零时合同和最终有效常规量，\texttt{charge}、\texttt{discharge}为电池外侧实际动作，\texttt{energy}含每日145个边界状态。\texttt{reference\_energy}仅见于母模型，保存规划参考。\texttt{emergency}与\texttt{spill}分别为紧急和弃余电量；三项费用字段之和为\texttt{total\_cost}。所有量保留原精度，显示时舍入。
+
+最终发布目录为\path{outputs/final_strategy/}。其中\path{results_export.json}保存执行数组，\path{summary.json}和\path{daily_summary.csv}保存主指标与逐日账本。工作簿与正文数表共用最终数组及物理索引；\path{data/results_export.json}及原实验、诊断文件保留母模型结果。紧凑表以日期并列展示，原数值及附件格式保持一致。
+
+\section{时间映射与附件5填写}
+
+附件5沿用表\ref{tab:physical_mapping}的源样本列序和原始标签，映射记录见\path{data/time_mapping.json/csv}。问题一纵排144行，其余购电页横排144列；10:00--10:10取$t=60$，四小时动作汇总24段。紧急页合并同日相邻正值，无紧急量写“无”和0。
+
+计划页的全天购电量及费用分别为$\sum_tg_t$及$\sum_tp_tg_t$；调整页填$a_t$而非$a_t-g_t$，全天费用填式\eqref{eq:settlement}的全部实际账单。没有调整页的问题二与问题四静态案，其完整账单由逐日CSV和正文给出。五本已填文件保存在\texttt{附件/附件5/}，空白原模板仅保存在\texttt{originals/附件5/}，交付时必须区别二者。
+
+五本附件共288720个计划及调整数值已逐格核对。最终两本滚动附件含192384个对应数值，储能聚合、紧急区间、日期和标签也已核对；文件指纹及检查记录位于\path{outputs/final_strategy/}，原版本另行备份。
+
+\section{数值可行性与因果信息检查}
+
+四个最终主案核对供需不等式及扣除弃余后的等式账本，并检查SOC递推、日际连续、1200--10800 kWh库存界、每段$5000/6$ kWh功率折算上限和充放电互斥。计划费按全部零时合同量结算。
+
+母模型未来扰动检查见\path{data/numerical_checks_v2.json}。候选模块进一步核对场景回放与标量执行器一致性、当前合同保留、零时结算基准、配对价格、终端偏离期望及未来扰动下已执行前缀不变；时点消融核对关闭筛选时调用原场景LP。明细见两个外层实验目录。
+
+以下伪代码概括外层交易与内层动作的职责；完整实现及参数见独立代码支撑材料。
+
+\begin{lstlisting}[language=Python,basicstyle=\ttfamily\footnotesize]
+for t in range(144):
+    if t in allowed_updates:
+        if screening_enabled(question, t):
+            candidates = candidate_plans(legal_forecast, observed_energy,
+                                         original_day_ahead_plan, contract)
+            contract = select_by_fixed_rule_replay(candidates,
+                       same_historical_scenarios, observed_energy)
+        else:
+            contract = outer_plan(legal_forecast, observed_energy,
+                                  original_day_ahead_plan)
+    # Contract remains fixed inside the storage controller.
+    action = controller(contract[t:], current_net, current_price,
+                        latest_legal_future_forecast, observed_energy)
+    execute_first_action(action)
+
+plan_cost = sum(price * original_plan)
+adjustment_cost = sum(price * (1.5 * maximum(final_plan-original_plan, 0)
+                              + 0.5 * maximum(original_plan-final_plan, 0)))
+emergency_cost = sum(5 * price * emergency)
+total_cost = plan_cost + adjustment_cost + emergency_cost
+\end{lstlisting}

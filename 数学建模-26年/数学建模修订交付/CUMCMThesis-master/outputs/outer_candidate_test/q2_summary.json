@@ -1,0 +1,179 @@
+{
+  "case": "q2",
+  "completed": true,
+  "period": [
+    "2025-02-01",
+    "2025-12-31"
+  ],
+  "days": 334,
+  "initial_energy_kwh": 8875.190890055994,
+  "frozen_config": {
+    "scenarios": 28,
+    "history": 28,
+    "risk_mode": "none",
+    "risk_scale": 0.1,
+    "fixed_risk": 0.1,
+    "reserve_mode": "none",
+    "reserve_scale": 1.0,
+    "fixed_reserve": 0.0,
+    "controller": "greedy",
+    "feedback": "full",
+    "cross_day": false,
+    "terminal_scale": 1.0,
+    "cancellation_refund": false,
+    "updates": [
+      0,
+      36,
+      72,
+      108
+    ],
+    "no_storage": false
+  },
+  "source_sha256": {
+    "data/prepared_v2_q2.npz": "0322336272736ef1956aefa31f183bf42740abd1797e8d0d290fc61a700158fa",
+    "data/q2_v2.npz": "57d964170cfd5f3a784ddac4dfca07dcae8e5532e5e869d9595f0fa341f3b255",
+    "data/selection_v2.json": "f290084567f8b335dfbe7c042da7bf6863af20d3db001376f8bb5003dedd9aa7",
+    "code/dispatch_v2.py": "3dd2d60d587acc2853ce496c61afd566c8270ec4f2d466eb947c325869d9bf44",
+    "code/optimize_dispatch.py": "22179f1a3f259b7083c159d9c3cb1288ab0715abc1545f6c51bb360d76c03b8e",
+    "code/outer_candidate_selector.py": "c9f20c5cd38386674e142f23feb47472f35ac05019a3a491e5c1e3cb528c23cf",
+    "code/run_outer_candidate_experiment.py": "ceeda250e36b7ff582f72f48adc8c6e4a6ca0fdf1104657ed3781fbec9cc934d"
+  },
+  "baseline_reproduction": {
+    "max_grid_difference_kwh": 4.092726157978177e-12,
+    "bill_difference_yuan": 0.0,
+    "same_opening_energy": true
+  },
+  "comparison": {
+    "baseline_bill_yuan": 14012807.662737625,
+    "selected_bill_yuan": 14035379.647337997,
+    "bill_change_yuan": 22571.984600372612,
+    "bill_change_percent": 0.16108109911758817,
+    "baseline_emergency_kwh": 85017.69344886823,
+    "selected_emergency_kwh": 138015.178992225,
+    "baseline_final_energy_kwh": 6240.3150954938255,
+    "selected_final_energy_kwh": 6240.3150954938255,
+    "common_final_inventory_beta": 0.8073499999999998,
+    "baseline_plan_cost_yuan": 13507968.426693833,
+    "baseline_adjustment_cost_yuan": 0.0,
+    "baseline_emergency_cost_yuan": 504839.23604379204,
+    "baseline_final_inventory_penalty_yuan": 194.01839234694,
+    "baseline_bill_plus_final_inventory_yuan": 14013001.681129972,
+    "selected_plan_cost_yuan": 13201802.780252136,
+    "selected_adjustment_cost_yuan": 0.0,
+    "selected_emergency_cost_yuan": 833576.8670858598,
+    "selected_final_inventory_penalty_yuan": 194.01839234694,
+    "selected_bill_plus_final_inventory_yuan": 14035573.665730344,
+    "inventory_adjusted_change_yuan": 22571.984600372612
+  },
+  "monthly": [
+    {
+      "month": "2025-02",
+      "baseline_bill_yuan": 1217933.1336563474,
+      "selected_bill_yuan": 1200559.2636713015,
+      "bill_change_yuan": -17373.869985045865,
+      "baseline_emergency_kwh": 1182.6363927777793,
+      "selected_emergency_kwh": 3124.335639742882
+    },
+    {
+      "month": "2025-03",
+      "baseline_bill_yuan": 1127777.1221072834,
+      "selected_bill_yuan": 1129813.7647290933,
+      "bill_change_yuan": 2036.6426218098495,
+      "baseline_emergency_kwh": 1833.695800415956,
+      "selected_emergency_kwh": 6783.659928155232
+    },
+    {
+      "month": "2025-04",
+      "baseline_bill_yuan": 964568.4444870042,
+      "selected_bill_yuan": 975420.3026457301,
+      "bill_change_yuan": 10851.858158725896,
+      "baseline_emergency_kwh": 4968.5455870555525,
+      "selected_emergency_kwh": 12374.653548564684
+    },
+    {
+      "month": "2025-05",
+      "baseline_bill_yuan": 1027691.0388732346,
+      "selected_bill_yuan": 1029728.0742669778,
+      "bill_change_yuan": 2037.0353937431937,
+      "baseline_emergency_kwh": 9319.403373894034,
+      "selected_emergency_kwh": 14332.763059786632
+    },
+    {
+      "month": "2025-06",
+      "baseline_bill_yuan": 1462215.7910433814,
+      "selected_bill_yuan": 1506672.3830943864,
+      "bill_change_yuan": 44456.59205100499,
+      "baseline_emergency_kwh": 23522.44362320231,
+      "selected_emergency_kwh": 34465.9781898852
+    },
+    {
+      "month": "2025-07",
+      "baseline_bill_yuan": 1625434.6527990224,
+      "selected_bill_yuan": 1634082.6099506454,
+      "bill_change_yuan": 8647.957151622977,
+      "baseline_emergency_kwh": 21637.287002555535,
+      "selected_emergency_kwh": 24821.053438856194
+    },
+    {
+      "month": "2025-08",
+      "baseline_bill_yuan": 1295254.9205469072,
+      "selected_bill_yuan": 1294142.6857537602,
+      "bill_change_yuan": -1112.2347931470722,
+      "baseline_emergency_kwh": 2151.56435049999,
+      "selected_emergency_kwh": 10836.742812275119
+    },
+    {
+      "month": "2025-09",
+      "baseline_bill_yuan": 1150390.0930048476,
+      "selected_bill_yuan": 1133799.4875641873,
+      "bill_change_yuan": -16590.60544066038,
+      "baseline_emergency_kwh": 2001.061981333325,
+      "selected_emergency_kwh": 3659.1254130643015
+    },
+    {
+      "month": "2025-10",
+      "baseline_bill_yuan": 1138831.0821916903,
+      "selected_bill_yuan": 1125549.445326231,
+      "bill_change_yuan": -13281.636865459383,
+      "baseline_emergency_kwh": 2878.287868694443,
+      "selected_emergency_kwh": 6036.188649526012
+    },
+    {
+      "month": "2025-11",
+      "baseline_bill_yuan": 1263524.2347245347,
+      "selected_bill_yuan": 1249863.6237188356,
+      "bill_change_yuan": -13660.61100569903,
+      "baseline_emergency_kwh": 977.8271684444386,
+      "selected_emergency_kwh": 3638.129530895543
+    },
+    {
+      "month": "2025-12",
+      "baseline_bill_yuan": 1739187.149303372,
+      "selected_bill_yuan": 1755748.00661685,
+      "bill_change_yuan": 16560.8573134779,
+      "baseline_emergency_kwh": 14544.940299994865,
+      "selected_emergency_kwh": 17942.5487814732
+    }
+  ],
+  "candidate_selection_counts": {
+    "margin_0.25sigma": 104,
+    "point_lp": 15,
+    "margin_0.5sigma": 73,
+    "scenario_lp": 99,
+    "margin_1sigma": 43
+  },
+  "decision_count": 334,
+  "decisions_with_lower_estimated_score": 235,
+  "mean_estimated_score_reduction_yuan_per_decision": 374.84681099933334,
+  "max_estimated_score_reduction_yuan_per_decision": 1689.537409675977,
+  "actual_bill_improved_days": 178,
+  "actual_bill_worsened_days": 78,
+  "elapsed_seconds": 32.6988535830169,
+  "validation": {
+    "physical_constraints": true,
+    "common_opening_soc": true,
+    "bill_components": true,
+    "score_never_above_baseline": true,
+    "source_inputs_unchanged": true
+  }
+}

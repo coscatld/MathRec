@@ -1,0 +1,27 @@
+{
+  "node": "v24.22.1",
+  "requests": 10000,
+  "trials": [
+    {
+      "recordMs": 6.6633939999999825,
+      "reportMs": 11.281799000000007
+    },
+    {
+      "recordMs": 8.563039000000003,
+      "reportMs": 14.493574999999993
+    },
+    {
+      "recordMs": 6.7685730000000035,
+      "reportMs": 17.652231999999998
+    },
+    {
+      "recordMs": 3.032621000000006,
+      "reportMs": 3.8083039999999926
+    },
+    {
+      "recordMs": 4.051171000000011,
+      "reportMs": 9.699309999999997
+    }
+  ],
+  "scope": "Local recorder overhead only; fake durations, no server/model/GPU throughput measured."
+}

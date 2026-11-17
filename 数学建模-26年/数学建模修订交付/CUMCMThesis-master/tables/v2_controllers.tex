@@ -1,0 +1,11 @@
+\begin{table}[htbp]\centering\small
+\caption{问题3母模型的执行控制与跨日续接对照}
+\label{tab:v2_controllers}
+\begin{tabularx}{\linewidth}{LRRRR}\toprule
+策略 & 总费/万元 & 紧急量/kWh & 日费CVaR95/元 & 末库存/kWh\\\midrule
+规则执行（母模型） & 1397.58 & 12647.76 & 65518.79 & 6240.32\\
+剩余日储能LP & 1421.32 & 23825.27 & 66397.37 & 5934.55\\
+储能LP+跨日价值 & 1405.26 & 22407.53 & 66033.05 & 6240.32\\
+\bottomrule\end{tabularx}
+\par\smallskip\parbox{\linewidth}{\footnotesize 未启用候选筛选的母模型对照；各组沿用原实验配置，覆盖334天并连续推进状态。}
+\end{table}

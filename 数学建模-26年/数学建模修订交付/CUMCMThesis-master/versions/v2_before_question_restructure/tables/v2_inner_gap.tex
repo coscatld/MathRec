@@ -1,0 +1,11 @@
+\begin{table}[htbp]\centering\small
+\caption{修订主计划下两种执行器的同场景回放诊断}
+\label{tab:v2_inner_gap}
+\begin{tabularx}{\linewidth}{LRR}\toprule
+指标 & 规则执行 & 内层LP\\\midrule
+有符号期望费用偏差/元 & -655.33 & -513.41\\
+场景费用绝对偏差的期望/元 & 697.25 & 605.16\\
+SOC均方根偏差/kWh & 1056.40 & 869.79\\
+\bottomrule\end{tabularx}
+\par\smallskip\parbox{\linewidth}{\footnotesize 四个指定日、四个时点共16个决策点，每点28场景。先计算场景概率加权指标，再对决策点等权平均；两种执行器固定相同购电合同和初态，仅逐步揭示当前场景值。}
+\end{table}

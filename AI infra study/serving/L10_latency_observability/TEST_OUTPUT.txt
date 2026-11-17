@@ -1,0 +1,26 @@
+✔ empty distributions are null, not zero (1.450525ms)
+✔ nearest rank: 20 points p95 is 19 (0.217811ms)
+✔ quantile input remains unchanged (0.858113ms)
+✔ invalid quantile inputs fail (0.440849ms)
+✔ timestamp zero is a real start (0.485515ms)
+✔ success agrees with reference, including delivery lag (0.379478ms)
+✔ queued timeout is separate from started queue sample (0.388232ms)
+✔ running timeout does not complete backend (0.448961ms)
+✔ cancel queued and running independently (0.38011ms)
+✔ errors count as observations, not dropped successes only (0.625831ms)
+✔ pending observations excluded, gauges retain unfinished work (0.241725ms)
+✔ duplicate accept and transitions fail without corrupting state (0.275375ms)
+✔ unknown IDs, backend-before-start, early caller success and labels rejected (0.242016ms)
+✔ clock regression rejected without changing timestamp (0.101469ms)
+✔ invalid clocks rejected (0.25138ms)
+✔ snapshot mutation cannot alter recorder (0.106547ms)
+✔ percentiles do not add (0.109452ms)
+✔ reference rejects impossible durations (0.141268ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 156.141138

@@ -1,0 +1,65 @@
+\section{支撑材料与可复现计算}
+
+论文主文件为\texttt{main.tex}，原模板示例\texttt{example.tex}和类、样式文件保留。计算过程不依赖LaTeX；表格中的结果均由程序从已求解的数组生成，不手工改写求解值。支撑材料主要组成见表\ref{tab:files}。
+
+\begin{table}[htbp]\centering\small
+\caption{主要代码及结果文件}\label{tab:files}
+\begin{tabularx}{\linewidth}{lL}\toprule
+文件 & 内容\\\midrule
+\texttt{code/data\_forecast.py} & 原始附件读取、因果预测、残差与数据统计\\
+\texttt{code/optimize\_dispatch.py} & 统一LP、场景缩减、执行器与四组全年主策略\\
+\texttt{code/run\_experiments.py} & 消融、更新时点、风险参数与退款解释实验\\
+\texttt{code/make\_paper\_assets.py} & 指定日期表格、年度汇总、CSV和论文插图\\
+\texttt{code/export\_workbooks.mjs} & 按原始模板填写附件5五个工作簿\\
+\texttt{code/verify\_workbooks.py} & 输出与数组、表头、费用及日期的逐项一致性检查\\
+\texttt{data/prepared.npz} & 数据、预测、各发布时间残差\\
+\texttt{data/*\_full.npz} & 包含1月状态推进的全年逐时执行结果\\
+\texttt{data/daily\_summary.csv} & 2月至12月常规量、紧急量、费用和库存汇总\\
+\texttt{data/experiments.json} & 全部对照设置、结果与库存边界\\
+\texttt{originals/} & 原附件5空模板及原论文模板代码备份\\
+\bottomrule\end{tabularx}
+\end{table}
+
+各\texttt{*\_full.npz}中，\texttt{plan}为每日零时承诺量，\texttt{adjusted}为每个时段最终生效的常规购电量，\texttt{charge}与\texttt{discharge}为实际电网侧电量，\texttt{energy}包含一天145个边界状态，\texttt{emergency}为紧急量，\texttt{spill}为未使用的富余电量。\texttt{plan\_cost}、\texttt{adjustment\_cost}、\texttt{emergency\_cost}之和为\texttt{total\_cost}。未使用原始真实未来值重算并替换已执行的决策。
+
+\section{原模板时间标签与费用填写说明}
+
+附件5购电页首标签为“0:10--0:20”，末标签为“0:00--0:10+1”；按要求完整保留这些标签及顺序，数组与附件1、2、4的144个源数据列逐列对应。物理模型把源数据0:10解释为0:00--0:10的右端点，因此模板标签仅保留原始展示口径，不再据其字面区间将数据第二次移位。三种对应关系为：
+\begin{center}\small
+\begin{tabular}{lll}\toprule
+源采样列 & 模型物理时段 & 保留的模板显示标签\\\midrule
+第1列：0:10 & 0:00--0:10 & 0:10--0:20\\
+第61列：10:10 & 10:00--10:10 & 10:10--10:20\\
+第144列：0:00+1 & 23:50--24:00 & 0:00--0:10+1\\
+\bottomrule\end{tabular}
+\end{center}
+上述约定保留源列次序与自然日能量守恒。正文指定时段表、四小时储能分段及紧急时段使用物理时钟，因此不能直接以购电页标签字符串在正文表中查找同一结果，应按上表映射源列。
+
+计划购电页全天购电量为144段计划量之和，费用为计划付费部分；调整购电页填最终生效总量，不填相对计划的差额，全天费用为含计划、调整和紧急购电的实际总费。问题二与问题四对应问题二的工作簿没有调整页，其含紧急费的总费用见论文和\texttt{daily\_summary.csv}。充放电页按日填写六个四小时区间，并列日首和日末储电量。紧急页将相邻正紧急量的10分钟区间合并，跨日不合并，无紧急量的日期写“无”和0。
+
+\section{执行与结算核心代码}
+
+以下代码节选展示因果执行环节。完整程序及全部参数保存在独立源文件中，结果生成不依赖人工修改表格。
+\begin{lstlisting}[language=Python,basicstyle=\ttfamily\footnotesize]
+def step(grid, net, energy):
+    cap, eta = 5000 / 6, 0.9
+    if grid >= net:
+        charge = min(grid - net, cap, (10800 - energy) / eta)
+        discharge, emergency = 0.0, 0.0
+        spill = grid - net - charge
+    else:
+        discharge = min(net - grid, cap, (energy - 1200) * eta)
+        charge, spill = 0.0, 0.0
+        emergency = net - grid - discharge
+    next_energy = energy + eta * charge - discharge / eta
+    return charge, discharge, next_energy, emergency, spill
+
+plan_cost = sum(price * plan)
+up = maximum(adjusted - plan, 0)
+down = maximum(plan - adjusted, 0)
+adjustment_cost = sum(price * (1.5 * up + 0.5 * down))
+emergency_cost = sum(5 * price * emergency)
+total_cost = plan_cost + adjustment_cost + emergency_cost
+\end{lstlisting}
+
+AI工具实际参与范围、主要提示和待人工处理事项另存\texttt{AI工具使用详情.tex}及说明文档；该材料不宣称已完成用户尚未实施的人工核验。

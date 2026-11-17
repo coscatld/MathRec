@@ -1,0 +1,5 @@
+# Optional reference target, NOT installed/tested in this run.
+# Requires a compatible Linux NVIDIA driver + CUDA PyTorch build.
+# Do not install automatically; use your existing validated environment.
+torch==2.5.1
+triton==3.1.0

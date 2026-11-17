@@ -1,0 +1,292 @@
+{
+  "status": "PASS",
+  "timestamp": "2026-09-12T08:00:12.040409+00:00",
+  "scope": "Recheck frozen arrays, actual bills, candidate argmin/components and four timing configurations; no optimization rerun.",
+  "checks": {
+    "actual_arrays_and_bills": {
+      "q2": {
+        "passed": true,
+        "source_path": "data/q2_v2.npz",
+        "days": 334,
+        "maximum_errors": {
+          "balance_kwh": 2.2737367544323206e-13,
+          "charge_kwh": 2.2737367544323206e-13,
+          "discharge_kwh": 2.2737367544323206e-13,
+          "emergency_kwh": 2.2737367544323206e-13,
+          "spill_kwh": 3.410605131648481e-13,
+          "soc_kwh": 9.094947017729282e-13,
+          "continuity_kwh": 0.0,
+          "plan_cost_yuan": 1.4551915228366852e-11,
+          "adjustment_cost_yuan": 0.0,
+          "emergency_cost_yuan": 7.275957614183426e-12,
+          "total_cost_yuan": 1.4551915228366852e-11
+        },
+        "metrics": {
+          "days": 334,
+          "plan_cost": 13507968.426693833,
+          "adjustment_cost": 0.0,
+          "emergency_cost": 504839.23604379204,
+          "total_cost": 14012807.662737625,
+          "plan_energy": 22047537.091897972,
+          "adjusted_energy": 22047537.091897972,
+          "emergency_energy": 85017.69344886823,
+          "spill_energy": 2980317.6065340475,
+          "charge_energy": 6396942.484532796,
+          "discharge_energy": 5183894.8006866705,
+          "emergency_days": 113,
+          "emergency_intervals": 617,
+          "daily_cost_cvar95": 70731.74383287484,
+          "daily_cost_max": 89306.81871010154,
+          "initial_energy": 8875.190890055994,
+          "final_energy": 6240.3150954938255,
+          "max_actual_grid_power": 10721.2
+        },
+        "terminal_penalty_excluded_from_realized_bill": true,
+        "power_to_energy_dt_hours": 0.16666666666666666,
+        "balance_inequality_excess_equals_spill": true
+      },
+      "q3": {
+        "passed": true,
+        "source_path": "outputs/outer_candidate_test/q3_selected.npz",
+        "days": 334,
+        "maximum_errors": {
+          "balance_kwh": 2.2737367544323206e-13,
+          "charge_kwh": 2.2737367544323206e-13,
+          "discharge_kwh": 2.2737367544323206e-13,
+          "emergency_kwh": 2.2737367544323206e-13,
+          "spill_kwh": 3.410605131648481e-13,
+          "soc_kwh": 9.094947017729282e-13,
+          "continuity_kwh": 0.0,
+          "plan_cost_yuan": 1.4551915228366852e-11,
+          "adjustment_cost_yuan": 9.094947017729282e-13,
+          "emergency_cost_yuan": 9.094947017729282e-13,
+          "total_cost_yuan": 1.4551915228366852e-11
+        },
+        "metrics": {
+          "days": 334,
+          "plan_cost": 13503057.818677261,
+          "adjustment_cost": 248699.6956895927,
+          "emergency_cost": 119713.92930063687,
+          "total_cost": 13871471.443667494,
+          "plan_energy": 22017587.593633752,
+          "adjusted_energy": 22232911.588298026,
+          "emergency_energy": 21029.901535523328,
+          "spill_energy": 3093929.523936808,
+          "charge_energy": 6437575.405427123,
+          "discharge_energy": 5216752.934497047,
+          "emergency_days": 119,
+          "emergency_intervals": 424,
+          "daily_cost_cvar95": 65552.75624040338,
+          "daily_cost_max": 67941.60994997872,
+          "initial_energy": 8814.599676936767,
+          "final_energy": 6240.315120185184,
+          "max_actual_grid_power": 10721.2
+        },
+        "terminal_penalty_excluded_from_realized_bill": true,
+        "power_to_energy_dt_hours": 0.16666666666666666,
+        "balance_inequality_excess_equals_spill": true
+      },
+      "q4_2": {
+        "passed": true,
+        "source_path": "data/q4_2_v2.npz",
+        "days": 334,
+        "maximum_errors": {
+          "balance_kwh": 2.2737367544323206e-13,
+          "charge_kwh": 2.2737367544323206e-13,
+          "discharge_kwh": 2.2737367544323206e-13,
+          "emergency_kwh": 2.2737367544323206e-13,
+          "spill_kwh": 3.410605131648481e-13,
+          "soc_kwh": 9.094947017729282e-13,
+          "continuity_kwh": 0.0,
+          "plan_cost_yuan": 2.9103830456733704e-11,
+          "adjustment_cost_yuan": 0.0,
+          "emergency_cost_yuan": 7.275957614183426e-12,
+          "total_cost_yuan": 2.9103830456733704e-11
+        },
+        "metrics": {
+          "days": 334,
+          "plan_cost": 14280142.02794322,
+          "adjustment_cost": 0.0,
+          "emergency_cost": 513982.2616487017,
+          "total_cost": 14794124.289591921,
+          "plan_energy": 22090688.665157676,
+          "adjusted_energy": 22090688.665157676,
+          "emergency_energy": 80544.00426732299,
+          "spill_energy": 3013477.983929485,
+          "charge_energy": 6427624.771585811,
+          "discharge_energy": 5209059.581056965,
+          "emergency_days": 106,
+          "emergency_intervals": 596,
+          "daily_cost_cvar95": 83044.31440801983,
+          "daily_cost_max": 108080.3679324401,
+          "initial_energy": 9251.544592637878,
+          "final_energy": 6269.860067685182,
+          "max_actual_grid_power": 10495.21315
+        },
+        "terminal_penalty_excluded_from_realized_bill": true,
+        "power_to_energy_dt_hours": 0.16666666666666666,
+        "balance_inequality_excess_equals_spill": true
+      },
+      "q4_3": {
+        "passed": true,
+        "source_path": "outputs/outer_candidate_test/q4_3_selected.npz",
+        "days": 334,
+        "maximum_errors": {
+          "balance_kwh": 2.2737367544323206e-13,
+          "charge_kwh": 2.2737367544323206e-13,
+          "discharge_kwh": 2.2737367544323206e-13,
+          "emergency_kwh": 2.2737367544323206e-13,
+          "spill_kwh": 3.410605131648481e-13,
+          "soc_kwh": 9.094947017729282e-13,
+          "continuity_kwh": 0.0,
+          "plan_cost_yuan": 2.9103830456733704e-11,
+          "adjustment_cost_yuan": 3.637978807091713e-12,
+          "emergency_cost_yuan": 9.094947017729282e-13,
+          "total_cost_yuan": 2.9103830456733704e-11
+        },
+        "metrics": {
+          "days": 334,
+          "plan_cost": 14265228.707708538,
+          "adjustment_cost": 283142.25625699793,
+          "emergency_cost": 121866.90381139866,
+          "total_cost": 14670237.867776934,
+          "plan_energy": 22017053.33117164,
+          "adjusted_energy": 22248243.915877637,
+          "emergency_energy": 21293.408380333254,
+          "spill_energy": 3092415.7967511523,
+          "charge_energy": 6528483.691970475,
+          "discharge_energy": 5290551.659430323,
+          "emergency_days": 116,
+          "emergency_intervals": 418,
+          "daily_cost_cvar95": 77575.86679639184,
+          "daily_cost_max": 81797.1761642312,
+          "initial_energy": 9030.403582948851,
+          "final_energy": 6274.993656018515,
+          "max_actual_grid_power": 10630.40035
+        },
+        "terminal_penalty_excluded_from_realized_bill": true,
+        "power_to_energy_dt_hours": 0.16666666666666666,
+        "balance_inequality_excess_equals_spill": true
+      }
+    },
+    "candidate_decisions": {
+      "q3": {
+        "passed": true,
+        "legal_updates": 1336,
+        "candidate_count_midnight": 5,
+        "candidate_count_intraday": 6,
+        "argmin_and_first_tie_match": true,
+        "same_current_soc_verified": true,
+        "max_component_error_yuan": 2.9103830456733704e-11,
+        "selected_counts": {
+          "scenario_lp": 643,
+          "margin_0.5sigma": 172,
+          "point_lp": 327,
+          "margin_0.25sigma": 120,
+          "no_adjust": 25,
+          "margin_1sigma": 49
+        }
+      },
+      "q4_3": {
+        "passed": true,
+        "legal_updates": 1336,
+        "candidate_count_midnight": 5,
+        "candidate_count_intraday": 6,
+        "argmin_and_first_tie_match": true,
+        "same_current_soc_verified": true,
+        "max_component_error_yuan": 2.9103830456733704e-11,
+        "selected_counts": {
+          "scenario_lp": 601,
+          "margin_0.5sigma": 199,
+          "point_lp": 343,
+          "margin_0.25sigma": 123,
+          "margin_1sigma": 51,
+          "no_adjust": 19
+        }
+      },
+      "focused_regressions": {
+        "scalar_replay": {
+          "parameter_combinations": 24,
+          "candidate_scenario_trajectories": 288,
+          "maximum_absolute_error": 7.275957614183426e-12,
+          "coverage": "SOC bounds, charge/discharge power cap, surplus, deficit, spill, exact balance, no storage, both settlement conventions"
+        },
+        "paired_q4_prices": {
+          "paired_expected_bill": 250.0,
+          "incorrect_mean_price_bill": 137.5,
+          "same_marginals_reversed_pairing_bill": 25.0
+        },
+        "no_adjust_and_original_reference": {
+          "no_adjust_candidate": "no_adjust",
+          "original_plan_bill": 80.0,
+          "existing_adjustment_bill": 24.0,
+          "no_adjust_total_bill": 104.0,
+          "incorrect_rebased_bill": 64.0
+        },
+        "scenario_terminal_penalty": {
+          "common_beta_yuan_per_kwh": 2.0,
+          "actual_final_energy_by_candidate_scenario": [
+            [
+              6180.0,
+              5777.777777777777
+            ],
+            [
+              6360.0,
+              6000.0
+            ]
+          ],
+          "expected_terminal_penalty": [
+            402.2222222222226,
+            360.0
+          ],
+          "incorrect_penalty_at_mean_soc_first_candidate": 42.222222222222626
+        }
+      }
+    },
+    "four_timing_groups": {
+      "q3": {
+        "passed": true,
+        "order": [
+          "mother",
+          "midnight",
+          "intraday",
+          "all"
+        ],
+        "actual_bills_yuan": [
+          13975810.856095206,
+          13911957.695123143,
+          13947087.880476236,
+          13871471.443667494
+        ],
+        "midnight_minus_all_yuan": 40486.25145564973,
+        "independent_continuous_states": true
+      },
+      "q4_3": {
+        "passed": true,
+        "order": [
+          "mother",
+          "midnight",
+          "intraday",
+          "all"
+        ],
+        "actual_bills_yuan": [
+          14769232.52858914,
+          14712596.452471688,
+          14734593.225735195,
+          14670237.867776934
+        ],
+        "midnight_minus_all_yuan": 42358.58469475433,
+        "independent_continuous_states": true
+      },
+      "q2": {
+        "retained_mother": true,
+        "rejected_screening_increase_percent": 0.16108109911758817
+      },
+      "q4_2": {
+        "retained_mother": true,
+        "rejected_screening_increase_percent": 0.42825211007677666
+      }
+    }
+  },
+  "checker_sha256": "1cc12f4e89b2be910fa0c711960903a905d65d0c09eb435da74377093b0363ae"
+}

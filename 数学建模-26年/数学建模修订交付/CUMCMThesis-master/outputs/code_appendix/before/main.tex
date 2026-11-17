@@ -1,0 +1,64 @@
+% 论文入口。沿用原 cumcmthesis.cls / cumcm2026.sty；原 example.tex 未覆盖。
+% 在本目录运行 latexmk -xelatex main.tex 编译。
+\documentclass[withoutpreface,bwprint]{cumcmthesis}
+\usepackage{cumcm2026}
+\usepackage{url}
+\usepackage{placeins}
+\hypersetup{hidelinks}
+\setlength{\emergencystretch}{2em}
+\renewcommand{\arraystretch}{1.13}
+% 一级标题沿用中文数字；二、三级标题显示为4.1、4.2.1。
+\renewcommand{\thesection}{\chinese{section}、}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+\title{非对称结算机制下的微网采购与储能协同调度}
+\tihao{C}
+\yearinput{2026}
+\monthinput{9}
+\dayinput{10}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+\setlength{\parskip}{0.45em}
+负载与光伏出力的波动使微网购电面临双重代价：采购不足需要高价补购，采购富余仍须按计划量付费；储能则受容量、功率和效率限制。为协调购电承诺与储能运行，本文以实际结算费用最小化为目标，建立统一调度框架，依次研究确定性供需、预测误差、日内信息更新和动态电价下的采购决策。
+
+针对问题一，在负载与光伏已知的条件下，建立\textbf{\heiti 购电与储能联合线性规划模型}。将功率换算为时段电量，以供给不小于需求为约束，联合优化购电和充放电，并利用免费弃余条件处理充放电互斥。求得全天购电59482.70 kWh，购电费\textbf{35126.95元}，较无储能基准\textbf{节省26.90\%}，首末储电量均为6000 kWh。
+
+针对问题二，面对日前预测误差及五倍价格的紧急补购，构建\textbf{\heiti 基于整日历史残差的场景采购模型}。先按一月实际费用校准预测器与储能执行器，再保留此前28日残差轨迹生成场景，优化共同购电计划，并根据实际供需逐段控制储能。在2月至12月334天回测中，总费用为\textbf{1401.28万元}，较相同预测及初态下的点预测采购\textbf{节省8.36\%}。
+
+针对问题三，利用日内发布的新预报和实测储电量，建立\textbf{\heiti 双时间尺度滚动调度模型}，并引入\textbf{\heiti 基于执行规则回放的购电候选筛选}。在0、6、12、18时生成场景、点预测和误差余量采购候选，日内另保留当前合同；以相同情景、初态和执行规则回放评分，再按每10分钟的实际供需执行储能。四种筛选时点配置中，\textbf{\heiti 零时与日内均筛选}的费用最低，为\textbf{1387.15万元}，较未筛选母模型\textbf{降低0.747\%}。
+
+针对问题四，考虑电价与净负荷的共同波动，构建\textbf{\heiti 同日配对的价格与净负荷联合场景模型}，保留高价格与高缺口同时出现的损失。日前版以场景LP制定计划，滚动版沿用全时点候选筛选，并按各情景对应价格计算回放费用、按实际价格结算。两版总费用分别为\textbf{1479.41万元}和\textbf{1467.02万元}，滚动版较其未筛选母模型\textbf{降低0.670\%}。
+
+本文将非对称结算、储能物理约束与固定执行规则回放相结合，形成\textbf{\heiti 统一母模型与滚动采购筛选相结合的分问策略}。筛选适用问题与启用时点由开发期回测确定，日前两组保留母模型；滚动两组的费用下降伴随紧急补购增加，体现经济性与补购需求的权衡。
+
+\keywords{微网调度\quad 非对称结算\quad 场景优化\quad 执行回放\quad 候选筛选}
+\end{abstract}
+
+\input{sections/common_intro}
+\FloatBarrier
+\input{sections/question1}
+\FloatBarrier
+\input{sections/question2}
+\FloatBarrier
+\input{sections/question3}
+\FloatBarrier
+\input{sections/question4}
+\FloatBarrier
+\input{sections/model_evaluation}
+
+\FloatBarrier
+\CumcmAIUsed{赛题拆解、建模思路整理、程序代码辅助生成、文献检索及论文表达优化}
+\input{sections/references}
+
+\clearpage
+\begin{appendices}
+\renewcommand{\thesection}{\appendixname\Alph{section}}
+\renewcommand{\thesubsection}{\Alph{section}.\arabic{subsection}}
+\input{sections/05_appendix}
+\input{sections/appendix_optional_models}
+\input{sections/appendix_controller_checks}
+\input{sections/appendix_final_adjustments}
+\end{appendices}
+\end{document}

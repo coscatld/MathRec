@@ -1,0 +1,12 @@
+\begin{table}[htbp]\centering\small
+\caption{问题3的状态、光伏和负荷反馈分解}
+\label{tab:v2_feedback}
+\begin{tabularx}{\linewidth}{LRRRR}\toprule
+策略 & 总费/万元 & 紧急量/kWh & 日费CVaR95/元 & 末库存/kWh\\\midrule
+仅零时外层计划 & 1416.90 & 80181.62 & 71801.23 & 6240.32\\
+仅更新SOC并重优化 & 1399.17 & 39298.96 & 66748.14 & 6240.32\\
+再加入新光伏预报 & 1407.57 & 40071.16 & 66732.97 & 6240.32\\
+再加入负荷偏差反馈 & 1397.58 & 12647.76 & 65518.79 & 6240.32\\
+\bottomrule\end{tabularx}
+\par\smallskip\parbox{\linewidth}{\footnotesize 所有对照覆盖相同334天；设置在运行前冻结，评价期结果不回写主案选择。各组状态连续演化。}
+\end{table}

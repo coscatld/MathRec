@@ -1,0 +1,5 @@
+# Historical teaching baseline: Linux x86_64 / Python 3.10–3.12.
+# torch is the CUDA 12.1 wheel from the official PyTorch cu121 index.
+# This file documents versions; no installation was performed.
+torch==2.5.1
+triton==3.1.0

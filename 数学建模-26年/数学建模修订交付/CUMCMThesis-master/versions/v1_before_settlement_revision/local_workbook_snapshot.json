@@ -1,0 +1,37 @@
+[
+  {
+    "file": "result1.xlsx",
+    "bytes": 8533,
+    "plan_rows": null,
+    "numeric_plan_cells": 146,
+    "B2": 1406.6410999999998
+  },
+  {
+    "file": "result2.xlsx",
+    "bytes": 520056,
+    "plan_rows": null,
+    "numeric_plan_cells": 48096,
+    "B2": 974.9345071600069
+  },
+  {
+    "file": "result3.xlsx",
+    "bytes": 934687,
+    "plan_rows": null,
+    "numeric_plan_cells": 48096,
+    "B2": 1049.091583959148
+  },
+  {
+    "file": "result4-2.xlsx",
+    "bytes": 522604,
+    "plan_rows": null,
+    "numeric_plan_cells": 48096,
+    "B2": 1343.091225
+  },
+  {
+    "file": "result4-3.xlsx",
+    "bytes": 939678,
+    "plan_rows": null,
+    "numeric_plan_cells": 48096,
+    "B2": 502.924385
+  }
+]

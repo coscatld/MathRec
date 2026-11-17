@@ -1,0 +1,11 @@
+{
+  "name": "lesson-07-bounded-concurrency",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24.22.1 <25" },
+  "scripts": {
+    "test": "node --test executor.test.ts",
+    "demo": "node demo.ts",
+    "bench": "node benchmark.ts"
+  }
+}

@@ -1,0 +1,24 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { Recorder, quantile } from './metrics.js';
+import { successReference } from './reference.js';
+import { replay } from './scenario.js';
+function fixture() { let t=0; return {r:new Recorder(()=>t), at:n=>{t=n;}}; }
+test('empty distributions are null, not zero',()=>{const p=new Recorder(()=>0).report(); assert.equal(p.milliseconds.execution.p95,null); assert.equal(p.gauges.running,0);});
+test('nearest rank: 20 points p95 is 19',()=>{assert.equal(quantile(Array.from({length:20},(_,i)=>i+1),.95),19); assert.equal(quantile([5],.99),5);});
+test('quantile input remains unchanged',()=>{const a=[3,1,2]; assert.equal(quantile(a,.5),2); assert.deepEqual(a,[3,1,2]);});
+test('invalid quantile inputs fail',()=>{for(const p of [0,-1,2,NaN]) assert.throws(()=>quantile([1],p)); for(const v of [-1,Infinity,NaN]) assert.throws(()=>quantile([v],.5));});
+test('timestamp zero is a real start',()=>{const {r}=fixture();r.accept('x');r.start('x');r.finishBackend('x','ok');r.finishCaller('x','ok');assert.equal(r.report().milliseconds.execution.count,1);assert.equal(r.report().milliseconds.callerWait.p50,0);});
+test('success agrees with reference, including delivery lag',()=>{const {r,at}=fixture();r.accept('x');at(10);r.start('x');at(40);r.finishBackend('x','ok');at(45);r.finishCaller('x','ok');const p=r.report().milliseconds, ref=successReference(10,30,5);assert.equal(p.startedQueueWait.p50,ref.queueWait);assert.equal(p.execution.p50,ref.execution);assert.equal(p.callerWait.p50,ref.callerWait);});
+test('queued timeout is separate from started queue sample',()=>{const {r,at}=fixture();r.accept('x');at(8);r.finishCaller('x','timeout');const p=r.report();assert.equal(p.milliseconds.abandonedQueueWait.p50,8);assert.equal(p.milliseconds.startedQueueWait.count,0);assert.equal(p.milliseconds.execution.count,0);assert.throws(()=>r.start('x'));});
+test('running timeout does not complete backend',()=>{const {afterTimeout:p,final:f}=replay();assert.equal(p.gauges.running,1);assert.equal(p.gauges.callerPending,0);assert.equal(p.milliseconds.execution.count,1);assert.equal(f.gauges.running,0);assert.equal(f.milliseconds.execution.p95,90);assert.equal(f.milliseconds.callerWait.p95,40);});
+test('cancel queued and running independently',()=>{const {r}=fixture();r.accept('q');r.finishCaller('q','cancelled');r.accept('r');r.start('r');r.finishCaller('r','cancelled');assert.equal(r.report().gauges.running,1);r.finishBackend('r','cancelled');assert.equal(r.report().gauges.running,0);});
+test('errors count as observations, not dropped successes only',()=>{const {r,at}=fixture();r.accept('x');r.start('x');at(9);r.finishBackend('x','error');r.finishCaller('x','error');assert.equal(r.report().callerOutcomes.error,1);assert.equal(r.report().milliseconds.execution.p95,9);});
+test('pending observations excluded, gauges retain unfinished work',()=>{const {r}=fixture();r.accept('q');r.accept('r');r.start('r');const p=r.report();assert.deepEqual(p.gauges,{queued:1,running:1,callerPending:2});assert.equal(p.milliseconds.callerWait.count,0);});
+test('duplicate accept and transitions fail without corrupting state',()=>{const {r}=fixture();r.accept('x');assert.throws(()=>r.accept('x'));r.start('x');assert.throws(()=>r.start('x'));r.finishBackend('x','ok');assert.throws(()=>r.finishBackend('x','ok'));r.finishCaller('x','ok');assert.throws(()=>r.finishCaller('x','ok'));assert.equal(r.report().accepted,1);});
+test('unknown IDs, backend-before-start, early caller success and labels rejected',()=>{const {r}=fixture();assert.throws(()=>r.start('none'));r.accept('x');assert.throws(()=>r.finishBackend('x','ok'));assert.throws(()=>r.finishCaller('x','ok'));assert.throws(()=>r.finishCaller('x','secret'));r.start('x');assert.throws(()=>r.finishBackend('x','secret'));r.finishBackend('x','error');assert.throws(()=>r.finishCaller('x','ok'));});
+test('clock regression rejected without changing timestamp',()=>{const {r,at}=fixture();at(10);r.accept('x');at(9);assert.throws(()=>r.start('x'));assert.equal(r.snapshot()[0].startedAt,null);at(10);r.start('x');});
+test('invalid clocks rejected',()=>{for(const t of [-1,NaN,Infinity]) assert.throws(()=>new Recorder(()=>t).accept('x'));});
+test('snapshot mutation cannot alter recorder',()=>{const {r}=fixture();r.accept('x');r.snapshot()[0].startedAt=999;assert.equal(r.report().gauges.queued,1);});
+test('percentiles do not add',()=>{const q=[0,100], e=[100,0];assert.equal(quantile(q,.95)+quantile(e,.95),200);assert.equal(quantile(q.map((v,i)=>v+e[i]),.95),100);});
+test('reference rejects impossible durations',()=>assert.throws(()=>successReference(-1,2)));

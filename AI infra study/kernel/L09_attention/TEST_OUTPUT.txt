@@ -1,0 +1,63 @@
+Python 3.12.14
+test_absolute_causality_decode (test_attention.AttentionTests.test_absolute_causality_decode) ... ok
+test_all_masked (test_attention.AttentionTests.test_all_masked) ... ok
+test_decimal_independent_reference (test_attention.AttentionTests.test_decimal_independent_reference) ... ok
+test_future_value_perturbation (test_attention.AttentionTests.test_future_value_perturbation) ... ok
+test_hand_computed_uniform (test_attention.AttentionTests.test_hand_computed_uniform) ... ok
+test_inputs_are_not_mutated (test_attention.AttentionTests.test_inputs_are_not_mutated) ... ok
+test_invalid_contracts (test_attention.AttentionTests.test_invalid_contracts) ... ok
+test_large_scores_are_stable (test_attention.AttentionTests.test_large_scores_are_stable) ... ok
+test_masked_first_block_tail_and_holes (test_attention.AttentionTests.test_masked_first_block_tail_and_holes) ... ok
+test_optional_pytorch_explicit (test_attention.AttentionTests.test_optional_pytorch_explicit) ... skipped 'optional PyTorch not installed'
+test_optional_pytorch_sdpa (test_attention.AttentionTests.test_optional_pytorch_sdpa) ... skipped 'optional PyTorch SDPA unavailable'
+test_randomized_and_probability_invariants (test_attention.AttentionTests.test_randomized_and_probability_invariants) ... ok
+test_singleton (test_attention.AttentionTests.test_singleton) ... ok
+test_arbitrary_positions_holes_padding_and_permutation (audit_checks.IndependentAudit.test_arbitrary_positions_holes_padding_and_permutation) ... ok
+test_common_score_offset (audit_checks.IndependentAudit.test_common_score_offset) ... ok
+test_denominator_only_mutant_is_detected (audit_checks.IndependentAudit.test_denominator_only_mutant_is_detected) ... ok
+test_distinct_feature_and_value_widths_scale (audit_checks.IndependentAudit.test_distinct_feature_and_value_widths_scale) ... ok
+test_lesson_exact_answers (audit_checks.IndependentAudit.test_lesson_exact_answers) ... ok
+test_masked_extreme_score_has_no_effect (audit_checks.IndependentAudit.test_masked_extreme_score_has_no_effect) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.022s
+
+OK (skipped=2)
+
+keep (True=allowed)
+[[True, True, True, False, False], [True, True, True, True, False]]
+
+scaled scores
+[[0.7071067811865475,
+  0.0,
+  0.7071067811865475,
+  -0.7071067811865475,
+  1.414213562373095],
+ [0.0, 0.7071067811865475, 0.7071067811865475, 0.7071067811865475, 0.0]]
+
+masked scores
+[[0.7071067811865475, 0.0, 0.7071067811865475, -inf, -inf],
+ [0.0, 0.7071067811865475, 0.7071067811865475, 0.7071067811865475, -inf]]
+
+probabilities
+[[0.4011120926797859, 0.1977758146404282, 0.4011120926797859, 0.0, 0.0],
+ [0.1411563112428496,
+  0.2862812295857168,
+  0.2862812295857168,
+  0.2862812295857168,
+  0.0]]
+
+O
+[[16.044483707191436, 15.988879073202142],
+ [21.451249183428672, 17.176873775143008]]
+
+streamed O, block=2
+[[16.044483707191436, 15.988879073202142],
+ [21.451249183428672, 17.176873775143008]]
+Python 3.12.14, Linux x86_64
+Correctness checked before timing; repeats=5, warmup=1 per method.
+CPU Python, L=16 S=64 D=32 Dv=16; includes validation/allocation.
+No warm GPU kernel, HBM bandwidth or GPU performance claims.
+materialized (trace): median 4.270 ms
+streaming block=8: median 4.990 ms
+The streaming lesson is about memory structure and invariants, not Python speed.

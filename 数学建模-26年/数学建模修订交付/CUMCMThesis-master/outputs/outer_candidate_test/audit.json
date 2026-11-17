@@ -1,0 +1,197 @@
+{
+  "audit": "independent saved-output numerical audit",
+  "created_utc": "2026-09-10T15:19:04.897768+00:00",
+  "read_only_sources": true,
+  "cases": {
+    "q2": {
+      "days": 334,
+      "same_opening_energy_kwh": 8875.190890055994,
+      "current_source_sha256_match": true,
+      "strategies": {
+        "baseline": {
+          "bill_yuan": 14012807.662737625,
+          "max_daily_cost_component_error_yuan": {
+            "plan_cost": 1.4551915228366852e-11,
+            "adjustment_cost": 0.0,
+            "emergency_cost": 7.275957614183426e-12,
+            "total_cost": 1.4551915228366852e-11
+          },
+          "max_balance_error_kwh": 3.2862601528904634e-13,
+          "max_storage_dynamics_error_kwh": 9.094947017729282e-13,
+          "max_day_continuity_error_kwh": 0.0,
+          "min_energy_kwh": 1200.0,
+          "max_energy_kwh": 10800.0,
+          "final_energy_kwh": 6240.3150954938255
+        },
+        "selected": {
+          "bill_yuan": 14035379.647337997,
+          "max_daily_cost_component_error_yuan": {
+            "plan_cost": 1.4551915228366852e-11,
+            "adjustment_cost": 0.0,
+            "emergency_cost": 1.4551915228366852e-11,
+            "total_cost": 1.4551915228366852e-11
+          },
+          "max_balance_error_kwh": 2.5224267119483557e-13,
+          "max_storage_dynamics_error_kwh": 9.094947017729282e-13,
+          "max_day_continuity_error_kwh": 0.0,
+          "min_energy_kwh": 1200.0,
+          "max_energy_kwh": 10800.0,
+          "final_energy_kwh": 6240.3150954938255
+        }
+      },
+      "decisions": {
+        "count": 334,
+        "selected_argmin_and_exact_tie_order": true,
+        "max_selected_above_min_yuan": 0.0,
+        "max_score_component_error_yuan": 3.603872755775228e-11,
+        "max_score_reduction_error_yuan": 0.0,
+        "max_decision_initial_energy_error_kwh": 0.0,
+        "intraday_no_adjust_present": true,
+        "selection_counts_match": true
+      }
+    },
+    "q3": {
+      "days": 334,
+      "same_opening_energy_kwh": 8814.599676936767,
+      "current_source_sha256_match": true,
+      "strategies": {
+        "baseline": {
+          "bill_yuan": 13975810.856095206,
+          "max_daily_cost_component_error_yuan": {
+            "plan_cost": 1.4551915228366852e-11,
+            "adjustment_cost": 1.8189894035458565e-12,
+            "emergency_cost": 9.094947017729282e-13,
+            "total_cost": 1.4551915228366852e-11
+          },
+          "max_balance_error_kwh": 2.788880237858393e-13,
+          "max_storage_dynamics_error_kwh": 9.094947017729282e-13,
+          "max_day_continuity_error_kwh": 0.0,
+          "min_energy_kwh": 1200.0,
+          "max_energy_kwh": 10800.0,
+          "final_energy_kwh": 6240.315120185184
+        },
+        "selected": {
+          "bill_yuan": 13871471.443667494,
+          "max_daily_cost_component_error_yuan": {
+            "plan_cost": 1.4551915228366852e-11,
+            "adjustment_cost": 9.094947017729282e-13,
+            "emergency_cost": 9.094947017729282e-13,
+            "total_cost": 1.4551915228366852e-11
+          },
+          "max_balance_error_kwh": 2.5224267119483557e-13,
+          "max_storage_dynamics_error_kwh": 9.094947017729282e-13,
+          "max_day_continuity_error_kwh": 0.0,
+          "min_energy_kwh": 1200.0,
+          "max_energy_kwh": 10800.0,
+          "final_energy_kwh": 6240.315120185184
+        }
+      },
+      "decisions": {
+        "count": 1336,
+        "selected_argmin_and_exact_tie_order": true,
+        "max_selected_above_min_yuan": 0.0,
+        "max_score_component_error_yuan": 3.2741809263825417e-11,
+        "max_score_reduction_error_yuan": 0.0,
+        "max_decision_initial_energy_error_kwh": 0.0,
+        "intraday_no_adjust_present": true,
+        "selection_counts_match": true
+      }
+    },
+    "q4_2": {
+      "days": 334,
+      "same_opening_energy_kwh": 9251.544592637878,
+      "current_source_sha256_match": true,
+      "strategies": {
+        "baseline": {
+          "bill_yuan": 14794124.289591923,
+          "max_daily_cost_component_error_yuan": {
+            "plan_cost": 1.4551915228366852e-11,
+            "adjustment_cost": 0.0,
+            "emergency_cost": 7.275957614183426e-12,
+            "total_cost": 1.4551915228366852e-11
+          },
+          "max_balance_error_kwh": 3.2862601528904634e-13,
+          "max_storage_dynamics_error_kwh": 9.094947017729282e-13,
+          "max_day_continuity_error_kwh": 0.0,
+          "min_energy_kwh": 1200.0,
+          "max_energy_kwh": 10800.0,
+          "final_energy_kwh": 6269.860067685182
+        },
+        "selected": {
+          "bill_yuan": 14857480.439029481,
+          "max_daily_cost_component_error_yuan": {
+            "plan_cost": 1.4551915228366852e-11,
+            "adjustment_cost": 0.0,
+            "emergency_cost": 1.4551915228366852e-11,
+            "total_cost": 2.9103830456733704e-11
+          },
+          "max_balance_error_kwh": 2.5224267119483557e-13,
+          "max_storage_dynamics_error_kwh": 9.094947017729282e-13,
+          "max_day_continuity_error_kwh": 0.0,
+          "min_energy_kwh": 1200.0,
+          "max_energy_kwh": 10800.0,
+          "final_energy_kwh": 6269.860067685182
+        }
+      },
+      "decisions": {
+        "count": 334,
+        "selected_argmin_and_exact_tie_order": true,
+        "max_selected_above_min_yuan": 0.0,
+        "max_score_component_error_yuan": 3.865352482534945e-11,
+        "max_score_reduction_error_yuan": 0.0,
+        "max_decision_initial_energy_error_kwh": 0.0,
+        "intraday_no_adjust_present": true,
+        "selection_counts_match": true
+      }
+    },
+    "q4_3": {
+      "days": 334,
+      "same_opening_energy_kwh": 9030.403582948851,
+      "current_source_sha256_match": true,
+      "strategies": {
+        "baseline": {
+          "bill_yuan": 14769232.52858914,
+          "max_daily_cost_component_error_yuan": {
+            "plan_cost": 1.4551915228366852e-11,
+            "adjustment_cost": 1.8189894035458565e-12,
+            "emergency_cost": 9.094947017729282e-13,
+            "total_cost": 1.4551915228366852e-11
+          },
+          "max_balance_error_kwh": 2.5224267119483557e-13,
+          "max_storage_dynamics_error_kwh": 9.094947017729282e-13,
+          "max_day_continuity_error_kwh": 0.0,
+          "min_energy_kwh": 1200.0,
+          "max_energy_kwh": 10800.0,
+          "final_energy_kwh": 6274.993656018515
+        },
+        "selected": {
+          "bill_yuan": 14670237.867776934,
+          "max_daily_cost_component_error_yuan": {
+            "plan_cost": 2.9103830456733704e-11,
+            "adjustment_cost": 3.637978807091713e-12,
+            "emergency_cost": 1.8189894035458565e-12,
+            "total_cost": 2.9103830456733704e-11
+          },
+          "max_balance_error_kwh": 2.5224267119483557e-13,
+          "max_storage_dynamics_error_kwh": 9.094947017729282e-13,
+          "max_day_continuity_error_kwh": 0.0,
+          "min_energy_kwh": 1200.0,
+          "max_energy_kwh": 10800.0,
+          "final_energy_kwh": 6274.993656018515
+        }
+      },
+      "decisions": {
+        "count": 1336,
+        "selected_argmin_and_exact_tie_order": true,
+        "max_selected_above_min_yuan": 0.0,
+        "max_score_component_error_yuan": 2.97859514830634e-11,
+        "max_score_reduction_error_yuan": 0.0,
+        "max_decision_initial_energy_error_kwh": 0.0,
+        "intraday_no_adjust_present": true,
+        "selection_counts_match": true
+      }
+    }
+  },
+  "passed": true,
+  "scope_note": "Checks saved trajectories, billed settlement, decision scores, state consistency and current source hashes. Candidate grids and replay trajectories are not retained in decision JSON; exact scalar replay, pairing and causal perturbation are covered independently in checks.json. No full experiment was rerun."
+}

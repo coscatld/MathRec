@@ -1,0 +1,25 @@
+Python 3.12.14
+test_cpu_float64_oracle (test_optional.TorchReferenceTests.test_cpu_float64_oracle) ... skipped 'optional PyTorch not installed'
+test_rejections (test_optional.TritonTests.test_rejections) ... skipped 'optional NVIDIA CUDA + PyTorch + Triton unavailable'
+test_shapes_dtypes_blocks_and_offsets (test_optional.TritonTests.test_shapes_dtypes_blocks_and_offsets) ... skipped 'optional NVIDIA CUDA + PyTorch + Triton unavailable'
+test_contract (test_reference.ReferenceTests.test_contract) ... ok
+test_identity_and_empty (test_reference.ReferenceTests.test_identity_and_empty) ... ok
+test_known_values_and_large_offset (test_reference.ReferenceTests.test_known_values_and_large_offset) ... ok
+test_seeded_partitions_order_shift_and_tails (test_reference.ReferenceTests.test_seeded_partitions_order_shift_and_tails) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.589s
+
+OK (skipped=3)
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.425s
+
+OK
+blocks: State(m=1001.0, l=1.3678794411714423) State(m=1002.0, l=1.0497870683678638)
+merged: State(m=1002.0, l=1.5530017927759188)
+empty identity: State(m=1001.0, l=1.3678794411714423)
+logsumexp: 1002.4401896985612
+softmax: [0.08714431874203257, 0.23688281808991013, 0.03205860328008499, 0.0, 0.6439142598879724]
+large offset preserves normalization: [0.5, 0.5]
+SKIP: optional torch/triton dependencies unavailable; no GPU timing collected.

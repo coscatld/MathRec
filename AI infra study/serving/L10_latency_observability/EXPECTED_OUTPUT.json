@@ -1,0 +1,121 @@
+{
+  "afterTimeout": {
+    "accepted": 3,
+    "gauges": {
+      "queued": 0,
+      "running": 1,
+      "callerPending": 0
+    },
+    "callerOutcomes": {
+      "ok": 1,
+      "error": 0,
+      "timeout": 2,
+      "cancelled": 0
+    },
+    "backendOutcomes": {
+      "ok": 1,
+      "error": 0,
+      "cancelled": 0
+    },
+    "milliseconds": {
+      "startedQueueWait": {
+        "count": 2,
+        "p50": 0,
+        "p95": 10,
+        "p99": 10
+      },
+      "abandonedQueueWait": {
+        "count": 1,
+        "p50": 20,
+        "p95": 20,
+        "p99": 20
+      },
+      "execution": {
+        "count": 1,
+        "p50": 30,
+        "p95": 30,
+        "p99": 30
+      },
+      "callerWait": {
+        "count": 3,
+        "p50": 30,
+        "p95": 40,
+        "p99": 40
+      }
+    }
+  },
+  "final": {
+    "accepted": 3,
+    "gauges": {
+      "queued": 0,
+      "running": 0,
+      "callerPending": 0
+    },
+    "callerOutcomes": {
+      "ok": 1,
+      "error": 0,
+      "timeout": 2,
+      "cancelled": 0
+    },
+    "backendOutcomes": {
+      "ok": 2,
+      "error": 0,
+      "cancelled": 0
+    },
+    "milliseconds": {
+      "startedQueueWait": {
+        "count": 2,
+        "p50": 0,
+        "p95": 10,
+        "p99": 10
+      },
+      "abandonedQueueWait": {
+        "count": 1,
+        "p50": 20,
+        "p95": 20,
+        "p99": 20
+      },
+      "execution": {
+        "count": 2,
+        "p50": 30,
+        "p95": 90,
+        "p99": 90
+      },
+      "callerWait": {
+        "count": 3,
+        "p50": 30,
+        "p95": 40,
+        "p99": 40
+      }
+    }
+  },
+  "traces": [
+    {
+      "id": "A",
+      "acceptedAt": 0,
+      "startedAt": 10,
+      "backendAt": 100,
+      "backendOutcome": "ok",
+      "callerAt": 40,
+      "callerOutcome": "timeout"
+    },
+    {
+      "id": "B",
+      "acceptedAt": 0,
+      "startedAt": null,
+      "backendAt": null,
+      "backendOutcome": null,
+      "callerAt": 20,
+      "callerOutcome": "timeout"
+    },
+    {
+      "id": "C",
+      "acceptedAt": 0,
+      "startedAt": 0,
+      "backendAt": 30,
+      "backendOutcome": "ok",
+      "callerAt": 30,
+      "callerOutcome": "ok"
+    }
+  ]
+}

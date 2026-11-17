@@ -1,0 +1,34 @@
+{
+  "q2": {
+    "source": "data/q2_v2.npz",
+    "source_sha256": "57d964170cfd5f3a784ddac4dfca07dcae8e5532e5e869d9595f0fa341f3b255",
+    "table": "tables/q2_selected.tex",
+    "table_sha256": "294957708a3623e830c9399348488fd9183a9f7a6880409629a33deec5ce26f0",
+    "preserved_original_numeric_cells": 98,
+    "all_original_values_preserved": true
+  },
+  "q3": {
+    "source": "outputs/outer_candidate_test/q3_selected.npz",
+    "source_sha256": "f7495ea084a4646f85b2ade40ea9eff44e345280770b4d0cda071604023204ad",
+    "table": "tables/q3_selected.tex",
+    "table_sha256": "ae9ea07769a8516fce9e0b8a69db956e43c1eda21633e34557e2be1aad4b1654",
+    "preserved_original_numeric_cells": 98,
+    "all_original_values_preserved": true
+  },
+  "q4_2": {
+    "source": "data/q4_2_v2.npz",
+    "source_sha256": "dd7e76104c77ab6bcfabd5540f305090fb54f87f4f2889771ca1e0a5e131e79d",
+    "table": "tables/q4_2_selected.tex",
+    "table_sha256": "500e68da7ae589a8f13a87f3f8bfae09001054e29ad4bdfac0e926fe520f5820",
+    "preserved_original_numeric_cells": 99,
+    "all_original_values_preserved": true
+  },
+  "q4_3": {
+    "source": "outputs/outer_candidate_test/q4_3_selected.npz",
+    "source_sha256": "40d02d3c26cd5e8dce8950f0a55a37fe544b1a6a79fedda506de722118eb947f",
+    "table": "tables/q4_3_selected.tex",
+    "table_sha256": "7e2eabdfd9ffbd774067ac643915d2040c4f820b7b08cb7de4e7eeba0f3d5ab3",
+    "preserved_original_numeric_cells": 97,
+    "all_original_values_preserved": true
+  }
+}

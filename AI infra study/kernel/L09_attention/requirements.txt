@@ -1,0 +1,3 @@
+# Required: Python 3.10+ standard library only. No pip install is necessary.
+# Optional: an already-installed PyTorch enables two CPU float64 comparisons.
+# Nothing is downloaded or installed by any script in this bundle.

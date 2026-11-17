@@ -1,0 +1,7 @@
+.DS_Store
+__pycache__/
+*.pyc
+node_modules/
+.venv/
+# 原始 zip 的归档，已解压到 kernel/ 与 serving/，不需要进版本库
+_archive/

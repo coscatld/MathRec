@@ -1,0 +1,74 @@
+[
+  {
+    "key": "q1",
+    "filename": "result1.xlsx",
+    "sheets": [
+      "计划购电量",
+      "充放电量"
+    ],
+    "previews": [
+      "C:\\Users\\lenovo\\Desktop\\数学建模\\解题\\CUMCMThesis-master\\outputs\\workbook_previews\\source\\q1_计划购电量.png",
+      "C:\\Users\\lenovo\\Desktop\\数学建模\\解题\\CUMCMThesis-master\\outputs\\workbook_previews\\source\\q1_充放电量.png"
+    ]
+  },
+  {
+    "key": "q2",
+    "filename": "result2.xlsx",
+    "sheets": [
+      "计划购电量",
+      "充放电量",
+      "紧急购电量"
+    ],
+    "previews": [
+      "C:\\Users\\lenovo\\Desktop\\数学建模\\解题\\CUMCMThesis-master\\outputs\\workbook_previews\\source\\q2_计划购电量.png",
+      "C:\\Users\\lenovo\\Desktop\\数学建模\\解题\\CUMCMThesis-master\\outputs\\workbook_previews\\source\\q2_充放电量.png",
+      "C:\\Users\\lenovo\\Desktop\\数学建模\\解题\\CUMCMThesis-master\\outputs\\workbook_previews\\source\\q2_紧急购电量.png"
+    ]
+  },
+  {
+    "key": "q3",
+    "filename": "result3.xlsx",
+    "sheets": [
+      "计划购电量",
+      "调整购电量",
+      "充放电量",
+      "紧急购电量"
+    ],
+    "previews": [
+      "C:\\Users\\lenovo\\Desktop\\数学建模\\解题\\CUMCMThesis-master\\outputs\\workbook_previews\\source\\q3_计划购电量.png",
+      "C:\\Users\\lenovo\\Desktop\\数学建模\\解题\\CUMCMThesis-master\\outputs\\workbook_previews\\source\\q3_调整购电量.png",
+      "C:\\Users\\lenovo\\Desktop\\数学建模\\解题\\CUMCMThesis-master\\outputs\\workbook_previews\\source\\q3_充放电量.png",
+      "C:\\Users\\lenovo\\Desktop\\数学建模\\解题\\CUMCMThesis-master\\outputs\\workbook_previews\\source\\q3_紧急购电量.png"
+    ]
+  },
+  {
+    "key": "q4_2",
+    "filename": "result4-2.xlsx",
+    "sheets": [
+      "计划购电量",
+      "充放电量",
+      "紧急购电量"
+    ],
+    "previews": [
+      "C:\\Users\\lenovo\\Desktop\\数学建模\\解题\\CUMCMThesis-master\\outputs\\workbook_previews\\source\\q4_2_计划购电量.png",
+      "C:\\Users\\lenovo\\Desktop\\数学建模\\解题\\CUMCMThesis-master\\outputs\\workbook_previews\\source\\q4_2_充放电量.png",
+      "C:\\Users\\lenovo\\Desktop\\数学建模\\解题\\CUMCMThesis-master\\outputs\\workbook_previews\\source\\q4_2_紧急购电量.png"
+    ]
+  },
+  {
+    "key": "q4_3",
+    "filename": "result4-3.xlsx",
+    "sheets": [
+      "计划购电量",
+      "调整购电量",
+      "充放电量",
+      "紧急购电量"
+    ],
+    "previews": [
+      "C:\\Users\\lenovo\\Desktop\\数学建模\\解题\\CUMCMThesis-master\\outputs\\workbook_previews\\source\\q4_3_计划购电量.png",
+      "C:\\Users\\lenovo\\Desktop\\数学建模\\解题\\CUMCMThesis-master\\outputs\\workbook_previews\\source\\q4_3_调整购电量.png",
+      "C:\\Users\\lenovo\\Desktop\\数学建模\\解题\\CUMCMThesis-master\\outputs\\workbook_previews\\source\\q4_3_充放电量.png",
+      "C:\\Users\\lenovo\\Desktop\\数学建模\\解题\\CUMCMThesis-master\\outputs\\workbook_previews\\source\\q4_3_紧急购电量.png"
+    ]
+  }
+]

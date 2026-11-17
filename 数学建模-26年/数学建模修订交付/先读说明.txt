@@ -1,0 +1,8 @@
+论文入口：CUMCMThesis-master/main.tex。
+本版按四个问题分别编排分析、模型建立与求解，新增真实数据热力矩阵、桑基图、瀑布图与阴影带。
+结构与图表索引：CUMCMThesis-master/论文结构与图表说明.md。
+修订说明：CUMCMThesis-master/修订记录.md；复现与文件说明：CUMCMThesis-master/交付说明.md。
+已填写结果在附件/附件5/；originals/附件5/为原始空模板，勿混淆。
+完整代码、执行数组、一月冻结选择与原版备份均包含。
+按要求没有编译LaTeX、没有进行论文审稿；example.pdf仅为原模板示例。
+购电页保留原模板0:10–0:20至次日0:00–0:10标签，数据不移位。

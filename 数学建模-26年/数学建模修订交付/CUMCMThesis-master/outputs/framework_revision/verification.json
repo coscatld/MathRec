@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "generated_utc": "2026-09-11T16:20:23.043765+00:00",
+  "scope": "Manuscript structure, concise language and layout; frozen numerical results retained.",
+  "pdf_pages_before": 49,
+  "pdf_pages_after": 38,
+  "framework_figure_page": 2,
+  "model_summary_pages": {
+    "q1": 4,
+    "q2": 8,
+    "q3": 17,
+    "q4": 28
+  },
+  "limitations_section": "8.2",
+  "limitations_page": 35,
+  "display_math_environments_preserved": 45,
+  "original_numeric_table_cells_preserved": 392,
+  "protected_file_count": 106,
+  "protected_files_unchanged": true,
+  "annual_model_runs_added": 0,
+  "workbooks_modified": 0,
+  "visual_review": {
+    "status": "PASS",
+    "scope": "Full-document contact-sheet review, followed by detail inspection of framework, all four model summaries, compact tables, Q1 plots, section 8.2, bibliography and both appendix pages. The last table relocation was inspected at full-page detail.",
+    "detail_pages": [
+      2,
+      4,
+      7,
+      8,
+      14,
+      17,
+      28,
+      35,
+      36,
+      37,
+      38
+    ]
+  },
+  "compile_command": "latexmk -xelatex -synctex=1 -interaction=nonstopmode -file-line-error -halt-on-error main.tex",
+  "reports": {
+    "source_integrity.json": "38456e31a4d471d96cde421c08726a892cd49c1be0f67bc8fb934215f49eb0a2",
+    "document_checks.json": "13827fa65c4259401351f16ebd1718da9957ff13ee877d65205dd1e2805df43f",
+    "compact_tables.json": "0e3bfdc4607fe48a4961ee97738f3eb9421549c4bcf661629214b5ba595f0787",
+    "compile.log": "993c1d4b22cc60225478a97e7b74b96e2720278914c0908fb9399ff88f514f97"
+  },
+  "pdf_sha256": "7ea390a1fa5f066415c8ea96d101d7de5d55b0bad46a0e0e6e9bc9d55eb6d315"
+}

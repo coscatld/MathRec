@@ -1,0 +1,125 @@
+{
+  "actual_bill_yuan": 13911957.695123143,
+  "plan_cost_yuan": 13493027.362524059,
+  "adjustment_cost_yuan": 340552.20043560566,
+  "emergency_cost_yuan": 78378.13216347774,
+  "emergency_kwh": 14137.573343211538,
+  "initial_energy_kwh": 8814.599676936767,
+  "final_energy_kwh": 6240.315120185184,
+  "endpoint_beta": 0.8073499999999998,
+  "endpoint_target_kwh": 6000.0,
+  "endpoint_penalty_yuan": 194.01841228150846,
+  "bill_plus_endpoint_penalty_yuan": 13912151.713535424,
+  "monthly": [
+    {
+      "month": "2025-02",
+      "actual_bill_yuan": 1241765.51462165,
+      "emergency_kwh": 258.4561852691237
+    },
+    {
+      "month": "2025-03",
+      "actual_bill_yuan": 1153201.8999170272,
+      "emergency_kwh": 286.52292847343585
+    },
+    {
+      "month": "2025-04",
+      "actual_bill_yuan": 949130.80602438,
+      "emergency_kwh": 199.6071834490852
+    },
+    {
+      "month": "2025-05",
+      "actual_bill_yuan": 992991.282091343,
+      "emergency_kwh": 3501.4280961517584
+    },
+    {
+      "month": "2025-06",
+      "actual_bill_yuan": 1348455.3997235415,
+      "emergency_kwh": 982.1557311222145
+    },
+    {
+      "month": "2025-07",
+      "actual_bill_yuan": 1586360.9982625467,
+      "emergency_kwh": 3190.0392216275814
+    },
+    {
+      "month": "2025-08",
+      "actual_bill_yuan": 1314313.9710607552,
+      "emergency_kwh": 1127.8583138976962
+    },
+    {
+      "month": "2025-09",
+      "actual_bill_yuan": 1163955.4635039584,
+      "emergency_kwh": 605.2257003676723
+    },
+    {
+      "month": "2025-10",
+      "actual_bill_yuan": 1163409.8059047651,
+      "emergency_kwh": 276.96136649859386
+    },
+    {
+      "month": "2025-11",
+      "actual_bill_yuan": 1278375.8758217802,
+      "emergency_kwh": 270.5418343091703
+    },
+    {
+      "month": "2025-12",
+      "actual_bill_yuan": 1719996.6781913945,
+      "emergency_kwh": 3438.776782045206
+    }
+  ],
+  "schema_version": "1.0",
+  "generated_by": "run_outer_timing_ablation.py",
+  "generated_at": "2026-09-10T15:36:28.261126+00:00",
+  "question_id": "q3",
+  "mode": "midnight_only",
+  "period": [
+    "2025-02-01",
+    "2025-12-31"
+  ],
+  "days": 334,
+  "outer_decision_count": 1336,
+  "screened_decision_count": 334,
+  "ordinary_lp_decision_count": 1002,
+  "screened_selection_counts": {
+    "scenario_lp": 164,
+    "margin_0.5sigma": 89,
+    "margin_0.25sigma": 39,
+    "margin_1sigma": 38,
+    "point_lp": 4
+  },
+  "frozen_config": {
+    "scenarios": 28,
+    "history": 28,
+    "risk_mode": "none",
+    "risk_scale": 0.1,
+    "fixed_risk": 0.1,
+    "reserve_mode": "none",
+    "reserve_scale": 1.0,
+    "fixed_reserve": 0.0,
+    "controller": "greedy",
+    "feedback": "full",
+    "cross_day": false,
+    "terminal_scale": 1.0,
+    "cancellation_refund": false,
+    "updates": [
+      0,
+      36,
+      72,
+      108
+    ],
+    "no_storage": false
+  },
+  "elapsed_seconds": 38.493859499983955,
+  "bill_minus_main_yuan": -63853.1609720625,
+  "bill_minus_all_screening_yuan": 40486.25145564973,
+  "actual_improved_days_vs_all": 70,
+  "actual_worsened_days_vs_all": 184,
+  "validation": {
+    "physical_constraints": true,
+    "legal_updates_preserved": true,
+    "screening_schedule": true,
+    "common_initial_state": true,
+    "bill_components": true,
+    "selected_minima": true
+  }
+}
