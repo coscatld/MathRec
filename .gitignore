@@ -63,3 +63,6 @@ logs/
 .env
 *.env
 !example.env
+
+# Local-only math modeling folder
+/数学建模-26年/
